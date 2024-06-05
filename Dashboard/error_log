@@ -1,0 +1,27 @@
+[21-May-2022 10:22:03 America/New_York] PHP Notice:  Undefined variable: Profile in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 101
+[21-May-2022 10:22:03 America/New_York] PHP Notice:  Undefined variable: Admin in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 103
+[21-May-2022 10:22:03 America/New_York] PHP Warning:  include(../Sidebar.php): failed to open stream: No such file or directory in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[21-May-2022 10:22:03 America/New_York] PHP Warning:  include(../Sidebar.php): failed to open stream: No such file or directory in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[21-May-2022 10:22:03 America/New_York] PHP Warning:  include(): Failed opening '../Sidebar.php' for inclusion (include_path='.:/opt/alt/php72/usr/share/pear') in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[21-May-2022 10:23:41 America/New_York] PHP Warning:  include(../Sidebar.php): failed to open stream: No such file or directory in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[21-May-2022 10:23:41 America/New_York] PHP Warning:  include(../Sidebar.php): failed to open stream: No such file or directory in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[21-May-2022 10:23:41 America/New_York] PHP Warning:  include(): Failed opening '../Sidebar.php' for inclusion (include_path='.:/opt/alt/php72/usr/share/pear') in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[21-May-2022 10:23:58 America/New_York] PHP Warning:  include(../Sidebar.php): failed to open stream: No such file or directory in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[21-May-2022 10:23:58 America/New_York] PHP Warning:  include(../Sidebar.php): failed to open stream: No such file or directory in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[21-May-2022 10:23:58 America/New_York] PHP Warning:  include(): Failed opening '../Sidebar.php' for inclusion (include_path='.:/opt/alt/php72/usr/share/pear') in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[21-May-2022 10:28:58 America/New_York] PHP Warning:  include(../Sidebar.php): failed to open stream: No such file or directory in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[21-May-2022 10:28:58 America/New_York] PHP Warning:  include(../Sidebar.php): failed to open stream: No such file or directory in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[21-May-2022 10:28:58 America/New_York] PHP Warning:  include(): Failed opening '../Sidebar.php' for inclusion (include_path='.:/opt/alt/php72/usr/share/pear') in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[21-May-2022 10:29:47 America/New_York] PHP Warning:  include(./Sidebar.php): failed to open stream: No such file or directory in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[21-May-2022 10:29:47 America/New_York] PHP Warning:  include(./Sidebar.php): failed to open stream: No such file or directory in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[21-May-2022 10:29:47 America/New_York] PHP Warning:  include(): Failed opening './Sidebar.php' for inclusion (include_path='.:/opt/alt/php72/usr/share/pear') in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 122
+[23-May-2022 10:21:39 America/New_York] PHP Notice:  Undefined variable: Profile in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 101
+[23-May-2022 10:21:39 America/New_York] PHP Notice:  Undefined variable: Admin in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 103
+[26-May-2022 09:22:36 America/New_York] PHP Notice:  Undefined variable: Profile in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 101
+[26-May-2022 09:22:36 America/New_York] PHP Notice:  Undefined variable: Admin in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 103
+[14-Jun-2022 07:31:39 America/New_York] PHP Notice:  Undefined variable: Profile in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 101
+[14-Jun-2022 07:31:39 America/New_York] PHP Notice:  Undefined variable: Admin in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 103
+[14-Jun-2022 09:36:36 America/New_York] PHP Notice:  Undefined variable: Profile in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 101
+[14-Jun-2022 09:36:36 America/New_York] PHP Notice:  Undefined variable: Admin in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 103
+[11-Jul-2022 08:31:58 America/New_York] PHP Notice:  Undefined variable: Profile in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 101
+[11-Jul-2022 08:31:58 America/New_York] PHP Notice:  Undefined variable: Admin in /home/bwtedjwe/public_html/Admin/Dashboard/index.php on line 103
