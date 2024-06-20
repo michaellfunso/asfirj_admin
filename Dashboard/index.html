@@ -9,7 +9,7 @@
 
 
     <meta name="robots" content="noindex,nofollow">
-    <title>Portal | ASFIRJ Editor</title>
+    <title>Portal | ASFIRJ Admin</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
@@ -167,16 +167,10 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Authors/"
-                                aria-expanded="false">
-                                <i class="bi bi-person" aria-hidden="true"></i>
-                                <span class="hide-menu">Authors</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Published/"
                                 aria-expanded="false">
-                                <!-- <i class="fas fa-hands" aria-hidden="true"></i> -->
+                                
+                                <!-- <i class=" fas fa-shopping-basket" aria-hidden="true"></i> -->
                                 <i class="fas fa-book"></i>
                                 <span class="hide-menu">Published</span>
                             </a>
@@ -188,7 +182,21 @@
                                 <span class="hide-menu">Manage Supplements</span>
                             </a>
                         </li>
-                  
+                        <!-- <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Authors/"
+                                aria-expanded="false">
+                                <i class="bi bi-person" aria-hidden="true"></i>
+                                <span class="hide-menu">Authors</span>
+                            </a>
+                        </li> -->
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Mail/"
+                                aria-expanded="false">
+                                <i class="fas fa-message" aria-hidden="true"></i>
+                                <span class="hide-menu">Mail</span>
+                            </a>
+                        </li>
+                       
                         
                         <li class="text-center p-20 upgrade-btn">
                             <a href="#"
@@ -235,9 +243,9 @@
                 <!-- ============================================================== -->
                 <!-- Three charts -->
                 <!-- ============================================================== -->
-                <div class="admin col"">
+                <div class="admin col">
                     <h3><b>Welcome, Bright Nwaru</b>
-                        <h5>Editor</h5>
+                        <h5>Editor-in-Chief</h5>
                 
                 </h3>
                 </div><div class="row justify-content-left">
@@ -251,29 +259,22 @@
                     
                     </div>
                    
-                    <div class="col-lg-2 col-md-10">
-                       
-                        <div class="white-box analytics-info box-shadow align-center">
-                            <i class="bi bi-person"></i>
-                             <h3 class="box-title"><span>0</span> Authors</h3>
-                        </div>
-                    </div>
 
                     <div class="col-lg-2 col-md-10">
                        
                         <div class="white-box analytics-info box-shadow align-center">
                             <i class="bi bi-people"></i>
-                             <h3 class="box-title"><span>0</span> Reviewed</h3>
-                        </div>
-                    </div>
-                    
-                        <div class="col-lg-2 col-md-10">
-                            
-                        <div class="white-box analytics-info box-shadow align-center">
-                            <i class="fas fa-book"></i>
                              <h3 class="box-title"><span>0</span> Published</h3>
                         </div>
                     </div>
+                    
+                        <!-- <div class="col-lg-2 col-md-10">
+                            
+                        <div class="white-box analytics-info box-shadow align-center">
+                            <i class="fas fa-book"></i>
+                             <h3 class="box-title"><span>0</span> Edited</h3>
+                        </div>
+                    </div> -->
 
                 </div>
              
@@ -301,7 +302,7 @@
                                     <table class="projects-table">
                                         <thead>
                                             <tr>
-                                                <th class="text-right">Submissions</th>
+                                                <th class="text-right">Activities</th>
                                                 <th class="text-right">Date</th>
                                                 <th class="text-right">Status</th>
                                         
@@ -320,7 +321,7 @@
                                             </td>
                               
                                             <td class="status">
-                                                <span class="status-text status-orange">Awaiting to be Reviewed</span>
+                                                <span class="status-text status-orange">Awaiting to be Edited</span>
                                             </td>
                                             <td>
                                                 <form class="form" action="#" method="POST">
@@ -328,7 +329,7 @@
                                                     <option>Actions</option>
                                                     <option>View</option>
                                                     <option>Edit</option>
-                                                    <option>Reject</option>
+                                                    
                                                 </select>
                                                 </form>
                                             </td>
@@ -351,14 +352,14 @@
                                             </td> -->
                                           
                                             <td class="status">
-                                                <span class="status-text status-red">Rejected</span>
+                                                <span class="status-text status-orange">Invitation Awaiting Response</span>
                                             </td>
                                             <td>
                                                 <form class="form" action="#" method="POST">
                                                     <select class="action-box">
                                                         <option>Actions</option>
                                                         <option>View</option>
-                                                        <option>Edit</option>
+                                                        <option>Accept</option>
                                                         <option>Reject</option>
                                                     </select>
                                                 </form>
@@ -382,50 +383,19 @@
                                             </td> -->
                                           
                                             <td class="status">
-                                                <span class="status-text status-green">Published</span>
+                                                <span class="status-text status-green">Edited</span>
                                             </td>
                                             <td>
                                                 <form class="form" action="#" method="POST">
                                                     <select class="action-box">
                                           <option>Actions</option>
                                           <option>View</option>
-                                          <option>Edit</option>
-                                          <option>Delete</option>
+                                          <option>Publish</option>
                                         </select>
                                                 </form>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <p>Title</p>
-                                                <p>Hormonal changes in Dolphines</p>
-                                            </td>
-                                            <td>
-                                                <p>6th June, 2024</p>
-                                                <p class="text-danger">Overdue</p>
-                                            </td>
-                                      <!-- <td class="member">
-                                                <figure><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" /></figure>
-                                                <div class="member-info">
-                                                    <p>Myrtle Erickson</p>
-                                                    <p>UK Design Team</p>
-                                                </div>
-                                            </td> -->
-                                         
-                                            <td class="status">
-                                                <span class="status-text status-blue">Awaiting to be Published</span>
-                                            </td>
-                                            <td>
-                                                <form class="form" action="#" method="POST">
-                                                    <select class="action-box">
-                                          <option>Actions</option>
-                                          <option>View</option>
-                                          <option>Edit</option>
-                                          <option>Reject</option>
-                                        </select>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                       
                                         
                                     </table>
                                 </div>
