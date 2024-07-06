@@ -44,67 +44,10 @@
               <!-- ============================================================== -->
               <!-- Topbar header - style you can find in pages.scss -->
               <!-- ============================================================== -->
-              <header class="topbar" data-navbarbg="skin5">
-                  <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                      <div class="navbar-header" data-logobg="skin6">
-                          <!-- ============================================================== -->
-                          <!-- Logo -->
-                          <!-- ============================================================== -->
-                          <a class="navbar-brand" href="../Dashboard/">
-                              <!-- Logo icon -->
-                              <b class="logo-icon">
-                                  <!-- Dark Logo icon -->
-                                  <img src="../plugins/images/logo-icon.png" alt="homepage" width="30px"/>
-                              </b>
-                              <!--End Logo icon -->
-                              <!-- Logo text -->
-                              <span class="logo-text">
-                                  <!-- dark Logo text -->
-                                  <img src="../plugins/images/logo-text.png" alt="homepage" width="180px"/>
-                              </span>
-                          </a>
-                          <!-- ============================================================== -->
-                          <!-- End Logo -->
-                          <!-- ============================================================== -->
-                          <!-- ============================================================== -->
-                          <!-- toggle and nav items -->
-                          <!-- ============================================================== -->
-                          <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                              href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                      </div>
-                      <!-- ============================================================== -->
-                      <!-- End Logo -->
-                      <!-- ============================================================== -->
-                      <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                         
-                          <!-- ============================================================== -->
-                          <!-- Right side toggle and nav items -->
-                          <!-- ============================================================== -->
-                          <ul class="navbar-nav ms-center d-flex align-items-center">
-      
-                              <!-- ============================================================== -->
-                              <!-- Search -->
-                              <!-- ============================================================== -->
-                              <li class=" in text-white ">
-                                  African Science Frontiers Initiatives Research Journal -
-                              </li>
-                              <!-- ============================================================== -->
-                              <!-- User profile and search -->
-                              <!-- ============================================================== -->
-                              <li>
-                                  <a class="profile-pic" href="#">
-                                      <!-- <img src="../plugins/images/users/" alt="user-img" width="36"
-                                          class="img-circle"> -->
-                                          <span class="text-white font-medium">
-                                             Bright Nwaru</span></a>
-                              </li>
-                              <!-- ============================================================== -->
-                              <!-- User profile and search -->
-                              <!-- ============================================================== -->
-                          </ul>
-                      </div>
-                  </nav>
+              <header class="topbar" data-navbarbg="skin5" id="topbar">
+
               </header>
+              <script src="../js/routes/topbar.js"></script>
               <style>
 
                   .box-shadow{
@@ -173,11 +116,11 @@
                                 </a>
                             </li>
                             <li class="sidebar-item">
-                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Published/"
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Inbox/"
                                     aria-expanded="false">
                                     <!-- <i class="fas fa-hands" aria-hidden="true"></i> -->
-                                    <i class="fas fa-book"></i>
-                                    <span class="hide-menu">Published</span>
+                                    <i class="fas fa-envelope"></i>
+                                    <span class="hide-menu">Inbox</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
@@ -190,7 +133,7 @@
                       
                             
                             <li class="text-center p-20 upgrade-btn">
-                                <a href="#"
+                                <a href="../Logout/"
                                     class="btn d-grid btn-danger text-white" target="_blank">
                                     Logout</a>
                             </li>
@@ -215,7 +158,7 @@
                                   <ol class="breadcrumb ms-auto">
                                       <li><a href="#" class="fw-normal">Dashboard</a></li>
                                   </ol>
-                                  <a href="#" target="_blank"
+                                  <a href="../Logout/" target="_blank"
                                       class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
                               </div>
                           </div>
@@ -267,41 +210,8 @@
                                                       
                                                       <th class="text-right">Actions</th>
                                                   </tr>
-                                              </thead>
-                                              <tr>
-                                                  <td>
-                                                     Prof.
-                                                  </td>
-                                                  <td>
-                                                      <p>Bright</p>
-                                                      
-                                                  </td>
-                                                  <td>
-                                                    <p>Nwaru</p>
-                                                    
-                                                </td>
-                                                <td>
-                                                    <p>UCLA</p>                                                    
-                                                </td>
-                                                <td>
-                                                    <p>6th, June 2024</p>
-                                                </td>
-                                    
-                                                  <td class="status">
-                                                      <span class="status-text status-orange">Awaiting Reviewer Acceptance</span>
-                                                  </td>
-                                                  <td>
-                                                      <form class="form" action="#" method="POST">
-                                                      <select class="action-box">
-                                                          <option>Actions</option>
-                                                          <option>Invite for Review</option>
-                                                          <option>Restrict</option>
-                                                          <option>Delete</option>
-                                                      </select>
-                                                      </form>
-                                                  </td>
-                                              </tr>
-                    
+                                                </thead>
+                                      <tbody id="AuthorsContainer"></tbody>
                                          
                                           </table>
                                       </div>
@@ -347,6 +257,7 @@
           <script src="../plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
           <script src="../js/pages/dashboards/dashboard1.js"></script>
           <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
+          <script type="module" src="../js/routes/authors/getAuthors.js"></script>
       </body>
       
       </html>

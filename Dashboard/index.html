@@ -45,68 +45,10 @@
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
-        <header class="topbar" data-navbarbg="skin5">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header" data-logobg="skin6">
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
-                    <a class="navbar-brand" href="../Dashboard/">
-                        <!-- Logo icon -->
-                        <b class="logo-icon">
-                            <!-- Dark Logo icon -->
-                            <img src="../plugins/images/logo-icon.png" alt="homepage" width="30px" />
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span class="logo-text">
-                            <!-- dark Logo text -->
-                            <img src="../plugins/images/logo-text.png" alt="homepage" width="180px" />
-                        
-                        </span>
-                    </a>
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                   
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav ms-center d-flex align-items-center">
-      
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
-                        <li class=" in text-white ">
-                            African Science Frontiers Initiatives Research Journal -
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                        <li>
-                            <a class="profile-pic" href="#">
-                                <!-- <img src="../plugins/images/users/" alt="user-img" width="36"
-                                    class="img-circle"> -->
-                                    <span class="text-white font-medium">
-                                       Bright Nwaru</span></a>
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                    </ul>
-                </div>
-            </nav>
+        <header class="topbar" data-navbarbg="skin5" id="topbar">
+
         </header>
+        <script src="../js/routes/topbar.js"></script>
         <style>
             .box-shadow{
                 box-shadow: 0px 10px 30px 0px rgba(37, 37, 37, 0.10);
@@ -174,11 +116,11 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Published/"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Inbox/"
                                 aria-expanded="false">
                                 <!-- <i class="fas fa-hands" aria-hidden="true"></i> -->
-                                <i class="fas fa-book"></i>
-                                <span class="hide-menu">Published</span>
+                                <i class="fas fa-envelope"></i>
+                                <span class="hide-menu">Inbox</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -214,11 +156,11 @@
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="#" class="fw-normal">Dashboard</a></li>
+                                <li><a href="../Logout/" class="fw-normal">Dashboard</a></li>
                             </ol>
 
                             
-                            <a href="#" target="_blank"
+                            <a href="../Logout/" target="_blank"
                                 class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
                         </div>
                     </div>
@@ -236,7 +178,7 @@
                 <!-- Three charts -->
                 <!-- ============================================================== -->
                 <div class="admin col"">
-                    <h3><b>Welcome, Bright Nwaru</b>
+                    <h3><b>Welcome, <span class="userFullnameContainer"></span></b>
                         <h5>Editor</h5>
                 
                 </h3>
@@ -284,7 +226,7 @@
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
                             <div class="d-md-flex mb-3">
-                                <h3 class="box-title mb-0">Recent Activities</h3>
+                                <h3 class="box-title mb-0">Recent Submissions</h3>
                                 <div class="col-md-3 col-sm-4 col-xs-6 ms-auto">
                                     <!-- <select class="form-select shadow-none row border-top">
                                         <option>March 2021</option>
@@ -309,124 +251,9 @@
                                                 <th class="text-right">Actions</th>
                                             </tr>
                                         </thead>
-                                        <tr>
-                                            <td>
-                                                <p>Title</p>
-                                                <p>Advancements in AI</p>
-                                            </td>
-                                            <td>
-                                                <p>6th June, 2024</p>
-                                                <p class="text-danger">Overdue</p>
-                                            </td>
-                              
-                                            <td class="status">
-                                                <span class="status-text status-orange">Awaiting to be Reviewed</span>
-                                            </td>
-                                            <td>
-                                                <form class="form" action="#" method="POST">
-                                                <select class="action-box">
-                                                    <option>Actions</option>
-                                                    <option>View</option>
-                                                    <option>Edit</option>
-                                                    <option>Reject</option>
-                                                </select>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        <tr class="danger-item">
-                                            <td>
-                                                <p>Title</p>
-                                                <p>Seafoods as the only source of food </p>
-                                            </td>
-                                            <td>
-                                                <p>6th June, 2024</p>
-                                                <p class="text-danger">Overdue</p>
-                                            </td>
-                                      <!-- <td class="member">
-                                                <figure><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" /></figure>
-                                                <div class="member-info">
-                                                    <p>Myrtle Erickson</p>
-                                                    <p>UK Design Team</p>
-                                                </div>
-                                            </td> -->
-                                          
-                                            <td class="status">
-                                                <span class="status-text status-red">Rejected</span>
-                                            </td>
-                                            <td>
-                                                <form class="form" action="#" method="POST">
-                                                    <select class="action-box">
-                                                        <option>Actions</option>
-                                                        <option>View</option>
-                                                        <option>Edit</option>
-                                                        <option>Reject</option>
-                                                    </select>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p>Title</p>
-                                                <p>Advancements in AI</p>
-                                            </td>
-                                            <td>
-                                                <p>6th June, 2024</p>
-                                                <p class="text-danger">Overdue</p>
-                                            </td>
-                                      <!-- <td class="member">
-                                                <figure><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" /></figure>
-                                                <div class="member-info">
-                                                    <p>Myrtle Erickson</p>
-                                                    <p>UK Design Team</p>
-                                                </div>
-                                            </td> -->
-                                          
-                                            <td class="status">
-                                                <span class="status-text status-green">Published</span>
-                                            </td>
-                                            <td>
-                                                <form class="form" action="#" method="POST">
-                                                    <select class="action-box">
-                                          <option>Actions</option>
-                                          <option>View</option>
-                                          <option>Edit</option>
-                                          <option>Delete</option>
-                                        </select>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p>Title</p>
-                                                <p>Hormonal changes in Dolphines</p>
-                                            </td>
-                                            <td>
-                                                <p>6th June, 2024</p>
-                                                <p class="text-danger">Overdue</p>
-                                            </td>
-                                      <!-- <td class="member">
-                                                <figure><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" /></figure>
-                                                <div class="member-info">
-                                                    <p>Myrtle Erickson</p>
-                                                    <p>UK Design Team</p>
-                                                </div>
-                                            </td> -->
-                                         
-                                            <td class="status">
-                                                <span class="status-text status-blue">Awaiting to be Published</span>
-                                            </td>
-                                            <td>
-                                                <form class="form" action="#" method="POST">
-                                                    <select class="action-box">
-                                          <option>Actions</option>
-                                          <option>View</option>
-                                          <option>Edit</option>
-                                          <option>Reject</option>
-                                        </select>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        
+                                        <tbody id="submissionsContainer">
+                                  
+                                        </tbody>
                                     </table>
                                 </div>
                        
@@ -471,6 +298,8 @@
     <script src="../plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
     <script src="../js/pages/dashboards/dashboard1.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
+
+    <script type="module" src="../js/routes/dashboard/dashboard.js"></script>
 </body>
 
 </html>

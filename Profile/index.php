@@ -1,25 +1,8 @@
 <?php session_start();?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-<?php include "../backend_controls/find_admin_data.php"; ?>
 
-<?php 
 
-if(isset($_SESSION["Username"])){
-$FIND_PEOPLE = "SELECT * FROM `admin_accounts` WHERE 1";
-
-$REACH = mysqli_query($con, $FIND_PEOPLE);
-if(mysqli_num_rows($REACH) > 0 ){
-    while($AVATAR = mysqli_fetch_array($REACH)){
-        $ID = $AVATAR["ID"];
-        $F_Name = $AVATAR["Firstname"];
-        $LAST_nm = $AVATAR["Lastname"];
-        $U_name = $AVATAR["Username"];   
-}
-}
-}
-
-?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,12 +26,17 @@ if(mysqli_num_rows($REACH) > 0 ){
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<?php if(!isset($_SESSION["Username"])){
-		header("location:../Login/");
-	  }?>
+<?php 
+// if(!isset(_SESSION["Username"])){
+// 		header("location:../Login/");
+// 	  }
+      ?>
 <style>
     .left-sideba{
         position: fixed;
+    }
+    label{
+        font-weight:bold;
     }
 </style>
 <body>
@@ -70,79 +58,9 @@ if(mysqli_num_rows($REACH) > 0 ){
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
-        <header class="topbar" data-navbarbg="skin5">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header" data-logobg="skin6">
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
-                    <a class="navbar-brand" href="../Dashboard/">
-                        <!-- Logo icon -->
-                        <b class="logo-icon">
-                            <!-- Dark Logo icon -->
-                            <img src="../plugins/images/logo-icon.png" alt="homepage" />
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span class="logo-text">
-                            <!-- dark Logo text -->
-                            <img src="../plugins/images/logo-text.png" alt="homepage" />
-                        </span>
-                    </a>
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                    <ul class="navbar-nav d-none d-md-block d-lg-none">
-                        <li class="nav-item">
-                            <a class="nav-toggler nav-link waves-effect waves-light text-white"
-                                href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                        </li>
-                    </ul>
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav ms-auto d-flex align-items-center">
-
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
-                        <li class=" in">
-                            <!-- <form role="search" class="app-search d-none d-md-block me-3">
-                                <input type="text" placeholder="Search..." class="form-control mt-0">
-                                <a href="" class="active">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </form> -->
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                        <li>
-                            <a class="profile-pic" href="#">
-                                <img src="../plugins/images/users/<?php echo "$Profile"; ?>" alt="user-img" width="36"
-                                    class="img-circle"><span class="text-white font-medium">
-                                        <?php echo "$Admin"; ?></span></a>
-                                        
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                    </ul>
-                </div>
-            </nav>
+        <header class="topbar" data-navbarbg="skin5" id="topbar">
         </header>
-        <?php include "../backend_controls/update_profile.php" ?>
-
+        <script src="../js/routes/topbar.js"></script>
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->
@@ -153,7 +71,58 @@ if(mysqli_num_rows($REACH) > 0 ){
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
-<?php include "../Sidebar.php" ?>
+
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <!-- User Profile-->
+                        <li class="sidebar-item pt-2">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Dashboard/"
+                                aria-expanded="false">
+                                <i class="far fa-clock" aria-hidden="true"></i>
+                                <span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Submissions/"
+                                aria-expanded="false">
+                                
+                                <!-- <i class=" fas fa-shopping-basket" aria-hidden="true"></i> -->
+                                <i class="fas fa-link"></i>
+                                <span class="hide-menu">Submissions</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Authors/"
+                                aria-expanded="false">
+                                <i class="bi bi-person" aria-hidden="true"></i>
+                                <span class="hide-menu">Authors</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Inbox/"
+                                aria-expanded="false">
+                                <!-- <i class="fas fa-hands" aria-hidden="true"></i> -->
+                                <i class="fas fa-envelope"></i>
+                                <span class="hide-menu">Inbox</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="https://asfirj.org/manuscriptPortal/manage" target="_blank"
+                                aria-expanded="false">
+                                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                                <span class="hide-menu">Manage Supplements</span>
+                            </a>
+                        </li>
+                  
+                        
+                        <li class="text-center p-20 upgrade-btn">
+                            <a href="../Logout/"
+                                class="btn d-grid btn-danger text-white" target="_blank">
+                                Logout</a>
+                        </li>
+                    </ul>
+
+                </nav>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -178,7 +147,7 @@ if(mysqli_num_rows($REACH) > 0 ){
                             <ol class="breadcrumb ms-auto">
                                 <li><a href="#" class="fw-normal">Dashboard</a></li>
                             </ol>
-                            <a href="../backend_controls/logout.php" target="_blank"
+                            <a href="../Logout/" target="_blank"
                                 class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
                         </div>
                     </div>
@@ -198,129 +167,13 @@ if(mysqli_num_rows($REACH) > 0 ){
                 <!-- Row -->
                 <div class="row">
                    
+                
                     <!-- Column -->
-                    <div class="col-lg-4 col-xlg-3 col-md-12">
-                        <div class="white-box">
-                            <div class="user-bg"> <img width="100%" alt="user" src="../plugins/images/large/img1.jpg">
-                                <div class="overlay-box">
-                                    <div class="user-content">
-                                        <a href="javascript:void(0)"><img src="../plugins/images/users/<?php echo "$Profile"; ?>"
-                                                class="thumb-lg img-circle" alt="img"></a>
-                                        <h4 class="text-white mt-2"><?php echo "$F_Name $LAST_nm"; ?></h4>
-                                        <h5 class="text-white mt-2"><?php echo "$Admin"; ?></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- <div class="user-btm-box mt-5 d-md-flex">
-                                <div class="col-md-4 col-sm-4 text-center">
-                                    <h1>258</h1>
-                                </div>
-                                <div class="col-md-4 col-sm-4 text-center">
-                                    <h1>125</h1>
-                                </div>
-                                <div class="col-md-4 col-sm-4 text-center">
-                                    <h1>556</h1>
-                                </div>
-                            </div> -->
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <!-- Column -->
-                    <div class="col-lg-8 col-xlg-9 col-md-12">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="card">
-                            <div class="card-body">
-                                <form class="form-horizontal form-material" method="Post">
-                                    <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Our Goal and Vision</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                        <textarea rows="3" class="form-control p-0 border-0" placeholder="Goal and Vision" name="goals">
-                                            <?php echo "$cmp_goal";   ?>
-                                    </textarea>
-                                            </div>
-                                    </div>
-
-                                    <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Our Mission</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                        <textarea rows="3" class="form-control p-0 border-0" placeholder="Mission" name="mission">
-                                       <?php echo"$cmp_mission";  ?>
-                                        </textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Our Commitment</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                        <textarea rows="3" class="form-control p-0 border-0" placeholder="Commitment" name="commitment">
-                                        <?php echo"$cmp_commitment";  ?>
-                                        </textarea>
-                                            </div>
-                                    </div>
-
-                                    <div class="form-group mb-4">
-                                        <label for="example-email" class="col-md-12 p-0">Address</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" placeholder="Address"
-                                                class="form-control p-0 border-0" name="Address"
-                                                id="example-email" value="<?php echo "$cmp_address" ?>" >
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Phone Number 1</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" placeholder="123 456 7890" name="phone_1" value="<?php echo "$cmp_phone_1";?>" class="form-control p-0 border-0">
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Phone Number 2</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" placeholder="123 456 7890"
-                                                class="form-control p-0 border-0" name="phone_2" value="<?php echo "$cmp_phone_2";?>">
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Phone number 3</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                        <input type="text" placeholder="123 456 7890"
-                                                class="form-control p-0 border-0" name="phone_3" value="<?php echo "$cmp_phone_3";?>" >
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-4">
-                                        <label for="example-email" class="col-md-12 p-0">Email 1</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" placeholder="Company Email Address"
-                                                class="form-control p-0 border-0" name="Email_1"
-                                                id="example-email" value="<?php echo "$cmp_email_1";?> ">
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-4">
-                                        <label for="example-email" class="col-md-12 p-0">Email 2</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" placeholder="Company Email Address"
-                                                class="form-control p-0 border-0" name="Email_2"
-                                                id="example-email" value="<?php echo "$cmp_email_2";?>" >
-                                        </div>
-                                    </div>
-                                    <!-- <div class="form-group mb-4">
-                                        <label class="col-sm-12">Select Country</label>
-
-                                        <div class="col-sm-12 border-bottom">
-                                            <select class="form-select shadow-none p-0 border-0 form-control-line">
-                                                <option>London</option>
-                                                <option>India</option>
-                                                <option>Usa</option>
-                                                <option>Canada</option>
-                                                <option>Thailand</option>
-                                            </select>
-                                        </div>
-                                    </div> -->
-                                    <div class="form-group mb-4">
-                                        <div class="col-sm-12">
-                                            <input type="hidden" name="UPDATE_PROFILE" value="89" readonly>
-                                            <button class="btn btn-success">Update Profile</button>
-                                        </div>
-                                    </div>
-                                </form>
+                            <div class="card-body" id="ProfileContainer">
+                                    
+                              
                             </div>
                         </div>
                     </div>
@@ -370,6 +223,7 @@ if(mysqli_num_rows($REACH) > 0 ){
     <script src="../js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="../js/custom.js"></script>
+    <script type="module" src="../js/routes/authors/getAuthorProfileDetails.js"></script>
 </body>
 
 </html>
