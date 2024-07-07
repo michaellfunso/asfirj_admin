@@ -1,5 +1,5 @@
 const TopBar = document.getElementById("topbar")
-
+ 
 TopBar.innerHTML = `            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin6">
                     <!-- ============================================================== -->

@@ -73,7 +73,7 @@ const unstructuredAbstract = ArticleData.abstract
                                     </div>
                                     <!-- End Section  -->
                               `
-
+ 
 
                     // Parse the Quill content from the JSON data
                     const quillContent = JSON.parse(unstructuredAbstract);

@@ -3,7 +3,7 @@ const hoursToKeep = 1;  // Desired duration in hours
 const daysToKeep = hoursToKeep / 24;  // Convert hours to days
 const expirationDays = daysToKeep > 0 ? daysToKeep : 1;  // Ensure a minimum of 1 day
 
-
+ 
 
 
 const  SetCookies = function setCookie(name, value, daysToExpire) {

@@ -19,4 +19,4 @@ import { GetCookie, SetCookies, hoursToKeep } from "./setCookie.js"
   }else{
   window.location.href = "Dashboard/";
 
-  }
+  } 

@@ -20,7 +20,7 @@ userFullnameContainer.forEach(container =>{
     container.innerText= userFullname
 })
 
-
+ 
 if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant"){
     fetch(`${submissionsEndpoint}/backend/editors/authorProfileDetails.php?&u_id=${user}&encrypted=${encrypted}`)
     .then(res=>res.json())

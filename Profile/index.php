@@ -151,7 +151,7 @@
                                 class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
                         </div>
                     </div>
-                </div>      
+                </div>       
                 <!-- /.col-lg-12 -->
             </div>
             <!-- ============================================================== -->

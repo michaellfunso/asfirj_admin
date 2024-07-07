@@ -13,7 +13,7 @@ const quill = new Quill('#quilleditor', {
     theme: 'snow',
   });
   
-
+ 
 export {
     quill
 }

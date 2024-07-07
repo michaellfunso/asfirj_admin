@@ -72,7 +72,7 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
                                                       </select>
                                                       </form>
                                                   </td>
-                                              </tr>
+                                              </tr> 
                     `
                 })
                 const formContainer = document.querySelectorAll('.form')
