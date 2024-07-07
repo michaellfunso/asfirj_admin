@@ -9,7 +9,7 @@
 
 
     <meta name="robots" content="noindex,nofollow">
-    <title>Portal | ASFIRJ Admin</title>
+    <title>Portal | ASFIRJ Editor</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
@@ -24,6 +24,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/jquery.selectric/1.10.1/selectric.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css'>
+    <!-- QUILL JS  -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <!-- END QUILL JS  -->
 </head>
 
 <body>
@@ -44,67 +48,11 @@
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
-        <header class="topbar" data-navbarbg="skin5">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header" data-logobg="skin6">
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
-                    <a class="navbar-brand" href="../Dashboard/">
-                        <!-- Logo icon -->
-                        <b class="logo-icon">
-                            <!-- Dark Logo icon -->
-                            <img src="../plugins/images/logo-icon.png" alt="homepage" width="30px"/>
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span class="logo-text">
-                            <!-- dark Logo text -->
-                            <img src="../plugins/images/logo-text.png" alt="homepage" width="180px"/>
-                        </span>
-                    </a>
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                   
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav ms-center d-flex align-items-center">
-
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
-                        <li class=" in text-white ">
-                            African Science Frontiers Initiatives Research Journal -
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                        <li>
-                            <a class="profile-pic" href="#">
-                                <!-- <img src="../plugins/images/users/" alt="user-img" width="36"
-                                    class="img-circle"> -->
-                                    <span class="text-white font-medium">
-                                       Bright Nwaru</span></a>
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                    </ul>
-                </div>
-            </nav>
+        <header class="topbar" data-navbarbg="skin5" id="topbar">
         </header>
+
+        <script src="../js/routes/topbar.js"></script>
+
         <style>
 
             .box-shadow{
@@ -166,12 +114,18 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Published/"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Authors/"
                                 aria-expanded="false">
-                                
-                                <!-- <i class=" fas fa-shopping-basket" aria-hidden="true"></i> -->
-                                <i class="fas fa-book"></i>
-                                <span class="hide-menu">Published</span>
+                                <i class="bi bi-person" aria-hidden="true"></i>
+                                <span class="hide-menu">Authors</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Inbox/"
+                                aria-expanded="false">
+                                <!-- <i class="fas fa-hands" aria-hidden="true"></i> -->
+                                <i class="fas fa-envelope"></i>
+                                <span class="hide-menu">Inbox</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -181,24 +135,10 @@
                                 <span class="hide-menu">Manage Supplements</span>
                             </a>
                         </li>
-                        <!-- <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Authors/"
-                                aria-expanded="false">
-                                <i class="bi bi-person" aria-hidden="true"></i>
-                                <span class="hide-menu">Authors</span>
-                            </a>
-                        </li> -->
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Mail/"
-                                aria-expanded="false">
-                                <i class="fas fa-message" aria-hidden="true"></i>
-                                <span class="hide-menu">Mail</span>
-                            </a>
-                        </li>
-                       
+                  
                         
                         <li class="text-center p-20 upgrade-btn">
-                            <a href="#"
+                            <a href="../Logout/"
                                 class="btn d-grid btn-danger text-white" target="_blank">
                                 Logout</a>
                         </li>
@@ -223,7 +163,7 @@
                             <ol class="breadcrumb ms-auto">
                                 <li><a href="#" class="fw-normal">Dashboard</a></li>
                             </ol>
-                            <a href="#" target="_blank"
+                            <a href="../Logout/" target="_blank"
                                 class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
                         </div>
                     </div>
@@ -248,62 +188,52 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
-                            <div class="d-md-flex mb-3">
-                                <h3 class="box-title mb-0">Published</h3>
-                                <div class="col-md-3 col-sm-4 col-xs-6 ms-auto">
-                                    <!-- <select class="form-select shadow-none row border-top">
-                                        <option>March 2021</option>
-                                        <option>April 2021</option>
-                                        <option>May 2021</option>
-                                        <option>June 2021</option>
-                                        <option>July 2021</option>
-                                    </select> -->
-                                </div>
-                            </div>
+                         
                             <div class="projects mb-4">
-                                <div class="projects-inner">
-                              
-                                    <table class="projects-table">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Title</th>
-                                                <th>Date</th>   
-                                                <th>Status</th>                                           
-                                                
-                                                <th class="text-right">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tr>
-                                            <td>
-                                               001
-                                            </td>
-                                            <td>
-                                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit, dolore. Sunt, unde reprehenderit. Ipsa totam corporis?</p>
-                                                
-                                            </td>
-                                          <td>
-                                              <p>6th, June 2024</p>
-                                          </td>
-                              
-                                            <td class="status">
-                                                <span class="status-text status-green">Published</span>
-                                            </td>
-                                            <td>
-                                                <form class="form" action="#" method="POST">
-                                                <select class="action-box">
-                                                    <option>Actions</option>
-                                                    <option>View</option>
-                                                    <option>Edit</option>
-                                                    <option>Delete</option>
-                                                </select>
-                                                </form>
-                                            </td>
-                                        </tr>
-              
+                                <div class="projects-inner" id="articlesContainer">
                                    
-                                    </table>
+                                <form id="sendMail">
+                                    <input type="hidden" id="articleIdContainer" name="articleId" readonly>
+                                    <input type="hidden" id="editor" name="editor" readonly>
+
+                                      <!-- Section  -->
+                                      <div class="d-md-flex mb-3" style="flex-direction: column;">
+                                        <h4 class="box-title mb-0">Recipient</h4>
+                                        <div><input class="form-control" type="email" name="reviewerEmail" id="email" placeholder="Enter Recipient email" required></div>
+                                        <div id="invitationLink">* The Invitation links will be displayed here after the email is typed</div>
+                                    </div>
+                                    <!-- End Section  -->
+                                         <!-- Section  -->
+                                         <div class="d-md-flex mb-3" style="flex-direction: column;">
+                                            <h4 class="box-title mb-0">Subject</h4>
+                                            <div><input class="form-control" type="text" name="subject" id="subject" placeholder="Enter Subject" required></div>
+                                        </div>
+                                        <!-- End Section  -->
+
+                                         <!-- Section  -->
+                                         <div class="d-md-flex mb-3" style="flex-direction: column;">
+                                            <h4 class="box-title mb-0">Message Body</h4>
+                                            * Please Replace fields in bracked with the appropriate data
+                                            <div id="meetingIdContainer">* Replace '[Manuscript ID]' with </div>
+                                            <div id="acceptLinkContainer">* Replace '[Link To Accept' with </div>
+                                            <div id="declineLinkContainer">* Replace '[Link To Decline]' with </div>
+
+
+                                         <!-- Main toolbar -->
+                                        <div class="bg-body border rounded-bottom h-400px overflow-hidden" id="quilleditor" style="height: 500px;">
+                                        </div>   
+                                    </div>
+                        <!-- End Section  -->
+                         <!-- button Section  -->
+                         <div class="d-md-flex mb-6" style="flex-direction: column; align-items: center;">
+                          <button type="submit" class="btn btn-github" style="border-radius: 25px; width: fit-content;">
+                            <i class="fa fa-paper-plane" style="border-right: 1px solid; padding: 10px;"></i> 
+                            <span style="padding-left:10px;">Send Invite</span></button>
+                            </div>
+
+                                </form>
                                 </div>
+                                
                        
                             </div>
 
@@ -346,6 +276,8 @@
     <script src="../plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
     <script src="../js/pages/dashboards/dashboard1.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
+    <script type="module" src="../js/routes/quill.js"></script>
+    <script type="module" src="../js/routes/dashboard/inviteReviewer.js"></script>
 </body>
 
 </html>
