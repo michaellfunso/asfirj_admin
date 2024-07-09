@@ -13,7 +13,7 @@
     <meta name="description"
         content="">
     <meta name="robots" content="noindex,nofollow">
-    <title>Portal | BW Tech Global</title>
+    <title>Portal | Editor</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
@@ -72,57 +72,11 @@
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
 
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <!-- User Profile-->
-                        <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Dashboard/"
-                                aria-expanded="false">
-                                <i class="far fa-clock" aria-hidden="true"></i>
-                                <span class="hide-menu">Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Submissions/"
-                                aria-expanded="false">
-                                
-                                <!-- <i class=" fas fa-shopping-basket" aria-hidden="true"></i> -->
-                                <i class="fas fa-link"></i>
-                                <span class="hide-menu">Submissions</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Authors/"
-                                aria-expanded="false">
-                                <i class="bi bi-person" aria-hidden="true"></i>
-                                <span class="hide-menu">Authors</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Inbox/"
-                                aria-expanded="false">
-                                <!-- <i class="fas fa-hands" aria-hidden="true"></i> -->
-                                <i class="fas fa-envelope"></i>
-                                <span class="hide-menu">Inbox</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="https://asfirj.org/manuscriptPortal/manage" target="_blank"
-                                aria-expanded="false">
-                                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                                <span class="hide-menu">Manage Supplements</span>
-                            </a>
-                        </li>
-                  
-                        
-                        <li class="text-center p-20 upgrade-btn">
-                            <a href="../Logout/"
-                                class="btn d-grid btn-danger text-white" target="_blank">
-                                Logout</a>
-                        </li>
-                    </ul>
+                <nav class="sidebar-nav" id="sidebar_nav">
+                    
 
                 </nav>
+                <script type="module" src="../js/routes/dashboard/sidenav.js"></script>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -197,7 +151,7 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-                 <footer class="footer text-center"> <?php echo date("Y");?> © BW Tech Global - all rights reserved
+                 <footer class="footer text-center"> <?php echo date("Y");?> © ASFI - all rights reserved
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
