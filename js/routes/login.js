@@ -3,7 +3,7 @@ import { GetCookie, SetCookies, hoursToKeep } from "./setCookie.js";
 import { validateLogin } from "./validateLogin.js";
 
 const LoginForm = document.getElementById("login-form")
-
+ 
 // check if the user is logged in 
 const editor = GetCookie("editor")
 

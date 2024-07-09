@@ -22,4 +22,4 @@ function GetAdminSubmissions(id){
 
 export {
     GetAdminSubmissions
-}
+} 

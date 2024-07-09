@@ -1,5 +1,5 @@
 import { submissionsEndpoint } from "./constants.js";
-
+ 
 function validateLogin(Id){
   return  fetch(`${submissionsEndpoint}/backend/editors/isEditor.php`, {
         method:"POST",

@@ -31,7 +31,7 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
                     <option value="invite_reviewer">Invite Reviewer</option>
                     <option value="invite_editor">Invite Editor</option>
                     <option value="accept">Accept</option>
-                    `
+                    ` 
 }else{
     SubmisisonsArray = await GetMySubmissions(user);
     adminAction =  `

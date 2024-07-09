@@ -12,7 +12,7 @@ function GetSubmissionData(id){
         if(data){
             return data.articles
         }else{
-            console.log("Could Not Get Data")
+            console.log("Could Not Get Data") 
             return false
         }
     })

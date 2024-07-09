@@ -14,7 +14,7 @@ const AccountData = await validateLogin(user)
 const userFullname = AccountData.fullname 
 const email = AccountData.email 
 const accoount_type = AccountData.editorial_level
-
+ 
 userFullnameContainer.forEach(container =>{
     container.innerText= userFullname
 })

@@ -30,7 +30,7 @@ const accoount_type = AccountData.editorial_level
 
 userFullnameContainer.forEach(container =>{
     container.innerText= userFullname
-})
+}) 
 
 
 if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant"){

@@ -10,7 +10,7 @@ function GetEmailContent(emailID){
     .then(data =>{
         if(data.emails){
             contentDiv.innerHTML = `<div>
-                <p><b>${data.emails.subject}</b></p>
+                <p><b>${data.emails.subject}</b></p> 
                 <p>${data.emails.article_id}</p>
                                   </div>`
 
