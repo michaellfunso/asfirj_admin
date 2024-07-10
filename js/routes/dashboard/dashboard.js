@@ -28,14 +28,21 @@ let tableRowClass = ""
 if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant"){
     SubmisisonsArray = await GetAdminSubmissions(user)
     adminAction =  `<option value="return">Return</option>
+                    <option value="return_for_revision">Return For Revision</option>
                     <option value="invite_reviewer">Invite Reviewer</option>
                     <option value="invite_editor">Invite Editor</option>
                     <option value="accept">Accept</option>
+                    <option value="reject">Reject</option>
+
                     ` 
 }else{
     SubmisisonsArray = await GetMySubmissions(user);
     adminAction =  `
     <option value="invite_reviewer">Invite Reviewer</option>
+    <option value="return_for_revision">Return For Revision</option>
+    <option value="accept">Accept</option>
+    <option value="reject">Reject</option>
+
     `
 }
 if(SubmisisonsArray.length > 0){
@@ -78,7 +85,23 @@ tableRowClass = ""
     }
     else if(submission.status === "returned_for_revision"){
         submissionStatus = `   <td class="status">
-                                                <span class="status-text status-red">Returned</span>
+                                                <span class="status-text status-orange">Returned For Revision</span>
+                                            </td>
+                                            <td>
+                                                <form class="form" action="#" method="GET">
+                                          <input type="hidden" value="${submission.revision_id}" name="id">
+                                                   <select class="action-box" name="do">
+                                                    <option value="">Actions</option>
+                                                    <option value="view">View</option>
+                                                    ${adminAction}
+                                                </select>
+                                                
+                                                </form>
+                                            </td>`
+        tableRowClass = "danger-item"
+    }    else if(submission.status === "rejected"){
+        submissionStatus = `   <td class="status">
+                                                <span class="status-text status-red">Rejected</span>
                                             </td>
                                             <td>
                                                 <form class="form" action="#" method="GET">
@@ -177,17 +200,29 @@ if(action && ArticleId){
    }
 
    if(action === "return" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant")){
+    window.location.href = `${parentDirectoryName}/returnPaper?a=${ArticleId}`
 
    }
 
-   if(action === "invite_reviewer" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant")){
+   if(action === "reject" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant"|| accoount_type === "editorial_assistant" || accoount_type === "sectional_editor" || accoount_type === "associate_editor")){
+    window.location.href = `${parentDirectoryName}/rejectPaper?a=${ArticleId}`
+
+   }
+
+   if(action === "invite_reviewer" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant" || accoount_type === "sectional_editor" || accoount_type === "associate_editor")){
     window.location.href = `${parentDirectoryName}/InviteReviewer?a=${ArticleId}`
-
    }
-   if(action === "invite_editor" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant")){
+
+   if(action === "return_for_revision" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant" || accoount_type === "sectional_editor" || accoount_type === "associate_editor")){
+    window.location.href = `${parentDirectoryName}/revisePaper?a=${ArticleId}`
+   }
+
+   if(action === "invite_editor" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant" )){
     window.location.href = `${parentDirectoryName}/InviteEditor?a=${ArticleId}`
    }
-   if(action === "accept" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant")){
+
+   if(action === "accept" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant" || accoount_type === "sectional_editor" || accoount_type === "associate_editor")){
+    window.location.href = `${parentDirectoryName}/acceptPaper?a=${ArticleId}`
 
    }
 }

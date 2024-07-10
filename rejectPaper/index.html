@@ -107,17 +107,17 @@
         </aside>
        
        
-        <div class="page-wrapper">
+        <div class="page-wrapper"> 
 
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Invite Reviewer</h4>
+                        <h4 class="page-title">Reject Paper</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="#" class="fw-normal">Invite Reviewer</a></li>
+                                <li><a href="#" class="fw-normal">Reject Paper</a></li>
                             </ol>
                             <a href="../Logout/" target="_blank"
                                 class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
@@ -151,14 +151,15 @@
                                 <form id="sendMail">
                                     <input type="hidden" id="articleIdContainer" name="articleId" readonly>
                                     <input type="hidden" id="editor" name="editor" readonly>
+
                                       <!-- Section  -->
                                       <div class="d-md-flex mb-3" style="flex-direction: column;">
                                         <h4 class="box-title mb-0">Recipient</h4>
                                         <div>
                                             <input class="form-control" type="email" name="reviewerEmail" id="email" placeholder="Enter Recipient email" required></div>
-                                    <ul id="emailList"></ul>
-
-                                        <div id="invitationLink">* The Invitation links will be displayed here after the email is typed</div>
+                                            <ul id="emailList"></ul>
+                                            <div id="invitationLink">*This Email has been auto filled with the Corresponding Author's Email</div>
+                                    
                                     </div>
                                     <!-- End Section  -->
                                          <!-- Section  -->
@@ -171,12 +172,10 @@
                                          <!-- Section  -->
                                          <div class="d-md-flex mb-3" style="flex-direction: column;">
                                             <h4 class="box-title mb-0">Message Body</h4>
-                                            * Please Replace fields in bracked with the appropriate data
-                                            <div id="meetingIdContainer">* Replace '[Manuscript ID]' with </div>
-                                            <div id="acceptLinkContainer">* Replace '[Link To Accept' with </div>
-                                            <div id="declineLinkContainer">* Replace '[Link To Decline]' with </div>
-
-
+                                            
+                                            <div style="display: flex; width: 100%;">*
+                                                Please Replace the Areas Marked red with their appropriate Data (e.g <span style="color: rgb(209, 12, 12);"><b>[Area Name]</b></span>)
+                                           </div>
                                          <!-- Main toolbar -->
                                         <div class="bg-body border rounded-bottom h-400px overflow-hidden" id="quilleditor" style="height: 500px;">
                                         </div>   
@@ -237,9 +236,8 @@
     <script src="../js/pages/dashboards/dashboard1.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
     <script type="module" src="../js/routes/quill.js"></script>
-    <script type="module" src="../js/routes/dashboard/inviteReviewer.js"></script>
-    <script type="module" src="../js/routes/dashboard/filterInviteList.js"></script>
-
+    <script type="module" src="../js/routes/dashboard/emails/rejectPaper.js"></script>
+    <script type="module" src="../js/routes/dashboard/filterinviteEditorsList.js"></script>
 </body>
 
 </html>

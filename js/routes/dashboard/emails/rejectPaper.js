@@ -1,9 +1,13 @@
-import { GetParameters, domainN, parentDirectoryName, submissionsEndpoint } from "../constants.js"
-import { formatTimestamp } from "../formatDate.js"
-import { GetSubmissionData } from "../queries/getSubmissionData.js"
-import { quill } from "../quill.js"
-import { GetCookie } from "../setCookie.js"
-import { validateLogin } from "../validateLogin.js"
+
+import { GetParameters, domainN, parentDirectoryName, submissionsEndpoint } from "../../constants.js"
+import { formatTimestamp } from "../../formatDate.js"
+import { GetSubmissionData } from "../../queries/getSubmissionData.js"
+import { quill } from "../../quill.js"
+import { GetCookie } from "../../setCookie.js"
+import { validateLogin } from "../../validateLogin.js"
+import { getAuthorsDetails } from "./getAuthorsDetails.js"
+
+
 
 const userFullnameContainer = document.querySelectorAll(".userFullnameContainer")
 const submissionsContainer = document.getElementById("submissionsContainer")
@@ -33,18 +37,24 @@ userFullnameContainer.forEach(container =>{
 }) 
 
 
-if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant" || accoount_type === "associate_editor" || accoount_type === "sectional_editor"){
+if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant" || accoount_type === "associate_editor"){
     const ArticleData = await GetSubmissionData(ArticleId)
     if(ArticleData){
     const Title = ArticleData.title
-    meetingIdContaienr.innerHTML += ` "<a href="#" class="copy-link" data-link="${ArticleId}">
-                      ${ArticleId}
-                    </a> "`
+    const CorrespondingAuthorsEmail = ArticleData.corresponding_authors_email
+    const CorrespondingAuthorsName = await getAuthorsDetails(user, CorrespondingAuthorsEmail)
+
+    Recipient.value = CorrespondingAuthorsEmail
+    Recipient.setAttribute("readonly", true)
+
+    // meetingIdContaienr.innerHTML += ` "<a href="#" class="copy-link" data-link="${ArticleId}">
+    //                   ${ArticleId}
+    //                 </a> "`
 
     // Get the Email tmplate for reviewers 
     fetch(`${submissionsEndpoint}/backend/editors/getReviewerEmailTemplate.php`, {
         method:"POST",
-        body:JSON.stringify({id:user, emailFor:"reviewer_invitation"}),
+        body:JSON.stringify({id:user, emailFor:"reject_paper"}),
         headers:{
             "Content-type" : "application/JSON"
         }
@@ -55,7 +65,7 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
             const subject = emailContent.subject
             const messagebody = emailContent.message_body
 
-            subjectContainer.value = `${subject} (${Title})`
+            subjectContainer.value = `Reject: ${Title} (${ArticleId})`
          // Set the content as Quill Delta and extract the HTML
     quill.setContents(JSON.parse(messagebody));
         }else{
@@ -64,30 +74,21 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
     })
 
     // add the Links to the DOM when the recipient Email has changed 
-    Recipient.addEventListener("change", function() {
+    // Recipient.addEventListener("change", function() {
         if(Recipient.value !== ""){
-            linksContainer.innerHTML = `<span>* Click on the link to Copy</span>`
+            linksContainer.innerHTML = `<span>* Click on an Item to Copy</span>`
         linksContainer.innerHTML += `
         <ul>
-        <li>Accept Link: <a href="#" class="copy-link" data-link="${domainN}/invitations?a=${ArticleId}&e=${Recipient.value}&do=review&accept=yes">
-                        ${domainN}/invitations?a=${ArticleId}&e=${Recipient.value}&do=review&accept=yes
+        <li>Manuscript Title And Id <a href="#" class="copy-link" data-link="${Title} (${ArticleId})">
+                        ${Title} (${ArticleId})
                     </a>
         </li>
-        <li>Reject Link: <a href="#" class="copy-link" data-link="${domainN}/invitations?a=${ArticleId}&e=${Recipient.value}&do=review&reject=yes">
-                        ${domainN}/invitations?a=${ArticleId}&e=${Recipient.value}&do=review&reject=yes
+        <li>Corresponding Author's Name: <a href="#" class="copy-link" data-link="${CorrespondingAuthorsName}">
+                        ${CorrespondingAuthorsName}
                     </a>
         </li>
 
         `
-        acceptLinkContainer.innerHTML += `       "Accept Link: <a href="#" class="copy-link" data-link="${domainN}/invitations?a=${ArticleId}&e=${Recipient.value}&do=review&accept=yes">
-                        ${domainN}/invitations?a=${ArticleId}&e=${Recipient.value}&do=review&accept=yes
-                    </a>"
-       `;
-
-        declineLinkContainer.innerHTML += ` "Reject Link: <a href="#" class="copy-link" data-link="${domainN}/invitations?a=${ArticleId}&e=${Recipient.value}&do=review&reject=yes">
-                        ${domainN}/invitations?a=${ArticleId}&e=${Recipient.value}&do=review&reject=yes
-                    </a>
-        "`;
 
  
 
@@ -96,7 +97,7 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
     }else{
         linksContainer.innerHTML = `<span>* The Invitation links will apppear here after the email is typed</span>`
     }
-    })
+    // })
 CopyText()
 
 // Send Mail event listener 
@@ -104,7 +105,7 @@ sendMail.addEventListener("submit", function(e){
     e.preventDefault();
     const formData = new FormData(sendMail);
     formData.append('message', JSON.stringify(quill.getContents().ops))
-    fetch(`${submissionsEndpoint}/backend/editors/inviteReviewer.php`,{
+    fetch(`${submissionsEndpoint}/backend/editors/rejectPaper.php`,{
         method:"POST",
         body:formData,
     }).then(res=>res.json())

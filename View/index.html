@@ -161,64 +161,19 @@
                                                     <table class="projects-table">
                                                         <thead>
                                                             <tr>
-                                                                <th>Reviewer Name</th>
-                                                                <th>Reviewer Email</th>
+                                                                <th>Reviewer</th>
+                                                                <!-- <th>Reviewer Email</th> -->
                                                                 <th>Date</th>   
                                                                 <th>Status</th>                                           
                                                                 
                                                                 <th class="text-right">Actions</th>
                                                             </tr>
                                                         </thead>
-                                                        <tr>
-                                                            <td>
-                                                               John Doe
-                                                            </td>
-                                                            <td>
-                                                                <p>johndoe@gmail.com</p>
-                                                                
-                                                            </td>
-                                                          <td>
-                                                              <p>6th, June 2024</p>
-                                                          </td>
-                                              
-                                                            <td class="status">
-                                                                <span class="status-text status-orange">Awaiting Review</span>
-                                                            </td>
-                                                            <td>
-                                                                <form class="form" action="#" method="POST">
-                                                                <select class="action-box">
-                                                                    <option>Actions</option>
-                                                                    <option>View</option>
-                                                                </select>
-                                                                </form>
-                                                            </td>
-                                                        </tr>
+                                                        <tbody id="reviewsContainer">
 
-                                                        <tr>
-                                                            <td>
-                                                               John Smith
-                                                            </td>
-                                                            <td>
-                                                                <p>johnsmith@gmail.com</p>
-                                                                
-                                                            </td>
-                                                          <td>
-                                                              <p>6th, June 2024</p>
-                                                          </td>
-                                              
-                                                            <td class="status">
-                                                                <span class="status-text status-green">Reviewed</span>
-                                                            </td>
-                                                            <td>
-                                                                <form class="form" action="#" method="POST">
-                                                                <select class="action-box">
-                                                                    <option>Actions</option>
-                                                                    <option>View</option>
-                                                                </select>
-                                                                </form>
-                                                            </td>
-                                                        </tr>
+                                                    
                               
+                                                    </tbody>
                                                    
                                                     </table>
                                                 </div>
@@ -268,6 +223,7 @@
     <script src="../js/pages/dashboards/dashboard1.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
     <script type="module" src="../js/routes/dashboard/viewArticle.js"></script>
+    <script type="module" src="../js/routes/dashboard/viewArticleReviews.js"></script>
 </body>
 
 </html>

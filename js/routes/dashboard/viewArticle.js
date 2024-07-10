@@ -1,8 +1,9 @@
-import { GetParameters, submissionsEndpoint } from "../constants.js";
+import { GetParameters, parentDirectoryName, submissionsEndpoint } from "../constants.js";
 import { GetSubmissionData } from "../queries/getSubmissionData.js";
 import { formatTimestamp } from "../formatDate.js"
 import { GetCookie } from "../setCookie.js"
 import { validateLogin } from "../validateLogin.js"
+
 
 const userFullnameContainer = document.querySelectorAll(".userFullnameContainer")
 const user = GetCookie("editor")
@@ -117,6 +118,8 @@ const unstructuredAbstract = ArticleData.abstract
         } else {
             console.log("Server Error")
         }
+
+      
     })
    }
 }
