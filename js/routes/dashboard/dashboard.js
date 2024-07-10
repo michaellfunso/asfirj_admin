@@ -1,4 +1,4 @@
-import { GetParameters, parentDirectoryName } from "../constants.js"
+import { GetParameters, parentDirectoryName, submissionsEndpoint } from "../constants.js"
 import { formatTimestamp } from "../formatDate.js"
 import { GetCookie } from "../setCookie.js"
 import { validateLogin } from "../validateLogin.js"
@@ -7,8 +7,46 @@ import { GetMySubmissions } from "./getMySubmissions.js"
 
 const userFullnameContainer = document.querySelectorAll(".userFullnameContainer")
 const submissionsContainer = document.getElementById("submissionsContainer")
+const authorsCount = document.querySelectorAll(".authorsCount")
+const reviewedCount = document.querySelectorAll(".reviewedCount")
+
+const SubmissionsCount = document.querySelectorAll(".submissionsCount")
 const user = GetCookie("editor")
 if(user){
+
+if(SubmissionsCount){
+    fetch(`${submissionsEndpoint}/backend/editors/countSubmissions.php?u_id=${user}`)
+    .then(res => res.json())
+    .then(data=>{
+        SubmissionsCount.forEach(count =>{
+            count.innerText = data.count
+        })
+    })
+   
+}
+
+if(authorsCount){
+    fetch(`${submissionsEndpoint}/backend/editors/countAuthors.php?u_id=${user}`)
+    .then(res => res.json())
+    .then(data=>{
+        authorsCount.forEach(count =>{
+            count.innerText = data.count
+        })
+    })
+}
+
+if(reviewedCount){
+    fetch(`${submissionsEndpoint}/backend/editors/countReviewed.php?u_id=${user}`)
+    .then(res => res.json())
+    .then(data=>{
+        reviewedCount.forEach(count =>{
+            count.innerText = data.count
+        })
+    })
+}
+
+
+
 const AccountData = await validateLogin(user)
 
 
