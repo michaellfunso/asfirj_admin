@@ -1,4 +1,4 @@
-import { parentDirectoryName } from "./constants";
+import { parentDirectoryName } from "./constants.js";
 import { DeleteCookie, GetCookie } from "./setCookie.js";
 
 const editorCookie = GetCookie("editor")
