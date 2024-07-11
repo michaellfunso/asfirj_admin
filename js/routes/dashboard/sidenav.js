@@ -25,6 +25,13 @@ const admin_nav = `<ul id="sidebarnav">
                                 <span class="hide-menu">Inbox</span>
                             </a>
                         </li>
+                            <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="https://asfirj.org/dashboard/"
+                                aria-expanded="false" target=_blank>
+                                <i class="bi bi-person" aria-hidden="true"></i>
+                                <span class="hide-menu">Author's Dashboard</span>
+                            </a>
+                        </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="https://asfirj.org/manuscriptPortal/manage" target="_blank"
                                 aria-expanded="false">
@@ -55,6 +62,13 @@ const editor_nav = `<ul id="sidebarnav">
                                 <!-- <i class="fas fa-hands" aria-hidden="true"></i> -->
                                 <i class="fas fa-envelope"></i>
                                 <span class="hide-menu">Inbox</span>
+                            </a>
+                        </li>
+                               <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="https://asfirj.org/dashboard/"
+                                aria-expanded="false" target=_blank>
+                                <i class="bi bi-person" aria-hidden="true"></i>
+                                <span class="hide-menu">Author's Dashboard</span>
                             </a>
                         </li>
                         <li class="text-center p-20 upgrade-btn">
