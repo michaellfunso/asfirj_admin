@@ -51,7 +51,7 @@ const admin_nav = `<ul id="sidebarnav">
                         
                         <li class="text-center p-20 upgrade-btn">
                             <a href="../Logout/"
-                                class="btn d-grid btn-danger text-white" target="_blank">
+                                class="btn d-grid btn-danger text-white">
                                 Logout</a>
                         </li>
                     </ul> `
@@ -81,7 +81,7 @@ const editor_nav = `<ul id="sidebarnav">
                         </li>
                         <li class="text-center p-20 upgrade-btn">
                             <a href="../Logout/"
-                                class="btn d-grid btn-danger text-white" target="_blank">
+                                class="btn d-grid btn-danger text-white">
                                 Logout</a>
                         </li>
                     </ul> `;
