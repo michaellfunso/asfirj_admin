@@ -25,6 +25,14 @@ const admin_nav = `<ul id="sidebarnav">
                                 <span class="hide-menu">Inbox</span>
                             </a>
                         </li>
+                              <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Mail/"
+                                aria-expanded="false">
+                                <!-- <i class="fas fa-hands" aria-hidden="true"></i> -->
+                                <i class="fas fa-envelope"></i>
+                                <span class="hide-menu">News Letter</span>
+                            </a>
+                        </li>
                             <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="https://asfirj.org/dashboard/"
                                 aria-expanded="false" target=_blank>
