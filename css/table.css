@@ -224,7 +224,12 @@ figure {
 .danger-item {
   border-left: 4px solid #A84D43;
 }
-
+.warning-item {
+  border-left: 4px solid #a88543;
+}
+.success-item {
+  border-left: 4px solid #46a843;
+}
 .zmdi {
   line-height: 1;
   vertical-align: middle;

@@ -22,7 +22,6 @@ if(SubmissionsCount){
             count.innerText = data.count
         })
     })
-   
 }
 
 if(authorsCount){
@@ -65,7 +64,7 @@ let tableRowClass = ""
 
 if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant"){
     SubmisisonsArray = await GetAdminSubmissions(user)
-    adminAction =  `<option value="return">Return</option>
+    adminAction =  `<option value="return">Return For Correction</option>
                     <option value="return_for_revision">Return For Revision</option>
                     <option value="invite_reviewer">Invite Reviewer</option>
                     <option value="invite_editor">Invite Editor</option>
@@ -170,24 +169,33 @@ tableRowClass = ""
                                             </td>`
         tableRowClass = ""
 
-    }else if(submission.status === "review_submitted" || submission.status === "submitted" || submission.status === "revision_submitted"){
+    }else if(submission.status === "review_submitted" || submission.status === "review_completed"){
         submissionStatus = `       <td class="status">
                                                 <span class="status-text status-blue">Awaiting to be Published</span>
                                             </td>
                                             <td>
-                                            <form class="form" action="#" method="GET">
-                                                <input type="hidden" value="${submission.revision_id}" name="id">
-                                               <select class="action-box" name="do">
+                                               <form class="form" action="#" method="GET">
+                                           <input type="hidden" value="${submission.revision_id}" name="id">
+                                                   <select class="action-box" name="do">
                                                     <option value="">Actions</option>
                                                     <option value="view">View</option>
                                                     ${adminAction}
                                                 </select>
                                                 
                                                 </form>
+                
                                             </td>`
         tableRowClass = ""
 
-    }
+}else if(submission.status === "revision_submitted" || submission.status === "submitted"){
+    submissionStatus = `       <td class="status">
+                                            <span class="status-text status-blue">New Submission</span>
+                                        </td>
+                                        <td>
+                                        </td>`
+    tableRowClass = "success-item"
+
+}
     submissionsContainer.innerHTML += `     <tr class="${tableRowClass}">
                                             <td>
                                                 <p>Title</p>

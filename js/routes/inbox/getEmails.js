@@ -1,4 +1,5 @@
 import { GetParameters, submissionsEndpoint } from "../constants.js";
+import { formatTimestamp } from "../formatDate.js";
 import { GetCookie } from "../setCookie.js";
 const user = GetCookie("editor")
 const contentDiv = document.getElementById('email-content');
@@ -12,6 +13,9 @@ function GetEmailContent(emailID){
             contentDiv.innerHTML = `<div>
                 <p><b>${data.emails.subject}</b></p> 
                 <p>${data.emails.article_id}</p>
+                <p>To: ${data.emails.recipient}</p>
+                <p>${formatTimestamp(data.emails.date_sent)}</p>
+                
                                   </div>`
 
  

@@ -33,6 +33,14 @@ const admin_nav = `<ul id="sidebarnav">
                                 <span class="hide-menu">News Letter</span>
                             </a>
                         </li>
+                           <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../EditorInvitations/"
+                                aria-expanded="false">
+                                <!-- <i class="fas fa-hands" aria-hidden="true"></i> -->
+                                <i class="bi bi-person-plus"></i>
+                                <span class="hide-menu">Editor Invitations</span>
+                            </a>
+                        </li>
                             <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="https://asfirj.org/dashboard/"
                                 aria-expanded="false" target=_blank>
