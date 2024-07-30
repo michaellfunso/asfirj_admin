@@ -15,15 +15,12 @@ function GetEmailContent(emailID){
                 <p>${data.emails.article_id}</p>
                 <p>To: ${data.emails.recipient}</p>
                 <p>${formatTimestamp(data.emails.date_sent)}</p>
-                
-                                  </div>`
+                </div>`
 
- 
          // Parse the Quill content from the JSON data]
          const quillContent = JSON.parse(data.emails.body);
 
          // Create a Quill instance in "read-only" mode to render the content as HTML
-
          function renderQuillAsHTML(divId, deltaContent) {
              // Create a Quill instance in a temporary div
              const tempDiv = document.createElement('div');

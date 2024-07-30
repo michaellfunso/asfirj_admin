@@ -9,6 +9,7 @@ const userFullnameContainer = document.querySelectorAll(".userFullnameContainer"
 const submissionsContainer = document.getElementById("submissionsContainer")
 const authorsCount = document.querySelectorAll(".authorsCount")
 const reviewedCount = document.querySelectorAll(".reviewedCount")
+const editorInviteCount = document.querySelectorAll(".editorInviteCount")
 
 const SubmissionsCount = document.querySelectorAll(".submissionsCount")
 const user = GetCookie("editor")
@@ -44,6 +45,15 @@ if(reviewedCount){
     })
 }
 
+if(editorInviteCount){
+    fetch(`${submissionsEndpoint}/backend/editors/countEditorInvites.php?u_id=${user}`)
+    .then(res => res.json())
+    .then(data=>{
+        editorInviteCount.forEach(count =>{
+            count.innerText = data.count
+        })
+    })
+}
 
 
 const AccountData = await validateLogin(user)
@@ -157,15 +167,7 @@ tableRowClass = ""
                                                 <span class="status-text status-green">Accepted</span>
                                             </td>
                                             <td>
-                                          <form class="form" action="#" method="GET">
-                                           <input type="hidden" value="${submission.revision_id}" name="id">
-                                                   <select class="action-box" name="do">
-                                                    <option value="">Actions</option>
-                                                    <option value="view">View</option>
-                                                    ${adminAction}
-                                                </select>
-                                                
-                                                </form>
+                                 
                                             </td>`
         tableRowClass = ""
 
@@ -192,6 +194,15 @@ tableRowClass = ""
                                             <span class="status-text status-blue">New Submission</span>
                                         </td>
                                         <td>
+                                                 <form class="form" action="#" method="GET">
+                                           <input type="hidden" value="${submission.revision_id}" name="id">
+                                                   <select class="action-box" name="do">
+                                                    <option value="">Actions</option>
+                                                    <option value="view">View</option>
+                                                    ${adminAction}
+                                                </select>
+                                                
+                                                </form>
                                         </td>`
     tableRowClass = "success-item"
 

@@ -3,6 +3,7 @@ import { GetSubmissionData } from "../queries/getSubmissionData.js";
 import { formatTimestamp } from "../formatDate.js"
 import { GetCookie } from "../setCookie.js"
 import { validateLogin } from "../validateLogin.js"
+import { GetKeywords } from "../queries/getKeywords.js";
 
 
 const userFullnameContainer = document.querySelectorAll(".userFullnameContainer")
@@ -72,6 +73,15 @@ const unstructuredAbstract = ArticleData.abstract
                                        </ul>
                                     
                                     </div>
+
+                                    <div class="d-md-flex mb-3">
+                                        <h3 class="box-title mb-0">Keywords</h3>
+                                    
+                                       <p id="keywordsContainer">
+                                       </p>
+                                    
+                                    </div>
+
                                     <!-- End Section  -->
                               `
  
@@ -104,25 +114,36 @@ const unstructuredAbstract = ArticleData.abstract
                     // Render the Quill content as HTML in the "content" div
                     renderQuillAsHTML('content', quillContent);
                     const AuthorsContainer = document.getElementById("authorsContainer")
-  fetch(`${submissionsEndpoint}/backend/accounts/articleAuthors.php?articleID=${ArticleId}`, {
-    method: "GET"
-}).then(res => res.json())
-    .then(data => {
-        
-        if (data) {
-            const AllAuthors = data.authorsList
-            AllAuthors.forEach(author => {
-                AuthorsContainer.innerHTML +=  `<li><a href="mailto:${author.authors_email}">${author.authors_fullname}</a></li>`
-            });
+            fetch(`${submissionsEndpoint}/backend/accounts/articleAuthors.php?articleID=${ArticleId}`, {
+                method: "GET"
+            }).then(res => res.json())
+                .then(data => {
+                    
+                    if (data) {
+                        const AllAuthors = data.authorsList
+                        AllAuthors.forEach(author => {
+                            AuthorsContainer.innerHTML +=  `<li><a href="mailto:${author.authors_email}">${author.authors_fullname}</a></li>`
+                        });
 
-        } else {
-            console.log("Server Error")
-        }
+                    } else {
+                        console.log("Server Error")
+                    }
 
-      
-    })
-   }
-}
+                
+                })
+            }
+            }
+
+            const keywordsContainer = document.getElementById("keywordsContainer");
+            const keywords = await GetKeywords(ArticleId)
+            for(let i=0; i<keywords.length;i++){
+                if(i === (keywords.length - 1)){
+                    keywordsContainer.innerHTML += `${keywords[i].keyword}`
+                }else{
+                    keywordsContainer.innerHTML += `${keywords[i].keyword}, `
+                }
+            }
+     
 
 }else{
     window.location.href = `${parentDirectoryName}/workflow/accounts/login`
