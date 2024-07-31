@@ -76,9 +76,14 @@ const unstructuredAbstract = ArticleData.abstract
 
                                     <div class="d-md-flex mb-3">
                                         <h3 class="box-title mb-0">Keywords</h3>
-                                    
+                                        
+                                    <ul>
+                                        <li>
                                        <p id="keywordsContainer">
+                                    
                                        </p>
+                                       </li>
+                                    </ul
                                     
                                     </div>
 
