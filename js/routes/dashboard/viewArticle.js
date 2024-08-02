@@ -83,9 +83,10 @@ const unstructuredAbstract = ArticleData.abstract
                                     
                                        </p>
                                        </li>
-                                    </ul
+                                    </ul>
                                     
                                     </div>
+
 
                                     <!-- End Section  -->
                               `
@@ -148,6 +149,35 @@ const unstructuredAbstract = ArticleData.abstract
                     keywordsContainer.innerHTML += `${keywords[i].keyword}, `
                 }
             }
+
+            const suggestedReviewersContainer = document.getElementById("suggestedReviewersContainer")
+
+            fetch(`${submissionsEndpoint}/backend/accounts/suggestedReviewers.php?articleID=${ArticleId}`, {
+                method:"GET"
+            }).then(res=>res.json())
+            .then(data=>{
+                if(data){
+                    const ReviewersList = data.suggestedReviewers
+
+                    ReviewersList.forEach(reviewer =>{
+                        suggestedReviewersContainer.innerHTML += `
+                        <tr>
+                           <td><p><b>${reviewer.fullname}</b></p>
+                           <p>${reviewer.email}</p>
+                           </td>
+                                    
+                           <td>${reviewer.affiliation}</td>   
+                           <td>${reviewer.affiliation_country}</td>
+                           <td>${reviewer.affiliation_city}</td>    
+                       </tr>
+                       `
+                    })
+              
+
+                }else{
+                    console.log("Could not Get Suggested Reviewers")
+                }
+            })
      
 
 }else{

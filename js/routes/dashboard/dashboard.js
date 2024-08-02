@@ -74,13 +74,12 @@ let tableRowClass = ""
 
 if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant"){
     SubmisisonsArray = await GetAdminSubmissions(user)
-    adminAction =  `<option value="return">Return For Correction</option>
+    adminAction =  `<option value="return_for_correction">Return For Correction</option>
                     <option value="return_for_revision">Return For Revision</option>
                     <option value="invite_reviewer">Invite Reviewer</option>
                     <option value="invite_editor">Invite Editor</option>
                     <option value="accept">Accept</option>
                     <option value="reject">Reject</option>
-
                     ` 
 }else{
     SubmisisonsArray = await GetMySubmissions(user);
@@ -146,6 +145,22 @@ tableRowClass = ""
                                                 </form>
                                             </td>`
         tableRowClass = "danger-item"
+    } else if(submission.status === "returned_for_correction"){
+        submissionStatus = `   <td class="status">
+                                                <span class="status-text status-orange">Returned For Correction</span>
+                                            </td>
+                                            <td>
+                                                <form class="form" action="#" method="GET">
+                                          <input type="hidden" value="${submission.revision_id}" name="id">
+                                                   <select class="action-box" name="do">
+                                                    <option value="">Actions</option>
+                                                    <option value="view">View</option>
+                                                    ${adminAction}
+                                                </select>
+                                                
+                                                </form>
+                                            </td>`
+        tableRowClass = "danger-item"
     }    else if(submission.status === "rejected"){
         submissionStatus = `   <td class="status">
                                                 <span class="status-text status-red">Rejected</span>
@@ -189,9 +204,42 @@ tableRowClass = ""
                                             </td>`
         tableRowClass = ""
 
-}else if(submission.status === "revision_submitted" || submission.status === "submitted"){
+}else if(submission.status === "revision_submitted"){
+    submissionStatus = `       <td class="status">
+                                            <span class="status-text status-blue">Revision for ${submission.article_id}</span>
+                                        </td>
+                                        <td>
+                                                 <form class="form" action="#" method="GET">
+                                           <input type="hidden" value="${submission.revision_id}" name="id">
+                                                   <select class="action-box" name="do">
+                                                    <option value="">Actions</option>
+                                                    <option value="view">View</option>
+                                                    ${adminAction}
+                                                </select>
+                                                
+                                                </form>
+                                        </td>`
+    tableRowClass = "success-item"
+}else if(submission.status === "submitted"){
     submissionStatus = `       <td class="status">
                                             <span class="status-text status-blue">New Submission</span>
+                                        </td>
+                                        <td>
+                                                 <form class="form" action="#" method="GET">
+                                           <input type="hidden" value="${submission.revision_id}" name="id">
+                                                   <select class="action-box" name="do">
+                                                    <option value="">Actions</option>
+                                                    <option value="view">View</option>
+                                                    ${adminAction}
+                                                </select>
+                                                
+                                                </form>
+                                        </td>`
+    tableRowClass = "success-item"
+
+}else if(submission.status === "correction_submitted"){
+    submissionStatus = `       <td class="status">
+                                            <span class="status-text status-blue">Correction Submitted</span>
                                         </td>
                                         <td>
                                                  <form class="form" action="#" method="GET">
@@ -256,7 +304,10 @@ if(action && ArticleId){
 
    }
 
-   if(action === "return" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant")){
+//    if(action === "return_for_revision" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant")){
+//     window.location.href = `${parentDirectoryName}/returnPaper?a=${ArticleId}`
+//    }
+   if(action === "return_for_correction" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant")){
     window.location.href = `${parentDirectoryName}/returnPaper?a=${ArticleId}`
 
    }

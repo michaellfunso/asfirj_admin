@@ -1,25 +1,46 @@
-import { submissionsEndpoint } from "../constants.js";
+import { GetParameters, submissionsEndpoint } from "../constants.js";
 import { GetCookie } from "../setCookie.js";
 
 
 // Get a List of Availabel Reviewers 
 const userID = GetCookie("editor")
-async function ReviewersList(){
-    return fetch(`${submissionsEndpoint}/backend/editors/listOfReviewerEmails.php`,{
-        method:"POST",
-        body:JSON.stringify({editorId:userID})
-    }).then(res=>res.json())
-    .then(data=>{
-        if(data.success){
-            return data.emails.map(item => item.email);
+const articleID = GetParameters(window.location.href).get("a")
+async function AllReviewersList(){
+    return fetch(`${submissionsEndpoint}/backend/editors/listOfReviewerEmails.php`, {
+        method: "POST",
+        body: JSON.stringify({
+            editorId: userID,
+        })
+    }).then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            // console.log(data.emails)
+            return data.emails;
+        } else {
+            return [];
+        }
+    });
+}
+async function ReviewersList() {
+    const res = await fetch(`${submissionsEndpoint}/backend/editors/listOfAuthorsForSuggestions.php?articleID=${articleID}`);
+    const data = await res.json();
+    const AuthorsList = data.authorsList;
+    const AllReviewers = await AllReviewersList()
+    const NotAuthorsOfThisManuscript = []
 
-        }else{
-            return {}
+    AllReviewers.forEach(reviewer =>{
+        if (!AuthorsList.includes(reviewer)){
+            NotAuthorsOfThisManuscript.push(reviewer)
         }
     })
+
+    return NotAuthorsOfThisManuscript
 }
 
+// Usage
 const emails = await ReviewersList();
+
+
 const emailList = document.getElementById('emailList');
 const emailInput = document.getElementById('email');
 

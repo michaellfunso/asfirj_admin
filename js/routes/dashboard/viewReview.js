@@ -174,7 +174,8 @@ if(ArticleId && reviewer){
     
 
         }else{
-            alert(data.message)
+            alert(data.reviewContent)
+            window.location.href = `${parentDirectoryName}/Dashboard`
         }
 
 
