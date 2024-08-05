@@ -15,7 +15,7 @@ const SubmissionsCount = document.querySelectorAll(".submissionsCount")
 const user = GetCookie("editor")
 if(user){
 
-fetch(`${submissionsEndpoint}/backend/email/getEmailSubscribers/index.php?a_id=${editorid}`)
+fetch(`${submissionsEndpoint}/backend/email/getEmailSubscribers.php?a_id=${editorid}`)
 .then(res=>res.json())
 .then(data =>{
     if(data.success){
