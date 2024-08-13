@@ -3,6 +3,10 @@ import { GetCookie } from "../setCookie.js";
 
 // Get a List of Availabel Reviewers 
 const userID = GetCookie("editor")
+const linksContainer = document.getElementById("invitationLink")
+const meetingIdContaienr = document.getElementById("meetingIdContainer");
+const acceptLinkContainer = document.getElementById("acceptLinkContainer")
+const declineLinkContainer = document.getElementById("declineLinkContainer")
 const articleID = GetParameters(window.location.href).get("a")
 async function AllReviewersList(){
     return fetch(`${submissionsEndpoint}/backend/editors/listOfEditorEmails.php`, {
@@ -49,6 +53,38 @@ function renderEmailList(filteredEmails) {
             li.addEventListener('click', () => {
                 emailInput.value = email;
                 emailList.style.display = 'none';
+                if(Recipient.value !== ""){
+                    linksContainer.innerHTML = `<span>* Click on the link to Copy</span>`
+                linksContainer.innerHTML += `
+                <ul>
+                <li>Accept Link: <a href="#" class="copy-link" data-link="${domainN}/editorInvitation?a=${articleID}&e=${Recipient.value}&do=edit&accept=yes">
+                                ${domainN}/editorInvitation?a=${articleID}&e=${Recipient.value}&do=edit&accept=yes
+                            </a>
+                </li>
+                <li>Reject Link: <a href="#" class="copy-link" data-link="${domainN}/editorInvitation?a=${articleID}&e=${Recipient.value}&do=edit&reject=yes">
+                                ${domainN}/editorInvitation?a=${articleID}&e=${Recipient.value}&do=edit&reject=yes
+                            </a>
+                </li>
+        
+                `
+                acceptLinkContainer.innerHTML += `       "Accept Link: <a href="#" class="copy-link" data-link="${domainN}/editorInvitation?a=${articleID}&e=${Recipient.value}&do=edit&accept=yes">
+                                ${domainN}/editorInvitation?a=${articleID}&e=${Recipient.value}&do=edit&accept=yes
+                            </a>"
+               `;
+        
+                declineLinkContainer.innerHTML += ` "Reject Link: <a href="#" class="copy-link" data-link="${domainN}/editorInvitation?a=${articleID}&e=${Recipient.value}&do=edit&reject=yes">
+                                ${domainN}/editorInvitation?a=${articleID}&e=${Recipient.value}&do=edit&reject=yes
+                            </a>
+                "`;
+        
+         
+        
+                // CopyText()
+        
+            }else{
+                linksContainer.innerHTML = `<span>* The Invitation links will apppear here after the email is typed</span>`
+            }
+    
             });
             emailList.appendChild(li);
         });
