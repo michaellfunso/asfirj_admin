@@ -77,8 +77,13 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
                                         <div class="col-md-12 border-bottom p-0" id="editorAccountStatus">
                                         ${authorDataArray.account_status}
                                         </div>
+
+                                        <br>
+                                        
                                     </div>
+                                    
                              `
+                    
         }else{
             alert("No Data Available")
         }
@@ -91,3 +96,34 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
 }else{
     window.location.href = `${parentDirectoryName}/Authors`
 }
+
+
+
+const deleteProfile = document.getElementById("deleteProfile");
+const email = GetParameters(window.location.href).get("e")
+deleteProfile.addEventListener("click", function(){
+   const confirmDeletion =  prompt(`Are you sure you want to delete this profile? To confirm, type "${email}" to continue.`)
+
+   console.log(confirmDeletion)
+
+   if(confirmDeletion && confirmDeletion === email){
+   fetch(`${submissionsEndpoint}/backend/editors/deleteAuthorAccount.php`, {
+    method:"POST",
+    body:JSON.stringify({id:email, admin:user}),
+    headers: {
+        "Content-type":"application/JSON"
+    }
+
+   }).then(res=>res.json())
+   .then(data=>{
+    if(data.success){
+        alert("Account Deleted Successfully")
+        window.location.href = `.${parentDirectoryName}/Dashboard`
+    }else{
+        alert(data.error)
+    }
+   })
+}else{
+    
+}
+})

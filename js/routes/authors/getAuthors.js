@@ -23,6 +23,7 @@ let SubmisisonsArray = []
 let Authorstatus = ""
 let adminAction = ""
 let tableRowClass = ""
+let AuthorsEmail = ""
 
 if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant"){
     fetch(`${submissionsEndpoint}/backend/editors/authorsList.php?u_id=${user}`, {
@@ -40,6 +41,9 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
                     }else{
                         StatusColor = "status-orange"
                     }
+
+                    AuthorsEmail = author.email 
+
                     AuthorsContainer.innerHTML += `       
                                               <tr>
                                                   <td>
@@ -69,6 +73,7 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
                                                       <select name="view" class="action-box">
                                                           <option>Actions</option>
                                                           <option value=${author.email}>View Profile</option>
+                                                          
                                                       </select>
                                                       </form>
                                                   </td>
@@ -96,7 +101,6 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
     if(view && view != ""){
         window.location.href = `${parentDirectoryName}/Profile?e=${view}`
     }
-
 }
 }else{
     window.location.href = `${parentDirectoryName}/workflow/accounts/login`

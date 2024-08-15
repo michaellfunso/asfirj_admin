@@ -129,6 +129,7 @@
                                     
                               
                             </div>
+                            <button class='btn bg-danger text-white' id='deleteProfile'>Delete Profile</button>
                         </div>
                     </div>
                     <!-- Column -->

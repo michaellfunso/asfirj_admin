@@ -2,6 +2,8 @@ import { GetParameters, parentDirectoryName, submissionsEndpoint } from "../cons
 import { formatTimestamp } from "../formatDate.js"
 import { GetCookie } from "../setCookie.js"
 import { validateLogin } from "../validateLogin.js"
+import { countAcceptedEditorInvitations, CountRejectedEditorInvitaitons, CountTotalEditorInvitaitons } from "./countEditorInvitations.js"
+import { countAcceptedReviewerInvitations, CountRejectedReviewerInvitaitons, CountTotalReviewerInvitaitons } from "./countReviewerInvitations.js"
 import { GetAdminSubmissions } from "./getAdminSubmissions.js"
 import { GetMySubmissions } from "./getMySubmissions.js"
 
@@ -71,6 +73,10 @@ let SubmisisonsArray = []
 let submissionStatus = ""
 let adminAction = ""
 let tableRowClass = ""
+let reviewerInvitaitons = ""
+let editorInvitations = ""
+
+
 
 if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant"){
     SubmisisonsArray = await GetAdminSubmissions(user)
@@ -92,11 +98,33 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
     `
 }
 if(SubmisisonsArray.length > 0){
-SubmisisonsArray.forEach(submission =>{
+  async function ListUpdate(){
+    for(let i=0; i<SubmisisonsArray.length; i++){
+// SubmisisonsArray.forEach(async (submission) =>{
+    const submission = SubmisisonsArray[i]
+    const id = submission.revision_id 
+    editorInvitations = `<ul>
+    <li>Acccepted: ${await countAcceptedEditorInvitations(id)}</li>
+    <li>Declined: ${await CountRejectedEditorInvitaitons(id)}</li>
+    <li>Pending: ${await CountTotalEditorInvitaitons(id)}</li>
+
+    </ul>
+    
+    `
+    reviewerInvitaitons = `
+    <ul>
+    <li>Accepted: ${await countAcceptedReviewerInvitations(id)}</li>
+     <li>Declined: ${await CountRejectedReviewerInvitaitons(id)}</li>
+    <li>Pending: ${await CountTotalReviewerInvitaitons(id)}</li>
+
+    </ul>`
     if(submission.status === "submitted_for_review"){
+        
         submissionStatus = `<td class="status">
                                                 <span class="status-text status-orange">Awaiting to be Reviewed</span>
                                             </td>
+                                             <td>${reviewerInvitaitons}</td>
+                                            <td>${editorInvitations}</td>
                                             <td>
                                                 <form class="form" action="#">
                                                 <input type="hidden" value="${submission.revision_id}" name="id">
@@ -115,6 +143,8 @@ SubmisisonsArray.forEach(submission =>{
         submissionStatus = `<td class="status">
         <span class="status-text status-orange">Awaiting to be Edited</span>
     </td>
+     <td>${reviewerInvitaitons}</td>
+                                            <td>${editorInvitations}</td>
     <td>
         <form class="form" action="#">
         <input type="hidden" value="${submission.revision_id}" name="id">
@@ -133,6 +163,8 @@ tableRowClass = ""
         submissionStatus = `   <td class="status">
                                                 <span class="status-text status-orange">Returned For Revision</span>
                                             </td>
+                                             <td>${reviewerInvitaitons}</td>
+                                            <td>${editorInvitations}</td>
                                             <td>
                                                 <form class="form" action="#" method="GET">
                                           <input type="hidden" value="${submission.revision_id}" name="id">
@@ -149,6 +181,8 @@ tableRowClass = ""
         submissionStatus = `   <td class="status">
                                                 <span class="status-text status-orange">Returned For Correction</span>
                                             </td>
+                                             <td>${reviewerInvitaitons}</td>
+                                            <td>${editorInvitations}</td>
                                             <td>
                                                 <form class="form" action="#" method="GET">
                                           <input type="hidden" value="${submission.revision_id}" name="id">
@@ -165,6 +199,8 @@ tableRowClass = ""
         submissionStatus = `   <td class="status">
                                                 <span class="status-text status-red">Rejected</span>
                                             </td>
+                                             <td>${reviewerInvitaitons}</td>
+                                            <td>${editorInvitations}</td>
                                             <td>
                                                 <form class="form" action="#" method="GET">
                                           <input type="hidden" value="${submission.revision_id}" name="id">
@@ -190,6 +226,8 @@ tableRowClass = ""
         submissionStatus = `       <td class="status">
                                                 <span class="status-text status-blue">Awaiting to be Published</span>
                                             </td>
+                                             <td>${reviewerInvitaitons}</td>
+                                            <td>${editorInvitations}</td>
                                             <td>
                                                <form class="form" action="#" method="GET">
                                            <input type="hidden" value="${submission.revision_id}" name="id">
@@ -208,6 +246,8 @@ tableRowClass = ""
     submissionStatus = `       <td class="status">
                                             <span class="status-text status-blue">Revision for ${submission.article_id}</span>
                                         </td>
+                                         <td>${reviewerInvitaitons}</td>
+                                            <td>${editorInvitations}</td>
                                         <td>
                                                  <form class="form" action="#" method="GET">
                                            <input type="hidden" value="${submission.revision_id}" name="id">
@@ -224,6 +264,8 @@ tableRowClass = ""
     submissionStatus = `       <td class="status">
                                             <span class="status-text status-blue">New Submission</span>
                                         </td>
+                                         <td>${reviewerInvitaitons}</td>
+                                            <td>${editorInvitations}</td>
                                         <td>
                                                  <form class="form" action="#" method="GET">
                                            <input type="hidden" value="${submission.revision_id}" name="id">
@@ -241,6 +283,8 @@ tableRowClass = ""
     submissionStatus = `       <td class="status">
                                             <span class="status-text status-blue">Correction Submitted</span>
                                         </td>
+                                         <td>${reviewerInvitaitons}</td>
+                                            <td>${editorInvitations}</td>
                                         <td>
                                                  <form class="form" action="#" method="GET">
                                            <input type="hidden" value="${submission.revision_id}" name="id">
@@ -249,10 +293,10 @@ tableRowClass = ""
                                                     <option value="view">View</option>
                                                     ${adminAction}
                                                 </select>
-                                                
                                                 </form>
                                         </td>`
     tableRowClass = "success-item"
+    
 
 }
     submissionsContainer.innerHTML += `     <tr class="${tableRowClass}">
@@ -261,15 +305,21 @@ tableRowClass = ""
                                                 <p>${submission.title}</p>
                                     
                                             </td>
+                                          
                                             <td>
                                                 <p>${formatTimestamp(submission.date_submitted)}</p>
                                                 <p class="text-danger">${submission.revision_id}</p>
 
                                             </td>
-                              
+                                
                                            ${submissionStatus}
+                                          
                                         </tr>`
-})
+// })
+}
+    }
+ListUpdate()
+
 }else{
     submissionsContainer.innerHTML = `<tr>
     <td>You have no manuscripts to Edit</td></tr>`
@@ -288,7 +338,6 @@ Select.forEach((action, index)=>{
         }
     })
 })
-
 
 
 // Check for parameters when form is submitted and redirect to the appropriate page 
