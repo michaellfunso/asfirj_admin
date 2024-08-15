@@ -129,6 +129,8 @@
                                     
                               
                             </div>
+                            <button class='btn btn-success text-white' id='migrateProfile'>Migrate To Editor Account</button>
+                            <br>
                             <button class='btn bg-danger text-white' id='deleteProfile'>Delete Profile</button>
                         </div>
                     </div>

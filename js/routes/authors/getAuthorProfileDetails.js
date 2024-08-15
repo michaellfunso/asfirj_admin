@@ -104,10 +104,39 @@ const email = GetParameters(window.location.href).get("e")
 deleteProfile.addEventListener("click", function(){
    const confirmDeletion =  prompt(`Are you sure you want to delete this profile? To confirm, type "${email}" to continue.`)
 
-   console.log(confirmDeletion)
-
    if(confirmDeletion && confirmDeletion === email){
    fetch(`${submissionsEndpoint}/backend/editors/deleteAuthorAccount.php`, {
+    method:"POST",
+    body:JSON.stringify({id:email, admin:user}),
+    headers: {
+        "Content-type":"application/JSON"
+    }
+
+   }).then(res=>res.json())
+   .then(data=>{
+    if(data.success){
+        alert("Account Deleted Successfully")
+        window.location.href = `.${parentDirectoryName}/Dashboard`
+    }else{
+        alert(data.error)
+    }
+   })
+}else{
+    
+}
+})
+
+
+
+// Migrate Account to Editor account 
+const migrateProfile = document.getElementById("migrateProfile");
+// const email = GetParameters(window.location.href).get("e")
+migrateProfile.addEventListener("click", function(){
+   const confirmMigration =  prompt(`To Migrate, type "${email}" to continue.`)
+
+
+   if(confirmMigration && confirmMigration === email){
+   fetch(`${submissionsEndpoint}/backend/editors/migrateAccount.php`, {
     method:"POST",
     body:JSON.stringify({id:email, admin:user}),
     headers: {
