@@ -98,7 +98,6 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
     `
 }
 if(SubmisisonsArray.length > 0){
-  async function ListUpdate(){
     for(let i=0; i<SubmisisonsArray.length; i++){
 // SubmisisonsArray.forEach(async (submission) =>{
     const submission = SubmisisonsArray[i]
@@ -317,8 +316,8 @@ tableRowClass = ""
                                         </tr>`
 // })
 }
-    }
-ListUpdate()
+    // }
+// ListUpdate()
 
 }else{
     submissionsContainer.innerHTML = `<tr>
