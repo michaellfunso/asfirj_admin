@@ -14,7 +14,23 @@
         content="">
     <meta name="robots" content="noindex,nofollow">
     <title>Portal | Editor</title>
+   
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,600" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link href="../plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <!-- Custom CSS -->
+    <link href="../css/style.min.css" rel="stylesheet">
+    <link href="../css/table.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/jquery.selectric/1.10.1/selectric.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css'>
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
     <!-- Custom CSS -->
@@ -130,8 +146,8 @@
                               
                             </div>
                             <button class='btn btn-success text-white' id='migrateProfile'>Migrate To Editor Account</button>
-                            <br>
-                            <button class='btn bg-danger text-white' id='deleteProfile'>Delete Profile</button>
+                            <br><br><br>
+                            <button class='btn bg-danger text-white' id='deleteProfile' style="margin-top:10px;">Delete Profile</button>
                         </div>
                     </div>
                     <!-- Column -->

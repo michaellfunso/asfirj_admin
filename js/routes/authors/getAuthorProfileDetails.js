@@ -115,8 +115,8 @@ deleteProfile.addEventListener("click", function(){
    }).then(res=>res.json())
    .then(data=>{
     if(data.success){
-        alert("Account Deleted Successfully")
-        window.location.href = `.${parentDirectoryName}/Dashboard`
+        alert(data.success)
+        window.location.href = `${parentDirectoryName}/../Dashboard`
     }else{
         alert(data.error)
     }
@@ -146,8 +146,9 @@ migrateProfile.addEventListener("click", function(){
    }).then(res=>res.json())
    .then(data=>{
     if(data.success){
-        alert("Account Deleted Successfully")
-        window.location.href = `.${parentDirectoryName}/Dashboard`
+        alert(data.success)
+        window.location.href = `${parentDirectoryName}/../Dashboard`
+
     }else{
         alert(data.error)
     }

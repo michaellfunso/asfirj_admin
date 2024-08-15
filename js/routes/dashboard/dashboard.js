@@ -12,6 +12,7 @@ const submissionsContainer = document.getElementById("submissionsContainer")
 const authorsCount = document.querySelectorAll(".authorsCount")
 const reviewedCount = document.querySelectorAll(".reviewedCount")
 const editorInviteCount = document.querySelectorAll(".editorInviteCount")
+const stats = document.getElementById("stats")
 
 const SubmissionsCount = document.querySelectorAll(".submissionsCount")
 const user = GetCookie("editor")
@@ -87,7 +88,11 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
                     <option value="accept">Accept</option>
                     <option value="reject">Reject</option>
                     ` 
+           
 }else{
+    if(stats){
+        stats.setAttribute('style', "display:none;");
+    }
     SubmisisonsArray = await GetMySubmissions(user);
     adminAction =  `
     <option value="invite_reviewer">Invite Reviewer</option>
