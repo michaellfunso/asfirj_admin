@@ -99,7 +99,6 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
 }
 if(SubmisisonsArray.length > 0){
     for(let i=0; i<SubmisisonsArray.length; i++){
-// SubmisisonsArray.forEach(async (submission) =>{
     const submission = SubmisisonsArray[i]
     const id = submission.revision_id 
     editorInvitations = `<ul>
@@ -316,8 +315,7 @@ tableRowClass = ""
                                         </tr>`
 // })
 }
-    // }
-// ListUpdate()
+
 
 }else{
     submissionsContainer.innerHTML = `<tr>
