@@ -1,392 +1,247 @@
-import { GetParameters, parentDirectoryName, submissionsEndpoint } from "../constants.js"
-import { formatTimestamp } from "../formatDate.js"
-import { GetCookie } from "../setCookie.js"
-import { validateLogin } from "../validateLogin.js"
-import { countAcceptedEditorInvitations, CountRejectedEditorInvitaitons, CountTotalEditorInvitaitons } from "./countEditorInvitations.js"
-import { countAcceptedReviewerInvitations, CountRejectedReviewerInvitaitons, CountTotalReviewerInvitaitons } from "./countReviewerInvitations.js"
-import { GetAdminSubmissions } from "./getAdminSubmissions.js"
-import { GetMySubmissions } from "./getMySubmissions.js"
+import { GetParameters, parentDirectoryName, submissionsEndpoint } from "../constants.js";
+import { formatTimestamp } from "../formatDate.js";
+import { GetCookie } from "../setCookie.js";
+import { validateLogin } from "../validateLogin.js";
+import { 
+    countAcceptedEditorInvitations, 
+    CountRejectedEditorInvitaitons, 
+    CountTotalEditorInvitaitons 
+} from "./countEditorInvitations.js";
+import { 
+    countAcceptedReviewerInvitations, 
+    CountRejectedReviewerInvitaitons, 
+    CountTotalReviewerInvitaitons 
+} from "./countReviewerInvitations.js";
+import { GetAdminSubmissions } from "./getAdminSubmissions.js";
+import { GetMySubmissions } from "./getMySubmissions.js";
 
-const userFullnameContainer = document.querySelectorAll(".userFullnameContainer")
-const submissionsContainer = document.getElementById("submissionsContainer")
-const authorsCount = document.querySelectorAll(".authorsCount")
-const reviewedCount = document.querySelectorAll(".reviewedCount")
-const editorInviteCount = document.querySelectorAll(".editorInviteCount")
-const stats = document.getElementById("stats")
+const user = GetCookie("editor");
 
-const SubmissionsCount = document.querySelectorAll(".submissionsCount")
-const user = GetCookie("editor")
-if(user){
+if (user) {
+const userFullnameContainer = document.querySelectorAll(".userFullnameContainer");
+const submissionsContainer = document.getElementById("submissionsContainer");
+const authorsCount = document.querySelectorAll(".authorsCount");
+const reviewedCount = document.querySelectorAll(".reviewedCount");
+const editorInviteCount = document.querySelectorAll(".editorInviteCount");
+const stats = document.getElementById("stats");
 
-if(SubmissionsCount){
-    fetch(`${submissionsEndpoint}/backend/editors/countSubmissions.php?u_id=${user}`)
-    .then(res => res.json())
-    .then(data=>{
-        SubmissionsCount.forEach(count =>{
-            count.innerText = data.count
-        })
-    })
-}
+const SubmissionsCount = document.querySelectorAll(".submissionsCount");
 
-if(authorsCount){
-    fetch(`${submissionsEndpoint}/backend/editors/countAuthors.php?u_id=${user}`)
-    .then(res => res.json())
-    .then(data=>{
-        authorsCount.forEach(count =>{
-            count.innerText = data.count
-        })
-    })
-}
+    const updateCount = (selector, endpoint) => {
+        fetch(`${submissionsEndpoint}/backend/editors/${endpoint}?u_id=${user}`)
+            .then(res => res.json())
+            .then(data => {
+                selector.forEach(count => {
+                    count.innerText = data.count;
+                });
+            });
+    };
 
-if(reviewedCount){
-    fetch(`${submissionsEndpoint}/backend/editors/countReviewed.php?u_id=${user}`)
-    .then(res => res.json())
-    .then(data=>{
-        reviewedCount.forEach(count =>{
-            count.innerText = data.count
-        })
-    })
-}
+    if (SubmissionsCount) {
+        updateCount(SubmissionsCount, "countSubmissions.php");
+    }
 
-if(editorInviteCount){
-    fetch(`${submissionsEndpoint}/backend/editors/countEditorInvites.php?u_id=${user}`)
-    .then(res => res.json())
-    .then(data=>{
-        editorInviteCount.forEach(count =>{
-            count.innerText = data.count
-        })
-    })
-}
+    if (authorsCount) {
+        updateCount(authorsCount, "countAuthors.php");
+    }
 
+    if (reviewedCount) {
+        updateCount(reviewedCount, "countReviewed.php");
+    }
 
-const AccountData = await validateLogin(user)
+    if (editorInviteCount) {
+        updateCount(editorInviteCount, "countEditorInvites.php");
+    }
 
+    const AccountData = await validateLogin(user);
+    const userFullname = AccountData.fullname;
+    const email = AccountData.email;
+    const accoount_type = AccountData.editorial_level;
 
-const userFullname = AccountData.fullname 
-const email = AccountData.email 
-const accoount_type = AccountData.editorial_level
+    userFullnameContainer.forEach(container => {
+        container.innerText = userFullname;
+    });
 
-userFullnameContainer.forEach(container =>{
-    container.innerText= userFullname
-})
+    let SubmissionsArray = [];
+    let submissionStatus = "";
+    let adminAction = "";
+    let tableRowClass = "";
+    let reviewerInvitaitons = "";
+    let editorInvitations = "";
 
-let SubmisisonsArray = []
-let submissionStatus = ""
-let adminAction = ""
-let tableRowClass = ""
-let reviewerInvitaitons = ""
-let editorInvitations = ""
+    const redirectTo = (path, id) => {
+        window.location.href = `${parentDirectoryName}/${path}?a=${id}`;
+    };
 
+    if (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant") {
+        SubmissionsArray = await GetAdminSubmissions(user);
+    } else {
+        if (stats) {
+            stats.style.display = "none";
+        }
+        SubmissionsArray = await GetMySubmissions(user);
+    }
 
-
-if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant"){
-    SubmisisonsArray = await GetAdminSubmissions(user)
-    adminAction =  `<option value="return_for_correction">Return For Correction</option>
-                    <option value="return_for_revision">Return For Revision</option>
+    if (SubmissionsArray.length > 0) {
+        for (const submission of SubmissionsArray) {
+            const id = submission.revision_id;
+            editorInvitations = `
+                <ul>
+                    <li>Accepted: ${await countAcceptedEditorInvitations(id)}</li>
+                    <li>Declined: ${await CountRejectedEditorInvitaitons(id)}</li>
+                    <li>Pending: ${await CountTotalEditorInvitaitons(id)}</li>
+                </ul>
+            `;
+            reviewerInvitaitons = `
+                <ul>
+                    <li>Accepted: ${await countAcceptedReviewerInvitations(id)}</li>
+                    <li>Declined: ${await CountRejectedReviewerInvitaitons(id)}</li>
+                    <li>Pending: ${await CountTotalReviewerInvitaitons(id)}</li>
+                </ul>
+            `;
+            adminAction = accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant" ?
+                `
+                    <option value="return_for_correction">Return For Correction</option>
+                    <option value="return_for_revision">Revise</option>
                     <option value="invite_reviewer">Invite Reviewer</option>
                     <option value="invite_editor">Invite Editor</option>
                     <option value="accept">Accept</option>
                     <option value="reject">Reject</option>
-                    ` 
+                ` :
+                `
+                    <option value="invite_reviewer">Invite Reviewer</option>
+                    <option value="return_for_revision">Revise</option>
+                    <option value="accept">Accept</option>
+                    <option value="reject">Reject</option>
+                `;
+
+            const getStatus = (status, textColor, text, additionalClasses = "") => {
+                return `
+                    <td class="status">
+                        <span class="status-text ${textColor}">${text}</span>
+                    </td>
+                    <td>${reviewerInvitaitons}</td>
+                    <td>${editorInvitations}</td>
+                    <td>
+                        <form class="form" id="${submission.revision_id}">
+                            <input type="hidden" value="${submission.revision_id}" name="id">
+                        
+                            <select class="action-box" name="do">
+                                <option value="Select An Action">Actions</option>
+                                <option value="view">View</option>
+                                ${adminAction}
+                            </select>
+                        </form>
+                    </td>
+                `;
+            };
+
+            switch (submission.status) {
+                case "submitted_for_review":
+                    submissionStatus = getStatus(submission.status, "status-orange", "Awaiting to be Reviewed");
+                    tableRowClass = "";
+                    break;
+                case "submitted_for_edit":
+                    submissionStatus = getStatus(submission.status, "status-orange", "Awaiting to be Edited");
+                    tableRowClass = "";
+                    break;
+                case "returned_for_revision":
+                    submissionStatus = getStatus(submission.status, "status-orange", "Returned For Revision", "danger-item");
+                    tableRowClass = "danger-item";
+                    break;
+                case "returned_for_correction":
+                    submissionStatus = getStatus(submission.status, "status-orange", "Returned For Correction", "danger-item");
+                    tableRowClass = "danger-item";
+                    break;
+                case "rejected":
+                    submissionStatus = getStatus(submission.status, "status-red", "Rejected", "danger-item");
+                    tableRowClass = "danger-item";
+                    break;
+                case "accepted":
+                    submissionStatus = `
+                        <td class="status">
+                            <span class="status-text status-green">Accepted</span>
+                        </td>
+                        <td></td>
+                    `;
+                    tableRowClass = "";
+                    break;
+                case "review_submitted":
+                case "review_completed":
+                    submissionStatus = getStatus(submission.status, "status-blue", "Awaiting to be Published");
+                    tableRowClass = "";
+                    break;
+                case "revision_submitted":
+                    submissionStatus = getStatus(submission.status, "status-blue", `Revision for ${submission.article_id}`, "success-item");
+                    tableRowClass = "success-item";
+                    break;
+                case "submitted":
+                    submissionStatus = getStatus(submission.status, "status-blue", "New Submission", "success-item");
+                    tableRowClass = "success-item";
+                    break;
+                case "correction_submitted":
+                    submissionStatus = getStatus(submission.status, "status-blue", "Correction Submitted", "success-item");
+                    tableRowClass = "success-item";
+                    break;
+                default:
+                    break;
+            }
+
+            const submissionRow = document.createElement('tr');
+            submissionRow.className = tableRowClass;
+            submissionRow.innerHTML = `
+                <td>
+                    <p>Title</p>
+                    <p>${submission.title}</p>
+                </td>
+                <td>
+                    <p>${formatTimestamp(submission.date_submitted)}</p>
+                    <p class="text-danger">${submission.revision_id}</p>
+                </td>
+                ${submissionStatus}
+            `;
            
-}else{
-    if(stats){
-        stats.setAttribute('style', "display:none;");
-    }
-    SubmisisonsArray = await GetMySubmissions(user);
-    adminAction =  `
-    <option value="invite_reviewer">Invite Reviewer</option>
-    <option value="return_for_revision">Return For Revision</option>
-    <option value="accept">Accept</option>
-    <option value="reject">Reject</option>
-
-    `
+     
+if(submissionsContainer){
+            submissionsContainer.appendChild(submissionRow);
 }
-if(SubmisisonsArray.length > 0){
-    for(let i=0; i<SubmisisonsArray.length; i++){
-    const submission = SubmisisonsArray[i]
-    const id = submission.revision_id 
-    editorInvitations = `<ul>
-    <li>Acccepted: ${await countAcceptedEditorInvitations(id)}</li>
-    <li>Declined: ${await CountRejectedEditorInvitaitons(id)}</li>
-    <li>Pending: ${await CountTotalEditorInvitaitons(id)}</li>
-
-    </ul>
-    
-    `
-    reviewerInvitaitons = `
-    <ul>
-    <li>Accepted: ${await countAcceptedReviewerInvitations(id)}</li>
-     <li>Declined: ${await CountRejectedReviewerInvitaitons(id)}</li>
-    <li>Pending: ${await CountTotalReviewerInvitaitons(id)}</li>
-
-    </ul>`
-    if(submission.status === "submitted_for_review"){
-        
-        submissionStatus = `<td class="status">
-                                                <span class="status-text status-orange">Awaiting to be Reviewed</span>
-                                            </td>
-                                             <td>${reviewerInvitaitons}</td>
-                                            <td>${editorInvitations}</td>
-                                            <td>
-                                                <form class="form" action="#">
-                                                <input type="hidden" value="${submission.revision_id}" name="id">
-                                                <select class="action-box" name="do">
-                                                    <option value="">Actions</option>
-                                                    <option value="view">View</option>
-                                                    <option value="edit">Edit</option>
-                                                    ${adminAction}
-                                                </select>
-                                                
-                                                </form>
-                                            </td>`
-        tableRowClass = ""
-
-    }else if(submission.status === "submitted_for_edit"){
-        submissionStatus = `<td class="status">
-        <span class="status-text status-orange">Awaiting to be Edited</span>
-    </td>
-     <td>${reviewerInvitaitons}</td>
-                                            <td>${editorInvitations}</td>
-    <td>
-        <form class="form" action="#">
-        <input type="hidden" value="${submission.revision_id}" name="id">
-        <select class="action-box" name="do">
-            <option value="">Actions</option>
-            <option value="view">View</option>
-            <option value="edit">Edit</option>
-            ${adminAction}
-        </select>
-        
-        </form>
-    </td>`
-tableRowClass = ""
-    }
-    else if(submission.status === "returned_for_revision"){
-        submissionStatus = `   <td class="status">
-                                                <span class="status-text status-orange">Returned For Revision</span>
-                                            </td>
-                                             <td>${reviewerInvitaitons}</td>
-                                            <td>${editorInvitations}</td>
-                                            <td>
-                                                <form class="form" action="#" method="GET">
-                                          <input type="hidden" value="${submission.revision_id}" name="id">
-                                                   <select class="action-box" name="do">
-                                                    <option value="">Actions</option>
-                                                    <option value="view">View</option>
-                                                    ${adminAction}
-                                                </select>
-                                                
-                                                </form>
-                                            </td>`
-        tableRowClass = "danger-item"
-    } else if(submission.status === "returned_for_correction"){
-        submissionStatus = `   <td class="status">
-                                                <span class="status-text status-orange">Returned For Correction</span>
-                                            </td>
-                                             <td>${reviewerInvitaitons}</td>
-                                            <td>${editorInvitations}</td>
-                                            <td>
-                                                <form class="form" action="#" method="GET">
-                                          <input type="hidden" value="${submission.revision_id}" name="id">
-                                                   <select class="action-box" name="do">
-                                                    <option value="">Actions</option>
-                                                    <option value="view">View</option>
-                                                    ${adminAction}
-                                                </select>
-                                                
-                                                </form>
-                                            </td>`
-        tableRowClass = "danger-item"
-    }    else if(submission.status === "rejected"){
-        submissionStatus = `   <td class="status">
-                                                <span class="status-text status-red">Rejected</span>
-                                            </td>
-                                             <td>${reviewerInvitaitons}</td>
-                                            <td>${editorInvitations}</td>
-                                            <td>
-                                                <form class="form" action="#" method="GET">
-                                          <input type="hidden" value="${submission.revision_id}" name="id">
-                                                   <select class="action-box" name="do">
-                                                    <option value="">Actions</option>
-                                                    <option value="view">View</option>
-                                                    ${adminAction}
-                                                </select>
-                                                
-                                                </form>
-                                            </td>`
-        tableRowClass = "danger-item"
-    }else if(submission.status === "accepted"){
-        submissionStatus = `   <td class="status">
-                                                <span class="status-text status-green">Accepted</span>
-                                            </td>
-                                            <td>
-                                 
-                                            </td>`
-        tableRowClass = ""
-
-    }else if(submission.status === "review_submitted" || submission.status === "review_completed"){
-        submissionStatus = `       <td class="status">
-                                                <span class="status-text status-blue">Awaiting to be Published</span>
-                                            </td>
-                                             <td>${reviewerInvitaitons}</td>
-                                            <td>${editorInvitations}</td>
-                                            <td>
-                                               <form class="form" action="#" method="GET">
-                                           <input type="hidden" value="${submission.revision_id}" name="id">
-                                                   <select class="action-box" name="do">
-                                                    <option value="">Actions</option>
-                                                    <option value="view">View</option>
-                                                    ${adminAction}
-                                                </select>
-                                                
-                                                </form>
-                
-                                            </td>`
-        tableRowClass = ""
-
-}else if(submission.status === "revision_submitted"){
-    submissionStatus = `       <td class="status">
-                                            <span class="status-text status-blue">Revision for ${submission.article_id}</span>
-                                        </td>
-                                         <td>${reviewerInvitaitons}</td>
-                                            <td>${editorInvitations}</td>
-                                        <td>
-                                                 <form class="form" action="#" method="GET">
-                                           <input type="hidden" value="${submission.revision_id}" name="id">
-                                                   <select class="action-box" name="do">
-                                                    <option value="">Actions</option>
-                                                    <option value="view">View</option>
-                                                    ${adminAction}
-                                                </select>
-                                                
-                                                </form>
-                                        </td>`
-    tableRowClass = "success-item"
-}else if(submission.status === "submitted"){
-    submissionStatus = `       <td class="status">
-                                            <span class="status-text status-blue">New Submission</span>
-                                        </td>
-                                         <td>${reviewerInvitaitons}</td>
-                                            <td>${editorInvitations}</td>
-                                        <td>
-                                                 <form class="form" action="#" method="GET">
-                                           <input type="hidden" value="${submission.revision_id}" name="id">
-                                                   <select class="action-box" name="do">
-                                                    <option value="">Actions</option>
-                                                    <option value="view">View</option>
-                                                    ${adminAction}
-                                                </select>
-                                                
-                                                </form>
-                                        </td>`
-    tableRowClass = "success-item"
-
-}else if(submission.status === "correction_submitted"){
-    submissionStatus = `       <td class="status">
-                                            <span class="status-text status-blue">Correction Submitted</span>
-                                        </td>
-                                         <td>${reviewerInvitaitons}</td>
-                                            <td>${editorInvitations}</td>
-                                        <td>
-                                                 <form class="form" action="#" method="GET">
-                                           <input type="hidden" value="${submission.revision_id}" name="id">
-                                                   <select class="action-box" name="do">
-                                                    <option value="">Actions</option>
-                                                    <option value="view">View</option>
-                                                    ${adminAction}
-                                                </select>
-                                                </form>
-                                        </td>`
-    tableRowClass = "success-item"
-    
-
-}
-    submissionsContainer.innerHTML += `     <tr class="${tableRowClass}">
-                                            <td>
-                                                <p>Title</p>
-                                                <p>${submission.title}</p>
-                                    
-                                            </td>
-                                          
-                                            <td>
-                                                <p>${formatTimestamp(submission.date_submitted)}</p>
-                                                <p class="text-danger">${submission.revision_id}</p>
-
-                                            </td>
-                                
-                                           ${submissionStatus}
-                                          
-                                        </tr>`
-// })
-}
-
-
-}else{
-    submissionsContainer.innerHTML = `<tr>
-    <td>You have no manuscripts to Edit</td></tr>`
-}
-
-
-const formContainer = document.querySelectorAll('.form')
-// Each input fields in the form 
-const Select = document.querySelectorAll("select")
-
-
-Select.forEach((action, index)=>{
-    action.addEventListener("change", function(){
-        if(action.value !== ""){
-        formContainer[index].submit()
         }
-    })
+    } else {
+        if(submissionsContainer){
+        submissionsContainer.innerHTML = `<tr><td>You have no manuscripts to Edit</td></tr>`;
+        }
+    }
+
+
+
+    var actionBoxMain = document.querySelectorAll('.action-box');
+    
+    actionBoxMain.forEach(actionBox =>{
+ 
+    actionBox.addEventListener('change', (event) => {
+        const id = event.target.closest("form").id.value
+        const action = event.target.value;
+        if (action) {
+            if (action === "view") {
+                redirectTo(`View`, id);
+            } else if (action === "invite_editor") {
+                redirectTo(`InviteEditor`, id);
+            } else if (action === "InviteReviewer") {
+                redirectTo(`reviewer/invite`, id);
+            } else if (action === "return_for_correction") {
+                redirectTo(`returnPaper`, id);
+            } else if (action === "return_for_revision") {
+                redirectTo(`revisePaper`, id);
+            } else if (action === "accept") {
+                redirectTo(`acceptPaper`, id);
+            } else if (action === "reject") {
+                redirectTo(`rejectPaper`, id);
+             } 
+        }
+    });
 })
 
 
-// Check for parameters when form is submitted and redirect to the appropriate page 
-const ArticleId = GetParameters(window.location.href).get("id")
-const action = GetParameters(window.location.href).get("do")
-
-if(action && ArticleId){
-    if(action !== "" && ArticleId != ""){
-   if(action === "view" ){
-    window.location.href = `${parentDirectoryName}/View?a=${ArticleId}`
-   }
-   if(action === "edit"){
-
-   }
-
-//    if(action === "return_for_revision" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant")){
-//     window.location.href = `${parentDirectoryName}/returnPaper?a=${ArticleId}`
-//    }
-   if(action === "return_for_correction" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant")){
-    window.location.href = `${parentDirectoryName}/returnPaper?a=${ArticleId}`
-
-   }
-
-   if(action === "reject" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant"|| accoount_type === "editorial_assistant" || accoount_type === "sectional_editor" || accoount_type === "associate_editor")){
-    window.location.href = `${parentDirectoryName}/rejectPaper?a=${ArticleId}`
-
-   }
-
-   if(action === "invite_reviewer" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant" || accoount_type === "sectional_editor" || accoount_type === "associate_editor")){
-    window.location.href = `${parentDirectoryName}/InviteReviewer?a=${ArticleId}`
-   }
-
-   if(action === "return_for_revision" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant" || accoount_type === "sectional_editor" || accoount_type === "associate_editor")){
-    window.location.href = `${parentDirectoryName}/revisePaper?a=${ArticleId}`
-   }
-
-   if(action === "invite_editor" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant" )){
-    window.location.href = `${parentDirectoryName}/InviteEditor?a=${ArticleId}`
-   }
-
-   if(action === "accept" && (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant" || accoount_type === "sectional_editor" || accoount_type === "associate_editor")){
-    window.location.href = `${parentDirectoryName}/acceptPaper?a=${ArticleId}`
-
-   }
-}
-}
-
-}else{
-    window.location.href = `${parentDirectoryName}/workflow/accounts/login`
+} else {
+    window.location.href = `${parentDirectoryName}/workflow/accounts/login`;
 }

@@ -21,8 +21,12 @@ const accurate_summary = document.getElementById("accurate_summary")
 const originality = document.getElementById("originality")
 const letterToEditorContainer = document.getElementById("letter_to_editor")
 const ReviewerDetailsContaienr = document.getElementById("reviewerDetails")
+const BackButton = document.getElementById("backButton")
 
 const ArticleId = GetParameters(window.location.href).get("a")
+BackButton.addEventListener("click", function(){
+    window.location.href = `${parentDirectoryName}/view?a=${ArticleId}`
+})
 const reviewer = GetParameters(window.location.href).get('r')
 const getReviewerDetails = await getAuthorsDetails(user, reviewer)
 ReviewerDetailsContaienr.innerHTML = `Reviewer's Report <br> by ${getReviewerDetails}`

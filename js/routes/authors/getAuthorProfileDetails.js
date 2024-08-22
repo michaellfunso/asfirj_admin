@@ -19,14 +19,14 @@ const accoount_type = AccountData.editorial_level
 userFullnameContainer.forEach(container =>{
     container.innerText= userFullname
 })
-
+const verifyAccount = document.getElementById("verifyAccount")
  
 if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant"){
     fetch(`${submissionsEndpoint}/backend/editors/authorProfileDetails.php?&u_id=${user}&encrypted=${encrypted}`)
     .then(res=>res.json())
     .then(data=>{
         if(data){
-            
+      
             if(data.accountData){
                 const authorDataArray = data.accountData
             ProfileContainer.innerHTML = `<div class="form-group mb-4">
@@ -83,7 +83,14 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
                                     </div>
                                     
                              `
-                    
+   
+
+                             if(authorDataArray.account_status === "unverified"){
+                                verifyAccount.removeAttribute("style")
+                                verifyAccount.setAttribute("style", "display:flex;")
+                            }else{
+                                verifyAccount.setAttribute("style", "display:none;")
+                            }
         }else{
             alert("No Data Available")
         }
@@ -126,6 +133,29 @@ deleteProfile.addEventListener("click", function(){
 }
 })
 
+
+verifyAccount.addEventListener("click", function(){
+
+    
+    fetch(`${submissionsEndpoint}/backend/editors/verifyUser.php`, {
+    method:"POST",
+    body:JSON.stringify({id:email, admin:user}),
+    headers: {
+        "Content-type":"application/JSON"
+    }
+    }).then(res => res.json())
+    .then(data=>{
+        if(data){
+            console.log(data)
+            if(data.success){
+                alert(data.success)
+                window.location.reload()
+            }else{
+                alert(data.error)
+            }
+        }
+    })
+})
 
 
 // Migrate Account to Editor account 

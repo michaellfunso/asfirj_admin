@@ -61,7 +61,7 @@ fetch(`${submissionsEndpoint}/backend/editors/articleinvitations.php`,{
                                     </td>`
                 ReviewAction = ``
             }
-            if(review.status === "review_request_rejected"){
+            if(review.status === "review_request_rejected" || review.status === "invitation_rejected"){
                 ReviewStatus = ` <td class="status">
                                    <span class="status-text status-red">Invitation Rejected</span>
                                 </td>`

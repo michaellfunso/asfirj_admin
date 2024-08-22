@@ -31,76 +31,98 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
     }).then(res=>res.json())
     .then(data=>{
         if(data){
-            const AuthorsList = data.authorsList
-            if(AuthorsList.length > 0){
-                AuthorsList.forEach(author =>{
-                    const AccountStatus = author.account_status
-                    let StatusColor = ""
-                    if(AccountStatus === 'verified'){
-                        StatusColor = "status-green"
-                    }else{
-                        StatusColor = "status-orange"
-                    }
-
-                    AuthorsEmail = author.email 
-
-                    AuthorsContainer.innerHTML += `       
-                                              <tr>
-                                                  <td>
-                                                     ${author.prefix}
-                                                  </td>
-                                                  <td>
-                                                      <p>${author.firstname} ${author.othername}</p>
-                                                      
-                                                  </td>
-                                                  <td>
-                                                    <p>${author.lastname}</p>
-                                                    
-                                                </td>
-                                                <td>
-                                                    <p>${author.affiliations}</p> 
-                                                    <p> ${author.affiliation_city}, ${author.affiliation_country}</p>                                                   
-                                                </td>
-                                                <td>
-                                                    <p>${formatTimestamp(author.date_joined)}</p>
-                                                </td>
-                                    
-                                                  <td class="status">
-                                                      <span class="status-text ${StatusColor}">${AccountStatus}</span>
-                                                  </td>
-                                                  <td>
-                                                      <form class="form">
-                                                      <select name="view" class="action-box">
-                                                          <option>Actions</option>
-                                                          <option value=${author.email}>View Profile</option>
-                                                          
-                                                      </select>
-                                                      </form>
-                                                  </td>
-                                              </tr> 
-                    `
-                })
-                const formContainer = document.querySelectorAll('.form')
-                // Each input fields in the form 
-                const Select = document.querySelectorAll("select")
-
-
-                Select.forEach((action, index)=>{
-                action.addEventListener("change", function(){
-                    if(action.value !== ""){
-                    formContainer[index].submit()
-                    }
-                })
-                })
-            }else{
-                AuthorsContainer.innerHTML = `<tr><td>There are No Authors Available on the platform yet </td></tr>`
+            const MainAuthorsList = data.authorsList;
+            const newAuthorsArray = [];
+            
+            const findAnAuthor = document.getElementById("findAnAuthor");
+            const AuthorsContainer = document.getElementById("AuthorsContainer"); // Assuming you have this element
+            
+            function updateUI(AuthorsList) {
+                AuthorsContainer.innerHTML = ''; // Clear previous content
+                if (AuthorsList.length > 0) {
+                    AuthorsList.forEach(author => {
+                        const AccountStatus = author.account_status;
+                        let StatusColor = "";
+            
+                        if (AccountStatus === 'verified') {
+                            StatusColor = "status-green";
+                        } else {
+                            StatusColor = "status-orange";
+                        }
+            
+                        AuthorsContainer.innerHTML += `       
+                            <tr>
+                                <td>${author.prefix}</td>
+                                <td><p>${author.firstname} ${author.othername}</p></td>
+                                <td><p>${author.lastname}</p></td>
+                                <td>
+                                    <p>${author.affiliations}</p> 
+                                    <p>${author.affiliation_city}, ${author.affiliation_country}</p>                                                   
+                                </td>
+                                <td><p>${formatTimestamp(author.date_joined)}</p></td>
+                                <td class="status">
+                                    <span class="status-text ${StatusColor}">${AccountStatus}</span>
+                                </td>
+                                <td>
+                                    <form class="form" id="${author.email}">
+                                        <select name="view" class="action-box">
+                                            <option>Actions</option>
+                                            <option value="${author.email}">View Profile</option>
+                                        </select>
+                                    </form>
+                                </td>
+                            </tr> 
+                        `;
+                    });
+            
+                    // const formContainer = document.querySelectorAll('.form');
+                    // const Select = document.querySelectorAll("select");
+            
+                    // Select.forEach((action, index) => {
+                    //     action.addEventListener("change", function () {
+                    //         if (action.value !== "") {
+                    //             formContainer[index].submit();
+                    //         }
+                    //     });
+                    // });
+                } else {
+                    AuthorsContainer.innerHTML = `<tr><td>No result to display.</td></tr>`;
+                }
             }
             
+            findAnAuthor.addEventListener("keyup", function () {
+                const searchTerm = findAnAuthor.value.toLowerCase();
+                const filteredAuthors = MainAuthorsList.filter(author => {
+                    return (
+                        author.email.toLowerCase().includes(searchTerm) ||
+                        author.firstname.toLowerCase().includes(searchTerm) ||
+                        author.lastname.toLowerCase().includes(searchTerm)
+                    );
+                });
+                updateUI(filteredAuthors);
+            });
+            
+            updateUI(MainAuthorsList);
+            
         }
+        var actionBoxMain = document.querySelectorAll('.action-box');
+    
+        actionBoxMain.forEach(actionBox =>{
+    
+            console.log(actionBox)
+        actionBox.addEventListener('change', (event) => {
+            const id = event.target.closest("form").id
+            
+            // const action = event.target.value;
+        window.location.href = `${parentDirectoryName}/Profile?e=${id}`
+
+        })
     })
-    if(view && view != ""){
-        window.location.href = `${parentDirectoryName}/Profile?e=${view}`
-    }
+    })
+    // if(view && view != ""){
+    // }
+
+
 }
 }else{
     window.location.href = `${parentDirectoryName}/workflow/accounts/login`

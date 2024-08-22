@@ -143,11 +143,20 @@
                         <div class="card">
                             <div class="card-body" id="ProfileContainer">
                                     
-                              
+                            
                             </div>
+                            <style>
+                            .card-body button:not(:first-child){
+                                margin-left: 10px;
+                            }    
+                            </style>
+                            <div class="card-body" style=" display:flex; align-items:center;">
+                            <button class='btn btn-success text-white' id='verifyAccount' st>Verify Account</button>
+                        
                             <button class='btn btn-success text-white' id='migrateProfile'>Migrate To Editor Account</button>
-                            <br><br><br>
-                            <button class='btn bg-danger text-white' id='deleteProfile' style="margin-top:10px;">Delete Profile</button>
+                          
+                            <button class='btn bg-danger text-white' id='deleteProfile' >Delete Profile</button>
+                            </div>
                         </div>
                     </div>
                     <!-- Column -->
