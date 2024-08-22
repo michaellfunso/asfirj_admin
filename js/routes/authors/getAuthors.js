@@ -75,19 +75,22 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
                         `;
                     });
             
-                    // const formContainer = document.querySelectorAll('.form');
-                    // const Select = document.querySelectorAll("select");
+                    var actionBoxMain = document.querySelectorAll('.action-box');
+    
+                    actionBoxMain.forEach(actionBox =>{
+
+                    actionBox.addEventListener('change', (event) => {
+                        const id = event.target.closest("form").id
+                        
+                        // const action = event.target.value;
+                    window.location.href = `${parentDirectoryName}/Profile?e=${id}`
             
-                    // Select.forEach((action, index) => {
-                    //     action.addEventListener("change", function () {
-                    //         if (action.value !== "") {
-                    //             formContainer[index].submit();
-                    //         }
-                    //     });
-                    // });
+                    })
+                })
                 } else {
                     AuthorsContainer.innerHTML = `<tr><td>No result to display.</td></tr>`;
                 }
+
             }
             
             findAnAuthor.addEventListener("keyup", function () {
@@ -105,19 +108,7 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
             updateUI(MainAuthorsList);
             
         }
-        var actionBoxMain = document.querySelectorAll('.action-box');
     
-        actionBoxMain.forEach(actionBox =>{
-    
-            console.log(actionBox)
-        actionBox.addEventListener('change', (event) => {
-            const id = event.target.closest("form").id
-            
-            // const action = event.target.value;
-        window.location.href = `${parentDirectoryName}/Profile?e=${id}`
-
-        })
-    })
     })
     // if(view && view != ""){
     // }
