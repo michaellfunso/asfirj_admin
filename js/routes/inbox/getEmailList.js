@@ -7,6 +7,13 @@ import { GetEmailContent } from "./getEmails.js"
 const userFullnameContainer = document.querySelectorAll(".userFullnameContainer")
 const emailListContainer = document.getElementById("emailListContainer")
 const user = GetCookie("editor")
+const emailContentContainer = document.getElementById("email-content");
+const expandForum = document.querySelector(".expand-forum")
+
+expandForum.addEventListener("click", function(){
+    emailListContainer.classList.toggle('small');
+    emailContentContainer.classList.toggle("wide");
+})
 if(user){
 const AccountData = await validateLogin(user)
 
@@ -70,6 +77,8 @@ fetch(`${submissionsEndpoint}/backend/editors/emailList.php?u_id=${user}`, {
       const Emailitems = document.querySelectorAll(".email-item")
     Emailitems.forEach(item=>{
         item.addEventListener("click", function(){
+            emailListContainer.classList.toggle('small');
+            emailContentContainer.classList.toggle("wide");
             showEmailContent(item.getAttribute("data-id"))
         })
     })
