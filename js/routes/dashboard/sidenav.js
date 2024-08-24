@@ -55,7 +55,13 @@ const admin_nav = `<ul id="sidebarnav">
                                 <span class="hide-menu">Manage Supplements</span>
                             </a>
                         </li>
-                  
+                       <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="https://asfirj.org/manuscriptPortal/manageIssues" target="_blank"
+                                aria-expanded="false">
+                                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                                <span class="hide-menu">Manage Issues</span>
+                            </a>
+                        </li>
                         
                         <li class="text-center p-20 upgrade-btn">
                             <a href="../Logout/"
