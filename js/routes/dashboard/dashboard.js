@@ -226,8 +226,8 @@ if(submissionsContainer){
                 redirectTo(`View`, id);
             } else if (action === "invite_editor") {
                 redirectTo(`InviteEditor`, id);
-            } else if (action === "InviteReviewer") {
-                redirectTo(`reviewer/invite`, id);
+            } else if (action === "invite_reviewer") {
+                redirectTo(`InviteReviewer`, id);
             } else if (action === "return_for_correction") {
                 redirectTo(`returnPaper`, id);
             } else if (action === "return_for_revision") {
