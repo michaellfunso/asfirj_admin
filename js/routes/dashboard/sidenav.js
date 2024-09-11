@@ -77,6 +77,13 @@ const admin_nav = `<ul id="sidebarnav">
                                 <span class="hide-menu">Manage Editors</span>
                             </a>
                         </li>
+                             <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="https://asfirj.org/portal/addEditor/" target="_blank"
+                                aria-expanded="false">
+                                <i class="bi bi-person-plus" aria-hidden="true"></i>
+                                <span class="hide-menu">Add Editor</span>
+                            </a>
+                        </li>
                         
                         <li class="text-center p-20 upgrade-btn">
                             <a href="../Logout/"
