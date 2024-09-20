@@ -44,7 +44,7 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
     // Get the Email tmplate for reviewers 
     fetch(`${submissionsEndpoint}/backend/editors/getReviewerEmailTemplate.php`, {
         method:"POST",
-        body:JSON.stringify({id:user, emailFor:"reviewer_invitation"}),
+        body:JSON.stringify({id:user, emailFor:"editor_invitation"}),
         headers:{
             "Content-type" : "application/JSON"
         }
