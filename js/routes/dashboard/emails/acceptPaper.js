@@ -8,7 +8,15 @@ import { validateLogin } from "../../validateLogin.js"
 import { getAuthorsDetails } from "./getAuthorsDetails.js"
 import { getEditorsDetails } from "./getEditorDetails.js"
 
+const confirmationModal = document.getElementById("exampleModal")
+const shareButton = document.getElementById("shareButton")
+const confirmButton  = document.getElementById("confirmButton")
+const closeModal = document.getElementById("closeModal")
+const preloader = document.querySelector(".preloader")
 
+closeModal.addEventListener("click", function(){
+    confirmationModal.click()
+})
 
 const userFullnameContainer = document.querySelectorAll(".userFullnameContainer")
 const submissionsContainer = document.getElementById("submissionsContainer")
@@ -105,8 +113,13 @@ CopyText()
 // Send Mail event listener 
 sendMail.addEventListener("submit", function(e){
     e.preventDefault();
-    const formData = new FormData(sendMail);
-    formData.append('message', JSON.stringify(quill.getContents().ops))
+ 
+    shareButton.click()
+
+    confirmButton.addEventListener("click", function(){
+        preloader.removeAttribute("style")
+        const formData = new FormData(sendMail);
+        formData.append('message', JSON.stringify(quill.getContents().ops))
     fetch(`${submissionsEndpoint}/backend/editors/acceptPaper.php`,{
         method:"POST",
         body:formData,
@@ -117,9 +130,11 @@ sendMail.addEventListener("submit", function(e){
             window.location.href = `${parentDirectoryName}/../Dashboard`
 
         }else{
+            preloader.setAttribute("style", "display:none;")
             alert(data.message)
         }
     })
+})
 
 })
 

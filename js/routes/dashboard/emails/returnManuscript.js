@@ -8,6 +8,15 @@ import { validateLogin } from "../../validateLogin.js"
 import { getAuthorsDetails } from "./getAuthorsDetails.js"
 
 
+const confirmationModal = document.getElementById("exampleModal")
+const shareButton = document.getElementById("shareButton")
+const confirmButton  = document.getElementById("confirmButton")
+const closeModal = document.getElementById("closeModal")
+const preloader = document.querySelector(".preloader")
+
+closeModal.addEventListener("click", function(){
+    confirmationModal.click()
+})
 
 const userFullnameContainer = document.querySelectorAll(".userFullnameContainer")
 const submissionsContainer = document.getElementById("submissionsContainer")
@@ -103,6 +112,12 @@ CopyText()
 // Send Mail event listener 
 sendMail.addEventListener("submit", function(e){
     e.preventDefault();
+
+    shareButton.click()
+
+    confirmButton.addEventListener("click", function(){
+        preloader.removeAttribute("style")
+
     const formData = new FormData(sendMail);
     formData.append('message', JSON.stringify(quill.getContents().ops))
     fetch(`${submissionsEndpoint}/backend/editors/returnPaper.php`,{
@@ -116,8 +131,10 @@ sendMail.addEventListener("submit", function(e){
 
         }else{
             alert(data.message)
+            preloader.setAttribute("style", "display:none;")
         }
     })
+})
 
 })
 

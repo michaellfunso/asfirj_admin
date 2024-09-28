@@ -28,6 +28,7 @@
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/jquery.selectric/1.10.1/selectric.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css'>
 
+    <link rel="stylesheet" href="../css/shareModal.css">
 </head>
 
 <body>
@@ -242,6 +243,34 @@
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
+             <!-- Start Modal  -->    
+    <a href="#" id="shareButton" data-bs-toggle="modal" data-bs-target="#exampleModal" style="display: none;" > Open Modal
+    </a>
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-scrollable modal-lg">
+     <div class="modal-content rounded-1">
+       <div class="modal-header border-bottom">
+        
+       </div>
+
+       <div class="modal-body message-body" data-simplebar="">
+         <div class="content">
+   
+     
+           <p>Are you sure you want to send this email?</p>
+           <button class="btn btn-primary btn-danger" id="confirmButton">
+             Yes</button>
+
+             <button class="btn btn-secondary"  id="closeModal">No, Cancel</button>
+             
+         </div>
+ 
+    
+       </div>
+     </div>
+   </div>
+ </div>
+   <!-- End Modal  -->
         </div>
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
