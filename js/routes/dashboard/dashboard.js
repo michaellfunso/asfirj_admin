@@ -133,6 +133,9 @@ const SubmissionsCount = document.querySelectorAll(".submissionsCount");
                             </select>
                         </form>
                     </td>
+                    <td>
+                     <a href="../View/?a=${id}" style="font-weight:bold;">View</a>
+                    </td>
                 `;
             };
 
