@@ -74,7 +74,7 @@ if(accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant
             const subject = emailContent.subject
             const messagebody = emailContent.message_body
 
-            subjectContainer.value = `Return For Revision: ${Title} (${ArticleId})`
+            subjectContainer.value = `Return For Correction: ${Title} (${ArticleId})`
          // Set the content as Quill Delta and extract the HTML
     quill.setContents(JSON.parse(messagebody));
         }else{
