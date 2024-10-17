@@ -28,9 +28,11 @@ if(ArticleId){
    if(ArticleData){
     let AuthorsList = ""
        const unstructuredAbstract = ArticleData.abstract
-       
+       let documentFile = ""
+       let DOCUMENTFILE = ""
        if (ArticleData.document_file !== "dummy.pdf") {
-           var documentFile = ArticleData.document_file;
+           documentFile = ArticleData.document_file;
+           DOCUMENTFILE = `<li>Document File: <a href="${submissionsEndpoint}/uploadedFiles/${documentFile}">${documentFile}</a></li>`;
        }
 
 
@@ -65,7 +67,7 @@ if(ArticleId){
                                        <ul>
                                         <li>Cover Letter: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.cover_letter_file}">${ArticleData.cover_letter_file}</a></li>
                                         <li>Manuscript File: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.manuscript_file}">${ArticleData.manuscript_file}</a></li>
-                                        <li>Document File: <a href="${submissionsEndpoint}/uploadedFiles/${documentFile}">${documentFile}</a></li>
+                                        ${DOCUMENTFILE}
 
                                        </ul>
                                     </div>
