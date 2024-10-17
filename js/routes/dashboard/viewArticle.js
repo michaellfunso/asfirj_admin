@@ -61,6 +61,7 @@ const unstructuredAbstract = ArticleData.abstract
                                        <ul>
                                         <li>Cover Letter: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.cover_letter_file}">${ArticleData.cover_letter_file}</a></li>
                                         <li>Manuscript File: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.manuscript_file}">${ArticleData.manuscript_file}</a></li>
+                                        <li>Document File: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.document_file}">${ArticleData.document_file}</a></li>
 
                                        </ul>
                                     </div>
@@ -69,8 +70,26 @@ const unstructuredAbstract = ArticleData.abstract
                                     <div class="d-md-flex mb-3">
                                         <h3 class="box-title mb-0">Authors</h3>
                                     
-                                       <ul id="authorsContainer">
-                                       </ul>
+                                       <table class="projects-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th> 
+                                                    <th>ORCID-ID</th> 
+                                                    <th>Affiliation</th> 
+                                                    <th>Afffiliation City</th> 
+                                                    <th>Afffiliation Country</th> 
+                                                    <th>Email</th> 
+                                                    <th>ASFI Membership ID</th> 
+                                                </tr>
+
+                                            </thead>
+                                            <tbody id="authorsContainer">
+
+                                        
+                  
+                                        </tbody>
+                                       
+                                        </table>
                                     
                                     </div>
 
@@ -89,7 +108,7 @@ const unstructuredAbstract = ArticleData.abstract
 
 
                                     <!-- End Section  -->
-                              `
+                              `;
  
 
                     // Parse the Quill content from the JSON data
@@ -128,7 +147,15 @@ const unstructuredAbstract = ArticleData.abstract
                     if (data) {
                         const AllAuthors = data.authorsList
                         AllAuthors.forEach(author => {
-                            AuthorsContainer.innerHTML +=  `<li><a href="mailto:${author.authors_email}">${author.authors_fullname}</a></li>`
+                            AuthorsContainer.innerHTML += `<tr>
+                            <td>${author.authors_fullname}</td>
+                            <td>${author.orcid_id}</td>
+                            <td>${author.affiliations}</td>
+                            <td>${author.affiliation_city}</td>
+                            <td>${author.affiliation_country}</td>
+                            <td><a href="mailto:${author.authors_email}">${author.authors_email}</a></td>
+                            <td>${author.asfi_membership_id}</td>
+                            </tr>`;
                         });
 
                     } else {
