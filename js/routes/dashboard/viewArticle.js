@@ -112,6 +112,46 @@ if(ArticleId){
                                     
                                     </div>
 
+                                     <div class="form-section hidden" id="disclosures">
+
+
+                        <h3 class="manu_head">Disclosures</h3><br>
+
+                        <!-- Main toolbar -->
+                        <div class="bg-body border rounded-bottom"><span style="color: #e22424;">*</span>
+                          <input type="checkbox" class="disclosure-checkbox" name="" id="" checked><span>I confirm that the manuscript has been submitted solely to ASFIRJ and is not published, in press,
+                            or submitted elsewhere, with exception of submission to preprint servers.</span>
+                        </div>
+                        <div class="bg-body border rounded-bottom"><span style="color: #e22424;">*</span>
+                          <input type="checkbox" class="disclosure-checkbox" name="" checked><span>I am aware that ASFIRJ requires that all authors disclose all potential sources of conflict of
+                            interest in regarding the submitted manuscript and I confirm that all authors have done so.</span>
+                        </div>
+                        <div class="bg-body border rounded-bottom"><span style="color: #e22424;">*</span>
+                          <input type="checkbox" class="disclosure-checkbox" name="" id="" checked><span>I confirm that the research that yielded the manuscript being submitted meets the ethical
+                            guidelines and adheres to all legal research requirements of the study country.</span>
+                        </div>
+                        <div class="bg-body border rounded-bottom"><span style="color: #e22424;">*</span>
+                          <input type="checkbox" class="disclosure-checkbox" name="" id="" checked><span>I have prepared my manuscript and files, including text, tables, and figures, in accordance with
+                            ASFIRJ’s style and formatting requirements as described at: <a href="https://asfirj.org/authors.html" style="color: blueviolet;">asfirj.org/authors.html</a>.</span>
+                        </div>
+                        <div class="bg-body border rounded-bottom"><span style="color: #e22424;">*</span>
+                          <input type="checkbox" class="disclosure-checkbox" name="" id="" checked><span>I confirm that each of the co-authors acknowledges their participation in the research that yielded
+                            the manuscript being submitted and agrees to the submission of the manuscript to ASFIRJ.</span>
+                        </div>
+                        <div class="bg-body border rounded-bottom"><span style="color: #e22424;">*</span>
+                          <input type="checkbox" class="disclosure-checkbox" name="" id="" checked><span>I confirm that the contributions each author made to the manuscript are specified in the authors’
+                            contribution section of the manuscript.</span>
+                        </div>
+                        <div class="bg-body border rounded-bottom"><span style="color: #e22424;">*</span>
+                          <input type="checkbox" class="disclosure-checkbox" name="" id="" checked><span>I confirm that the manuscript being submitted and the data it contains are unpublished and
+                            original.</span>
+                        </div>
+                        <div class="bg-body border rounded-bottom"><span style="color: #e22424;">*</span>
+                          <input type="checkbox" class="disclosure-checkbox" name="" id="disclosure_confirm" checked><span>I confirm that I am willing to pay ASFIRJ’s APC for the submitted manuscript if it is accepted for
+                            publication in the journal as indicated at <a href="https://asfirj.org/aboutus.html" style="color:blueviolet;">asfirj.org/aboutus.html</a>.</span>
+                        </div>
+                    </div>
+
 
                                     <!-- End Section  -->
                               `;
