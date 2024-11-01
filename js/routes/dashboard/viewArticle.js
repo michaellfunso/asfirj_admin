@@ -119,22 +119,22 @@ if(ArticleId){
 
                         <!-- Main toolbar -->
                        <ul style="color: #e22424; list-style-type: disc;">
-                          <li style="color: blueviolet; margin-bottom: 10px;">I confirm that the manuscript has been submitted solely to ASFIRJ and is not published, in press,
+                          <li style="color: black; margin-bottom: 10px;">I confirm that the manuscript has been submitted solely to ASFIRJ and is not published, in press,
                             or submitted elsewhere, with exception of submission to preprint servers.</li>
-                       <li style="color: blueviolet; margin-bottom: 10px;">I am aware that ASFIRJ requires that all authors disclose all potential sources of conflict of interest in regarding the submitted manuscript and I confirm that all authors have done so.
+                       <li style="color: black; margin-bottom: 10px;">I am aware that ASFIRJ requires that all authors disclose all potential sources of conflict of interest in regarding the submitted manuscript and I confirm that all authors have done so.
                      </li>
-                     <li style="color: blueviolet; margin-bottom: 10px;">I am aware that ASFIRJ requires that all authors disclose all potential sources of conflict of interest in regarding the submitted manuscript and I confirm that all authors have done so.
+                     <li style="color: black; margin-bottom: 10px;">I am aware that ASFIRJ requires that all authors disclose all potential sources of conflict of interest in regarding the submitted manuscript and I confirm that all authors have done so.
                      </li>
-                      <li style="color: blueviolet; margin-bottom: 10px;">I confirm that the research that yielded the manuscript being submitted meets the ethical guidelines and adheres to all legal research requirements of the study country.
+                      <li style="color: black; margin-bottom: 10px;">I confirm that the research that yielded the manuscript being submitted meets the ethical guidelines and adheres to all legal research requirements of the study country.
                      </li>
-                     <li style="color: blueviolet; margin-bottom: 10px;">I have prepared my manuscript and files, including text, tables, and figures, in accordance with ASFIRJ’s style and formatting requirements as described at: <a href="https://asfirj.org/authors.html" style="color: orange;">asfirj.org/authors.html</a>.</li>
-                     <li style="color: blueviolet; margin-bottom: 10px;">I confirm that each of the co-authors acknowledges their participation in the research that yielded
+                     <li style="color: black; margin-bottom: 10px;">I have prepared my manuscript and files, including text, tables, and figures, in accordance with ASFIRJ’s style and formatting requirements as described at: <a href="https://asfirj.org/authors.html" style="color: 2cabe3;">asfirj.org/authors.html</a>.</li>
+                     <li style="color: black; margin-bottom: 10px;">I confirm that each of the co-authors acknowledges their participation in the research that yielded
                             the manuscript being submitted and agrees to the submission of the manuscript to ASFIRJ.</li>
-                       <li style="color: blueviolet; margin-bottom: 10px;">I confirm that the contributions each author made to the manuscript are specified in the authors’ contribution section of the manuscript.</li> 
+                       <li style="color: black; margin-bottom: 10px;">I confirm that the contributions each author made to the manuscript are specified in the authors’ contribution section of the manuscript.</li> 
                        
-                    <li style="color: blueviolet; margin-bottom: 10px;">I confirm that the manuscript being submitted and the data it contains are unpublished and original.</li>
+                    <li style="color: black; margin-bottom: 10px;">I confirm that the manuscript being submitted and the data it contains are unpublished and original.</li>
                        
-                <li style="color: blueviolet; margin-bottom: 10px;">I confirm that I am willing to pay ASFIRJ’s APC for the submitted manuscript if it is accepted for publication in the journal as indicated at <a href="https://asfirj.org/aboutus.html" style="color:orange;">asfirj.org/aboutus.html</a>.</li>
+                <li style="color: black; margin-bottom: 10px;">I confirm that I am willing to pay ASFIRJ’s APC for the submitted manuscript if it is accepted for publication in the journal as indicated at <a href="https://asfirj.org/aboutus.html" style="color:2cabe3;">asfirj.org/aboutus.html</a>.</li>
                     </ul>
 
 
