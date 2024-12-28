@@ -60,7 +60,7 @@ if(ArticleId){
                                         <h3 class="box-title mb-0">Corresponding Author</h3>
                                        <div>${ArticleData.corresponding_authors_email}</div>
                                     </div>
-                                    <!-- End Section  -->
+                                    <!-- End Section  --> 
                                      
                                     <!-- Section  -->
                                     <div class="d-md-flex mb-3" style="flex-direction: column;">
