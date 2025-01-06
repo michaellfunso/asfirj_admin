@@ -30,10 +30,23 @@ if(ArticleId){
        const unstructuredAbstract = ArticleData.abstract
        let documentFile = ""
        let DOCUMENTFILE = ""
+       let MANUSCRIPT_FILE = ""
+       if(ArticleData.date_submitted < "2025-01-06"){
+        MANUSCRIPT_FILE = `<li>Manuscript File: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.manuscript_file}">${ArticleData.manuscript_file}</a></li>`
+
        if (ArticleData.document_file !== "dummy.pdf") {
            documentFile = ArticleData.document_file;
            DOCUMENTFILE = `<li>Document File: <a href="${submissionsEndpoint}/uploadedFiles/${documentFile}">${documentFile}</a></li>`;
        }
+    }else{
+        MANUSCRIPT_FILE = `<li>Manuscript File: <a href="${ArticleData.manuscript_file}">${ArticleData.manuscript_file.slice(78)}</a></li>`
+        const filesArray = JSON.parse(ArticleData.document_file)
+        DOCUMENTFILE = "Original Document Files: "
+        for(let i = 0; i< filesArray.length; i++){
+            
+            DOCUMENTFILE += `<li><a href="${filesArray[i]}">${filesArray[i].slice(78)}</a></li>`
+        }
+    }
 
 
    ArticlesContainer.innerHTML = `     <!-- Section  -->
@@ -73,7 +86,7 @@ if(ArticleId){
                                         <h3 class="box-title mb-0">Files</h3>
                                        <ul>
                                         <li>Cover Letter: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.cover_letter_file}">${ArticleData.cover_letter_file}</a></li>
-                                        <li>Manuscript File: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.manuscript_file}">${ArticleData.manuscript_file}</a></li>
+                                        ${MANUSCRIPT_FILE}
                                         ${DOCUMENTFILE}
 
                                        </ul>
