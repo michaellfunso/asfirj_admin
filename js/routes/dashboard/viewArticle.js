@@ -31,7 +31,7 @@ if(ArticleId){
        let documentFile = ""
        let DOCUMENTFILE = ""
        let MANUSCRIPT_FILE = ""
-       if(ArticleData.date_submitted < "2025-01-06"){
+       if(ArticleData.date_submitted < "2025-01-07"){
         MANUSCRIPT_FILE = `<li>Manuscript File: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.manuscript_file}">${ArticleData.manuscript_file}</a></li>`
 
        if (ArticleData.document_file !== "dummy.pdf") {
@@ -39,12 +39,13 @@ if(ArticleId){
            DOCUMENTFILE = `<li>Document File: <a href="${submissionsEndpoint}/uploadedFiles/${documentFile}">${documentFile}</a></li>`;
        }
     }else{
-        MANUSCRIPT_FILE = `<li>Manuscript File: <a href="${ArticleData.manuscript_file}">${ArticleData.manuscript_file.slice(78)}</a></li>`
+    
+        MANUSCRIPT_FILE = `<li>Manuscript File: <a href="https://process.asfirj.org/file?url=${ArticleData.manuscript_file}">${ArticleData.manuscript_file.slice(78)}</a></li>`
         const filesArray = JSON.parse(ArticleData.document_file)
         DOCUMENTFILE = "Original Document Files: "
         for(let i = 0; i< filesArray.length; i++){
             
-            DOCUMENTFILE += `<li><a href="${filesArray[i]}">${filesArray[i].slice(78)}</a></li>`
+            DOCUMENTFILE += `<li><a href="${filesArray[i]}">${filesArray[i].slice(76)}</a></li>`
         }
     }
 
@@ -84,7 +85,7 @@ if(ArticleId){
                                     <!-- Section  -->
                                     <div class="d-md-flex mb-3">
                                         <h3 class="box-title mb-0">Files</h3>
-                                       <ul>
+                                       <ul style="list-style-type:disc;">
                                         <li>Cover Letter: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.cover_letter_file}">${ArticleData.cover_letter_file}</a></li>
                                         ${MANUSCRIPT_FILE}
                                         ${DOCUMENTFILE}
