@@ -44,8 +44,11 @@ if(ArticleId){
         const filesArray = JSON.parse(ArticleData.document_file)
         DOCUMENTFILE = "Original Document Files: "
         for(let i = 0; i< filesArray.length; i++){
-            
+            if(filesArray[i].slice(0, 76) === 'https://res.cloudinary.com/dll8awuig/image/upload/v1736236264/asfirj/original/'){
             DOCUMENTFILE += `<li><a href="${filesArray[i]}">${filesArray[i].slice(76)}</a></li>`
+            }else{
+                DOCUMENTFILE += `<li><a href="${filesArray[i]}">${filesArray[i].slice(36)}</a></li>`
+            }  
         }
     }
 
