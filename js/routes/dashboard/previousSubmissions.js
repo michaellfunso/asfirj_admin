@@ -12,46 +12,21 @@ import {
     CountRejectedReviewerInvitaitons, 
     CountTotalReviewerInvitaitons 
 } from "./countReviewerInvitations.js";
-import { GetAdminSubmissions } from "./getAdminSubmissions.js";
-import { GetMySubmissions } from "./getMySubmissions.js";
+import { GetMyPreviousSubmissions } from "./getMyPreviousSubmissions.js";
+import { GetPreviousAdminSubmissions } from "./getPreviousAdminSubmissions.js";
 
 const user = GetCookie("editor");
 
 if (user) {
 const userFullnameContainer = document.querySelectorAll(".userFullnameContainer");
 const submissionsContainer = document.getElementById("submissionsContainer");
-const authorsCount = document.querySelectorAll(".authorsCount");
-const reviewedCount = document.querySelectorAll(".reviewedCount");
-const editorInviteCount = document.querySelectorAll(".editorInviteCount");
+
 const stats = document.getElementById("stats");
 
-const SubmissionsCount = document.querySelectorAll(".submissionsCount");
 
-    const updateCount = (selector, endpoint) => {
-        fetch(`${submissionsEndpoint}/backend/editors/${endpoint}?u_id=${user}`)
-            .then(res => res.json())
-            .then(data => {
-                selector.forEach(count => {
-                    count.innerText = data.count;
-                });
-            });
-    };
-
-    if (SubmissionsCount) {
-        updateCount(SubmissionsCount, "countSubmissions.php");
-    }
-
-    if (authorsCount) {
-        updateCount(authorsCount, "countAuthors.php");
-    }
-
-    if (reviewedCount) {
-        updateCount(reviewedCount, "countReviewed.php");
-    }
-
-    if (editorInviteCount) {
-        updateCount(editorInviteCount, "countEditorInvites.php");
-    }
+ const submissionId = GetParameters(window.location.href).get("a")
+ console.log("SUBMISSION ID", submissionId)
+    
 
     const AccountData = await validateLogin(user);
     const userFullname = AccountData.fullname;
@@ -74,12 +49,12 @@ const SubmissionsCount = document.querySelectorAll(".submissionsCount");
     };
 
     if (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant") {
-        SubmissionsArray = await GetAdminSubmissions(user);
+        SubmissionsArray = await GetPreviousAdminSubmissions(user, submissionId)
     } else {
         if (stats) {
             stats.style.display = "none";
         }
-        SubmissionsArray = await GetMySubmissions(user);
+        SubmissionsArray = await GetMyPreviousSubmissions(user, submissionId)
     }
 
     if (SubmissionsArray.length > 0) {
