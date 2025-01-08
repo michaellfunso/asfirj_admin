@@ -1,5 +1,6 @@
 import { GetParameters, parentDirectoryName, submissionsEndpoint } from "../constants.js";
 import { formatTimestamp } from "../formatDate.js"
+import { GetSubmissionData } from "../queries/getSubmissionData.js";
 import { GetCookie } from "../setCookie.js"
 import { validateLogin } from "../validateLogin.js"
 import { getAuthorsDetails } from "./emails/getAuthorsDetails.js";
@@ -22,6 +23,9 @@ const originality = document.getElementById("originality")
 const letterToEditorContainer = document.getElementById("letter_to_editor")
 const ReviewerDetailsContaienr = document.getElementById("reviewerDetails")
 const BackButton = document.getElementById("backButton")
+const ArticleInfoContainer = document.getElementById("articleInfoContainer")
+// const ArticleIdContainer = document.getElementById("articleIdContainer")
+
 
 const ArticleId = GetParameters(window.location.href).get("a")
 BackButton.addEventListener("click", function(){
@@ -36,7 +40,7 @@ if(ArticleId && reviewer){
         method:"POST",
         body:JSON.stringify({a:ArticleId, r:reviewer})
     }).then(res => res.json())
-    .then(data=>{
+    .then(async data=>{
         if(data.status === "success"){
             const reviewsContent = data.reviewContent
             const oneParagraph = reviewsContent.one_paragraph_comment
@@ -57,6 +61,17 @@ if(ArticleId && reviewer){
             const reviewId = reviewsContent.review_id
 
             // Append the values to the DOM 
+
+            // Append the Article's Data to the Dom 
+            const ArticleInfo =  await GetSubmissionData(ArticleId)
+            const ArtilceTitle = ArticleInfo.title 
+            const ArticleIdMain = ArticleInfo.revision_id
+
+            ArticleInfoContainer.innerHTML = `<b>Title: </b> ${ArtilceTitle} (${ArticleIdMain})`
+            
+
+
+
             reviewIdContainer.innerText = reviewId
             one_paragraph_comment.innerText = oneParagraph
             if(oneParagraphFile !== "" && oneParagraphFile != ""){
