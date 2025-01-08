@@ -41,7 +41,7 @@ fetch(`${submissionsEndpoint}/backend/editors/articleinvitations.php`,{
             const ReviewerName  = review.reviewer_email
             if(review.status === "review_submitted"){
                 ReviewStatus = ` <td class="status">
-                                    <span class="status-text status-green">Review Invitation Accepted</span>
+                                    <span class="status-text status-green">Review Submitted</span>
                                  </td>`
                 ReviewAction = ` <td>
                                     <form class="form" action="#" >
@@ -70,7 +70,7 @@ fetch(`${submissionsEndpoint}/backend/editors/articleinvitations.php`,{
             }
             if(review.status === "review_invitation_accepted"){
                 ReviewStatus = ` <td class="status">
-                                  <span class="status-text status-green">Review Submitted</span>
+                                  <span class="status-text status-green">Review Invitation Accepted</span>
                              </td>`
                              ReviewAction = ` <td>
                              <form class="form" action="#" >
