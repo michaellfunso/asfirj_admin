@@ -4,6 +4,7 @@ import { formatTimestamp } from "../formatDate.js"
 import { GetCookie } from "../setCookie.js"
 import { validateLogin } from "../validateLogin.js"
 import { GetKeywords } from "../queries/getKeywords.js";
+import { getAuthor } from "./getAuthor.js";
 
 
 const userFullnameContainer = document.querySelectorAll(".userFullnameContainer")
@@ -79,7 +80,9 @@ if(ArticleId){
                                                  <!-- Section  -->
                                     <div class="d-md-flex mb-3" style="flex-direction: column;">
                                         <h3 class="box-title mb-0">Corresponding Author</h3>
+                                        <div><b>${await getAuthor(ArticleData.corresponding_authors_email)}</b></div>
                                        <div>${ArticleData.corresponding_authors_email}</div>
+                                       
                                     </div>
                                     <!-- End Section  --> 
                                      
