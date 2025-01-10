@@ -54,21 +54,19 @@ fetch(`${submissionsEndpoint}/backend/editors/articleinvitations.php`,{
                                     </select>
                                     </form>
                                 </td>`
-            }
-            if(review.status === "submitted_for_review"){
+            }else    if(review.status === "submitted_for_review"){
                 ReviewStatus = ` <td class="status">
                                       <span class="status-text status-orange">Awaiting Reviewer's Response</span>
                                     </td>`
                 ReviewAction = ``
-            }
-            if(review.status === "review_request_rejected" || review.status === "invitation_rejected"){
+            }else if(review.status === "review_request_rejected" || review.status === "invitation_rejected"){
                 ReviewStatus = ` <td class="status">
                                    <span class="status-text status-red">Invitation Rejected</span>
                                 </td>`
                 ReviewAction = ``
 
             }
-            if(review.status === "review_invitation_accepted"){
+            else if(review.status === "review_invitation_accepted"){
                 ReviewStatus = ` <td class="status">
                                   <span class="status-text status-green">Review Invitation Accepted</span>
                              </td>`
