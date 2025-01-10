@@ -188,6 +188,12 @@
                                          <!-- Main toolbar -->
                                         <div class="bg-body border rounded-bottom h-400px overflow-hidden" id="quilleditor" style="height: 500px;">
                                         </div>   
+                                          <!-- Attachments section -->
+                                          <div class="d-md-flex mb-3" style="flex-direction: column;">
+                                            <h4 class="box-title mb-0">Attachments (Max: 10 Files)</h4>
+                                            <input class="form-control" type="file" name="attachments[]" id="attachmentInput" multiple accept="*/*">
+                                            <div id="attachmentPreviewContainer" style="margin-top: 15px;"></div>
+                                        </div>
                                     </div>
                         <!-- End Section  -->
                          <!-- button Section  -->
@@ -276,6 +282,7 @@
     <script type="module" src="../js/routes/quill.js"></script>
     <script type="module" src="../js/routes/dashboard/inviteEditor.js"></script>
     <script type="module" src="../js/routes/dashboard/filterinviteEditorsList.js"></script>
+    <script type="module" src="../js/routes/dashboard/addFileAttachment.js"></script>
 </body>
 
 </html>

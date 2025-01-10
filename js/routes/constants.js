@@ -9,18 +9,19 @@ const segments = pathname.split('/');
 
 const parentDIRName = segments[1];
 const domainName = window.location.origin
-let parentDirectoryName, EndPoint, submissionsEndpoint, domainN
+let parentDirectoryName, EndPoint, submissionsEndpoint, domainN, processEndpoint
 if(parentDIRName === "asfirj_admin"){   
     parentDirectoryName = `/asfirj_admin`
     EndPoint = `/asfirj_admin/backend`;
     submissionsEndpoint = 'http://localhost/asfirj_submission_controls'
     domainN = "http://localhost/asfi_journal"
-
+    processEndpoint = "http://localhost:31000"
 }else{
     parentDirectoryName = ""
     EndPoint = '/backend'   
     submissionsEndpoint = 'https://cp.asfirj.org'
     domainN = "https://asfirj.org"
+    processEndpoint = "https://process.asfirj.org"
 }
 
 function GetParameters(href){
@@ -60,6 +61,7 @@ export {
     GetParameters,
     submissionsEndpoint,
     url,
-    domainN
+    domainN,
+    processEndpoint
 };
  
