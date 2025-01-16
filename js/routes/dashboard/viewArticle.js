@@ -26,6 +26,8 @@ const ArticlesContainer = document.getElementById("articlesContainer")
 if(ArticleId){
    const ArticleData = await GetSubmissionData(ArticleId)
 
+  
+
    if(ArticleData){
     let AuthorsList = ""
        const unstructuredAbstract = ArticleData.abstract

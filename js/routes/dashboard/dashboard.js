@@ -101,18 +101,18 @@ const SubmissionsCount = document.querySelectorAll(".submissionsCount");
             `;
             adminAction = accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant" ?
                 `
-                    <option value="return_for_correction">Return For Correction</option>
-                    <option value="return_for_revision">Revise</option>
-                    <option value="invite_reviewer">Invite Reviewer</option>
-                    <option value="invite_editor">Invite Editor</option>
-                    <option value="accept">Accept</option>
-                    <option value="reject">Reject</option>
+                    <option value="returnPaper">Return For Correction</option>
+                    <option value="revisePaper">Revise</option>
+                    <option value="InviteReviewer">Invite Reviewer</option>
+                    <option value="InviteEditor">Invite Editor</option>
+                    <option value="acceptPaper">Accept</option>
+                    <option value="rejectPaper">Reject</option>
                 ` :
                 `
-                    <option value="invite_reviewer">Invite Reviewer</option>
-                    <option value="return_for_revision">Revise</option>
-                    <option value="accept">Accept</option>
-                    <option value="reject">Reject</option>
+                    <option value="InviteReviewer">Invite Reviewer</option>
+                    <option value="revisePaper">Revise</option>
+                    <option value="acceptPaper">Accept</option>
+                    <option value="rejectPaper">Reject</option>
                 `;
 
             const getStatus = (status, textColor, text, additionalClasses = "") => {
@@ -123,15 +123,26 @@ const SubmissionsCount = document.querySelectorAll(".submissionsCount");
                     <td>${reviewerInvitaitons}</td>
                     <td>${editorInvitations}</td>
                     <td>
-                        <form class="form" id="${submission.revision_id}">
+                       
                             <input type="hidden" value="${submission.revision_id}" name="id">
                         
-                            <select class="action-box" name="do">
-                                <option value="Select An Action">Actions</option>
-                                <option value="view">View</option>
-                                ${adminAction}
-                            </select>
-                        </form>
+                      <div class="dropdown">
+    <button class="dropdown-toggle">Actions</button>
+    <ul class="dropdown-menu">
+       <a href="${parentDirectoryName}/View?a=${submission.revision_id}"> <li data-action="view">View</li></a>
+        ${adminAction
+            .split('\n')
+            .map((option) => {
+                const match = option.match(/value="([^"]+)">(.*?)</);
+                return match
+                    ? `<a href="${parentDirectoryName}/${match[1]}?a=${submission.revision_id}"><li data-action="${match[1]}">${match[2]}</li></a>`
+                    : '';
+            })
+            .join('')}
+    </ul>
+</div>
+
+                       
                     </td>
                     <td>
                      <a href="../View/?a=${id}" style="font-weight:bold;">View</a>
@@ -237,7 +248,7 @@ if(submissionsContainer){
                 redirectTo(`View`, id);
             } else if (action === "invite_editor") {
                 redirectTo(`InviteEditor`, id);
-            } else if (action === "invite_reviewer") {
+            } else if (action === "InviteReviewer") {
                 redirectTo(`InviteReviewer`, id);
             } else if (action === "return_for_correction") {
                 redirectTo(`returnPaper`, id);
@@ -251,6 +262,59 @@ if(submissionsContainer){
         }
     });
 })
+
+
+document.querySelectorAll('.dropdown').forEach((dropdown) => {
+    const toggle = dropdown.querySelector('.dropdown-toggle');
+    const menu = dropdown.querySelector('.dropdown-menu');
+
+    // Toggle dropdown visibility
+    toggle.addEventListener('click', () => {
+        menu.classList.toggle('show');
+    });
+
+    // Handle dropdown item clicks
+    // menu.addEventListener('click', (event) => {
+    //     const action = event.target.getAttribute('data-action');
+    //     const id = dropdown.closest('form').id;
+
+    //     if (action) {
+    //         switch (action) {
+    //             case 'view':
+    //                 redirectTo(`View`, id);
+    //                 break;
+    //             case 'invite_editor':
+    //                 redirectTo(`InviteEditor`, id);
+    //                 break;
+    //             case 'invite_reviewer':
+    //                 redirectTo(`InviteReviewer`, id);
+    //                 break;
+    //             case 'return_for_correction':
+    //                 redirectTo(`returnPaper`, id);
+    //                 break;
+    //             case 'return_for_revision':
+    //                 redirectTo(`revisePaper`, id);
+    //                 break;
+    //             case 'accept':
+    //                 redirectTo(`acceptPaper`, id);
+    //                 break;
+    //             case 'reject':
+    //                 redirectTo(`rejectPaper`, id);
+    //                 break;
+    //         }
+    //     }
+
+    //     // Close the dropdown after selection
+    //     menu.classList.remove('show');
+    // });
+
+    // Close dropdown if clicked outside
+    document.addEventListener('click', (event) => {
+        if (!dropdown.contains(event.target)) {
+            menu.classList.remove('show');
+        }
+    });
+});
 
 
 } else {

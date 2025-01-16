@@ -82,6 +82,49 @@
             .analytics-info:hover{
                 transform: scale(1.1);
             }
+            .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background-color: #6b0874;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.dropdown-menu li:hover {
+    background-color: #f0f0f0;
+}
+
         </style>
         <!-- ============================================================== -->
         <!-- End Topbar header -->
@@ -144,6 +187,14 @@
                         <div class="white-box">
                          
                             <div class="projects mb-4">
+                                <div class="butonsContainer">
+                                    <div class="dropdown">
+                                        <button class="dropdown-toggle">Actions</button>
+                                        <ul class="dropdown-menu" id="dropDown">
+                                        
+                                        </ul>
+                                    </div>
+                                </div>
                                 <div class="projects-inner" id="articlesContainer">
                                    
 
@@ -285,6 +336,27 @@
     <script type="module" src="../js/routes/dashboard/viewArticle.js"></script>
     <script type="module" src="../js/routes/dashboard/viewArticleReviews.js"></script>
     <script type="module" src="../js/routes/dashboard/previousSubmissions.js"></script>
+    <script src="../js/routes/dashboard/dropDownAction.js"></script>
+    <script>
+        document.querySelectorAll('.dropdown').forEach((dropdown) => {
+    const toggle = dropdown.querySelector('.dropdown-toggle');
+    const menu = dropdown.querySelector('.dropdown-menu');
+
+    // Toggle dropdown visibility
+    toggle.addEventListener('click', () => {
+        menu.classList.toggle('show');
+    });
+
+
+    // Close dropdown if clicked outside
+    document.addEventListener('click', (event) => {
+        if (!dropdown.contains(event.target)) {
+            menu.classList.remove('show');
+        }
+    });
+});
+
+    </script>
 </body>
 
 
