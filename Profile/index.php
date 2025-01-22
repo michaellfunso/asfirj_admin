@@ -7,7 +7,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
-   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords"
         content="">
     <meta name="description"
@@ -37,8 +40,8 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js?v=<?= time(); ?>"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js?v=<?= time(); ?>"></script>
 <![endif]-->
 </head>
 <?php 
@@ -75,7 +78,7 @@
         <!-- ============================================================== -->
         <header class="topbar" data-navbarbg="skin5" id="topbar">
         </header>
-        <script src="../js/routes/topbar.js"></script>
+        <script src="../js/routes/topbar.js?v=<?= time(); ?>"></script>
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->
@@ -91,7 +94,7 @@
                     
 
                 </nav>
-                <script type="module" src="../js/routes/dashboard/sidenav.js"></script>
+                <script type="module" src="../js/routes/dashboard/sidenav.js?v=<?= time(); ?>"></script>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -194,17 +197,17 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../plugins/bower_components/jquery/dist/jquery.min.js?v=<?= time(); ?>"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/app-style-switcher.js"></script>
+    <script src="../bootstrap/dist/js/bootstrap.bundle.min.js?v=<?= time(); ?>"></script>
+    <script src="../js/app-style-switcher.js?v=<?= time(); ?>"></script>
     <!--Wave Effects -->
-    <script src="../js/waves.js"></script>
+    <script src="../js/waves.js?v=<?= time(); ?>"></script>
     <!--Menu sidebar -->
-    <script src="../js/sidebarmenu.js"></script>
+    <script src="../js/sidebarmenu.js?v=<?= time(); ?>"></script>
     <!--Custom JavaScript -->
-    <script src="../js/custom.js"></script>
-    <script type="module" src="../js/routes/authors/getAuthorProfileDetails.js"></script>
+    <script src="../js/custom.js?v=<?= time(); ?>"></script>
+    <script type="module" src="../js/routes/authors/getAuthorProfileDetails.js?v=<?= time(); ?>"></script>
 </body>
 
 </html>
