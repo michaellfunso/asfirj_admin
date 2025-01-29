@@ -1,6 +1,8 @@
 import { submissionsEndpoint } from "../constants.js";
 
 function GetMyPreviousSubmissions(id, RevisionId){
+
+
    return fetch(`${submissionsEndpoint}/backend/editors/myPreviousSubmissions.php`, {
         method: "POST",
         body:JSON.stringify({admin_id:id, revision_id:RevisionId}),

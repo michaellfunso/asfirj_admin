@@ -40,7 +40,7 @@ fetch(`${submissionsEndpoint}/backend/editors/articleinvitations.php`,{
             let ReviewAction = ""
             const ReviewerName  = review.reviewer_email
 
-            console.log(review)
+          
             if(review.status === "review_submitted"){
                 ReviewStatus = ` <td class="status">
                                     <span class="status-text status-green">Review Submitted</span>

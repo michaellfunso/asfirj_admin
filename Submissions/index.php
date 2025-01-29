@@ -23,16 +23,9 @@
     <!-- Custom CSS -->
     <link href="../css/style.min.css" rel="stylesheet">
     <link href="../css/table.css" rel="stylesheet">
-    <link href="../css/filterList.css" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/jquery.selectric/1.10.1/selectric.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css'>
-    <!-- QUILL JS  -->
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
-    <!-- END QUILL JS  -->
-    <link rel="stylesheet" href="../css/shareModal.css">
 </head>
 
 <body>
@@ -53,11 +46,10 @@
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
-        <header class="topbar" data-navbarbg="skin5" id="topbar">
+ <header class="topbar" data-navbarbg="skin5" id="topbar">
+
         </header>
-
-        <script src="../js/routes/topbar.js"></script>
-
+        <script src="../js/routes/topbar.js?v=<?= time(); ?>"></script>
         <style>
 
             .box-shadow{
@@ -99,28 +91,74 @@
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
 
-                <nav class="sidebar-nav" id="sidebar_nav">
-                    
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <!-- User Profile-->
+                        <li class="sidebar-item pt-2">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Dashboard/"
+                                aria-expanded="false">
+                                <i class="far fa-clock" aria-hidden="true"></i>
+                                <span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Submissions/"
+                                aria-expanded="false">
+                                
+                                <!-- <i class=" fas fa-shopping-basket" aria-hidden="true"></i> -->
+                                <i class="fas fa-link"></i>
+                                <span class="hide-menu">Submissions</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Authors/"
+                                aria-expanded="false">
+                                <i class="bi bi-person" aria-hidden="true"></i>
+                                <span class="hide-menu">Authors</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../Inbox/"
+                                aria-expanded="false">
+                                <!-- <i class="fas fa-hands" aria-hidden="true"></i> -->
+                                <i class="fas fa-envelope"></i>
+                                <span class="hide-menu">Inbox</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="https://asfirj.org/manuscriptPortal/manage" target="_blank"
+                                aria-expanded="false">
+                                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                                <span class="hide-menu">Manage Supplements</span>
+                            </a>
+                        </li>
+                  
+                        
+                        <li class="text-center p-20 upgrade-btn">
+                            <a href="../Logout/"
+                                class="btn d-grid btn-danger text-white" target="_blank">
+                                Logout</a>
+                        </li>
+                    </ul>
 
                 </nav>
-                <script type="module" src="../js/routes/dashboard/sidenav.js"></script>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
         </aside>
        
        
-        <div class="page-wrapper"> 
+        <div class="page-wrapper">
 
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Reject Paper</h4>
+                        <h4 class="page-title">Dashboard</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="#" class="fw-normal">Reject Paper</a></li>
+                                <li><a href="#" class="fw-normal">Dashboard</a></li>
                             </ol>
                             <a href="../Logout/" target="_blank"
                                 class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
@@ -129,7 +167,7 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <!-- ============================================================== -->
+            <!-- ============================================================== --> 
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
             <!-- ============================================================== -->
@@ -147,69 +185,62 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
-                         
-                            <div class="projects mb-4">
-                                <div class="projects-inner" id="articlesContainer">
-                                   
-                                <form id="sendMail">
-                                    <input type="hidden" id="articleIdContainer" name="articleId" readonly>
-                                    <input type="hidden" id="editor" name="editor" readonly>
-
-                                      <!-- Section  -->
-                                      <div class="d-md-flex mb-3" style="flex-direction: column;">
-                                        <h4 class="box-title mb-0">Recipient</h4>
-                                        <div>
-                                            <input class="form-control" type="email" name="reviewerEmail" id="email" placeholder="Enter Recipient email" required></div>
-                                          
-                                            <input class="form-control" type="text" name="ccEmail" id="ccEmail" placeholder="CC">
-                                  
-
-                                            <input class="form-control" type="text" name="bccEmail"
-                                            id="bccEmail" placeholder="BCC">
-                                            <div>* Seperate CC and BCC emails by comma (',')
-                                            </div>
-
-                                            <ul id="emailList"></ul>
-                                            <div id="invitationLink">*This Email has been auto filled with the Corresponding Author's Email</div>
-                                    
-                                    </div>
-                                    <!-- End Section  -->
-                                         <!-- Section  -->
-                                         <div class="d-md-flex mb-3" style="flex-direction: column;">
-                                            <h4 class="box-title mb-0">Subject</h4>
-                                            <div><input class="form-control" type="text" name="subject" id="subject" placeholder="Enter Subject" required></div>
-                                        </div>
-                                        <!-- End Section  -->
-
-                                         <!-- Section  -->
-                                         <div class="d-md-flex mb-3" style="flex-direction: column;">
-                                            <h4 class="box-title mb-0">Message Body</h4>
-                                            
-                                            <div style="display: flex; width: 100%;">*
-                                                Please Replace the Areas Marked red with their appropriate Data (e.g <span style="color: rgb(209, 12, 12);"><b>[Area Name]</b></span>)
-                                           </div>
-                                         <!-- Main toolbar -->
-                                        <div class="bg-body border rounded-bottom h-400px overflow-hidden" id="quilleditor" style="height: 500px;">
-                                        </div>   
-                                               <!-- Attachments section -->
-                                               <div class="d-md-flex mb-3" style="flex-direction: column;">
-                                                <h4 class="box-title mb-0">Attachments (Max: 10 Files)</h4>
-                                                <input class="form-control" type="file" name="attachments[]" id="attachmentInput" multiple accept="*/*">
-                                                <div id="attachmentPreviewContainer" style="margin-top: 15px;"></div>
-                                            </div>
-                                            <!-- end attachment section   -->
-                                    </div>
-                        <!-- End Section  -->
-                         <!-- button Section  -->
-                         <div class="d-md-flex mb-6" style="flex-direction: column; align-items: center;">
-                          <button type="submit" class="btn btn-github" style="border-radius: 25px; width: fit-content;">
-                            <i class="fa fa-paper-plane" style="border-right: 1px solid; padding: 10px;"></i> 
-                            <span style="padding-left:10px;">Send</span></button>
-                            </div>
-
-                                </form>
+                            <div class="d-md-flex mb-3">
+                                <h3 class="box-title mb-0">Submissions</h3>
+                                <div class="col-md-3 col-sm-4 col-xs-6 ms-auto">
+                                    <!-- <select class="form-select shadow-none row border-top">
+                                        <option>March 2021</option>
+                                        <option>April 2021</option>
+                                        <option>May 2021</option>
+                                        <option>June 2021</option>
+                                        <option>July 2021</option>
+                                    </select> -->
                                 </div>
-                                
+                            </div>
+                            <div class="projects mb-4">
+                                <div class="projects-inner">
+                              
+                                    <table class="projects-table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Title</th>
+                                                <th>Date</th>   
+                                                <th>Status</th>                                           
+                                                
+                                                <th class="text-right">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tr>
+                                            <td>
+                                               001
+                                            </td>
+                                            <td>
+                                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit, dolore. Sunt, unde reprehenderit. Ipsa totam corporis?</p>
+                                                
+                                            </td>
+                                          <td>
+                                              <p>6th, June 2024</p>
+                                          </td>
+                              
+                                            <td class="status">
+                                                <span class="status-text status-orange">Awaiting Review</span>
+                                            </td>
+                                            <td>
+                                                <form class="form" action="#" method="POST">
+                                                <select class="action-box">
+                                                    <option>Actions</option>
+                                                    <option>View</option>
+                                                    <option>Edit</option>
+                                                    <option>Invite Author(s) for Review</option>
+                                                </select>
+                                                </form>
+                                            </td>
+                                        </tr>
+              
+                                   
+                                    </table>
+                                </div>
                        
                             </div>
 
@@ -219,41 +250,11 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer text-center" id="footer"> 
-                
+            <footer class="footer text-center"> 2024 © ASFI - all rights reserved
             </footer>
-            <script type="module" src="../js/routes/dashboard/footer.js"></script>
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
-              <!-- Start Modal  -->    
-    <a href="#" id="shareButton" data-bs-toggle="modal" data-bs-target="#exampleModal" style="display: none;" > Open Modal
-    </a>
- <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
-   <div class="modal-dialog modal-dialog-scrollable modal-lg">
-     <div class="modal-content rounded-1">
-       <div class="modal-header border-bottom">
-        
-       </div>
-
-       <div class="modal-body message-body" data-simplebar="">
-         <div class="content">
-   
-     
-           <p>Are you sure you want to send this email?</p>
-           <button class="btn btn-primary btn-danger" id="confirmButton">
-             Yes</button>
-
-             <button class="btn btn-secondary"  id="closeModal">No, Cancel</button>
-             
-         </div>
- 
-    
-       </div>
-     </div>
-   </div>
- </div>
-   <!-- End Modal  -->
         </div>
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
@@ -265,27 +266,23 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../plugins/bower_components/jquery/dist/jquery.min.js?v=<?= time(); ?>"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/app-style-switcher.js"></script>
-    <script src="../plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="../bootstrap/dist/js/bootstrap.bundle.min.js?v=<?= time(); ?>"></script>
+    <script src="../js/app-style-switcher.js?v=<?= time(); ?>"></script>
+    <script src="../plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js?v=<?= time(); ?>"></script>
     <!--Wave Effects -->
-    <script src="../js/waves.js"></script>
+    <script src="../js/waves.js?v=<?= time(); ?>"></script>
     <!--Menu sidebar -->
-    <script src="../js/sidebarmenu.js"></script>
+    <script src="../js/sidebarmenu.js?v=<?= time(); ?>"></script>
     <!--Custom JavaScript -->
-    <script src="../js/custom.js"></script>
+    <script src="../js/custom.js?v=<?= time(); ?>"></script>
     <!--This page JavaScript -->
     <!--chartis chart-->
-    <script src="../plugins/bower_components/chartist/dist/chartist.min.js"></script>
-    <script src="../plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="../js/pages/dashboards/dashboard1.js"></script>
+    <script src="../plugins/bower_components/chartist/dist/chartist.min.js?v=<?= time(); ?>"></script>
+    <script src="../plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js?v=<?= time(); ?>"></script>
+    <script src="../js/pages/dashboards/dashboard1.js?v=<?= time(); ?>"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
-    <script type="module" src="../js/routes/quill.js"></script>
-    <script type="module" src="../js/routes/dashboard/emails/rejectPaper.js"></script>
-    <script type="module" src="../js/routes/dashboard/filterinviteEditorsList.js"></script>
-    <script type="module" src="../js/routes/dashboard/addFileAttachment.js"></script>
 </body>
 
 </html>

@@ -176,7 +176,15 @@ const SubmissionsCount = document.querySelectorAll(".submissionsCount");
                         <td class="status">
                             <span class="status-text status-green">Accepted</span>
                         </td>
-                        <td></td>
+                             <td>${reviewerInvitaitons}</td>
+                    <td>${editorInvitations}</td>
+                    <td>
+                       
+                       
+                    </td>
+                    <td>
+                     <a href="../View/?a=${id}" style="font-weight:bold;">View</a>
+                    </td>
                     `;
                     tableRowClass = "";
                     break;

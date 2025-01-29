@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../../../cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../../../oidc-provider-k8-prod.s3.amazonaws.com/muser/style.css">
-    <script src="../../../cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
-    <script src="../../../ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.2/js/bootstrap.min.js?v=<?= time(); ?>"></script>
+    <script src="../../../ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js?v=<?= time(); ?>"></script>
 </head>
 
 <body>
@@ -73,8 +73,8 @@
             </div>
         </div>
 	</div>
-    <script src="../../../cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="../../../www.sakimura.org/test/openidconnect.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js?v=<?= time(); ?>"></script>
+    <script src="../../../www.sakimura.org/test/openidconnect.js?v=<?= time(); ?>"></script>
 </body>
 
 

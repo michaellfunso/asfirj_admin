@@ -13,7 +13,7 @@
 
     <meta name="robots" content="noindex,nofollow">
     <title>Portal | ASFIRJ Editor</title>
-        <!-- Favicon icon -->
+    <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,600" />
@@ -30,9 +30,11 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css'>
     <!-- QUILL JS  -->
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js?v=<?= time(); ?>"></script>
     <!-- END QUILL JS  -->
+
     <link rel="stylesheet" href="../css/shareModal.css">
+
 </head>
 
 <body>
@@ -56,7 +58,7 @@
         <header class="topbar" data-navbarbg="skin5" id="topbar">
         </header>
 
-        <script src="../js/routes/topbar.js"></script>
+        <script src="../js/routes/topbar.js?v=<?= time(); ?>"></script>
 
         <style>
 
@@ -103,7 +105,7 @@
                     
 
                 </nav>
-                <script type="module" src="../js/routes/dashboard/sidenav.js"></script>
+                <script type="module" src="../js/routes/dashboard/sidenav.js?v=<?= time(); ?>"></script>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -115,12 +117,12 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Send For Revision</h4>
+                        <h4 class="page-title">Accept Paper</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="#" class="fw-normal">Send For Revision</a></li>
+                                <li><a href="#" class="fw-normal">Accept Paper</a></li>
                             </ol>
                             <a href="../Logout/" target="_blank"
                                 class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
@@ -151,7 +153,7 @@
                             <div class="projects mb-4">
                                 <div class="projects-inner" id="articlesContainer">
                                    
-                                <form id="sendMail" enctype="multipart/form-data">
+                                <form id="sendMail">
                                     <input type="hidden" id="articleIdContainer" name="articleId" readonly>
                                     <input type="hidden" id="editor" name="editor" readonly>
 
@@ -159,7 +161,8 @@
                                       <div class="d-md-flex mb-3" style="flex-direction: column;">
                                         <h4 class="box-title mb-0">Recipient</h4>
                                         <div>
-                                            <input class="form-control" type="email" name="reviewerEmail" id="email" placeholder="Enter Recipient email" required></div>
+                                            <input class="form-control" type="email" name="reviewerEmail" id="email" placeholder="Enter Recipient email" required>
+
                                             <input class="form-control" type="text" name="ccEmail" id="ccEmail" placeholder="CC">
                                   
 
@@ -167,8 +170,14 @@
                                             id="bccEmail" placeholder="BCC">
                                             <div>* Seperate CC and BCC emails by comma (',')
                                             </div>
+
+                                           
+
+                                        </div>
                                             <ul id="emailList"></ul>
-                                            <div id="invitationLink">*This Email has been auto filled with the Corresponding Author's Email</div>
+        
+                                        <div id="invitationLink">* This Email field has been auto filled with the Editor-In-Chief's Email
+                                        </div>
                                     
                                     </div>
                                     <!-- End Section  -->
@@ -183,22 +192,20 @@
                                          <div class="d-md-flex mb-3" style="flex-direction: column;">
                                             <h4 class="box-title mb-0">Message Body</h4>
                                             
-                                            <div style="display: flex; width: 100%;">*
-                                                Please Replace the Areas Marked red with their appropriate Data (e.g <span style="color: rgb(209, 12, 12);"><b>[Area Name]</b></span>)
-                                           </div>
+                                                <div style="display: flex; width: 100%;">*
+                                                     Please Replace the Areas Marked red with their appropriate Data (e.g <span style="color: rgb(209, 12, 12);"><b>[Area Name]</b></span>)
+                                                </div>
+                                           
                                          <!-- Main toolbar -->
                                         <div class="bg-body border rounded-bottom h-400px overflow-hidden" id="quilleditor" style="height: 500px;">
                                         </div>
-                                        <!-- Add this section for attachments -->
-                                    <!-- Add this section for attachments -->
-                          <!-- Attachments section -->
-                            <div class="d-md-flex mb-3" style="flex-direction: column;">
-                                <h4 class="box-title mb-0">Attachments (Max: 10 Files)</h4>
-                                <input class="form-control" type="file" name="attachments[]" id="attachmentInput" multiple accept="*/*">
-                                <div id="attachmentPreviewContainer" style="margin-top: 15px;"></div>
-                            </div>
+                                        <!-- Attachments section -->
+                                        <div class="d-md-flex mb-3" style="flex-direction: column;">
+                                            <h4 class="box-title mb-0">Attachments (Max: 10 Files)</h4>
+                                            <input class="form-control" type="file" name="attachments[]" id="attachmentInput" multiple accept="*/*">
+                                            <div id="attachmentPreviewContainer" style="margin-top: 15px;"></div>
+                                        </div>
 
-                                        <!-- End attachment section  -->
                                     </div>
                         <!-- End Section  -->
                          <!-- button Section  -->
@@ -223,38 +230,39 @@
             <footer class="footer text-center" id="footer"> 
                 
             </footer>
-            <script type="module" src="../js/routes/dashboard/footer.js"></script>
+            <script type="module" src="../js/routes/dashboard/footer.js?v=<?= time(); ?>"></script>
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
-              <!-- Start Modal  -->    
+      <!-- Start Modal  -->    
     <a href="#" id="shareButton" data-bs-toggle="modal" data-bs-target="#exampleModal" style="display: none;" > Open Modal
-    </a>
- <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
-   <div class="modal-dialog modal-dialog-scrollable modal-lg">
-     <div class="modal-content rounded-1">
-       <div class="modal-header border-bottom">
+       </a>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content rounded-1">
+          <div class="modal-header border-bottom">
+           
+          </div>
+
+          <div class="modal-body message-body" data-simplebar="">
+            <div class="content">
+      
         
-       </div>
+              <p>Are you sure you want to send this email?</p>
+              <button class="btn btn-primary btn-danger" id="confirmButton">
+                Yes</button>
 
-       <div class="modal-body message-body" data-simplebar="">
-         <div class="content">
-   
-     
-           <p>Are you sure you want to send this email?</p>
-           <button class="btn btn-primary btn-danger" id="confirmButton">
-             Yes</button>
-
-             <button class="btn btn-secondary"  id="closeModal">No, Cancel</button>
-             
-         </div>
- 
+                <button class="btn btn-secondary"  id="closeModal">No, Cancel</button>
+                
+            </div>
     
-       </div>
-     </div>
-   </div>
- </div>
-   <!-- End Modal  -->
+       
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- End Modal  -->
+      
         </div>
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
@@ -262,31 +270,32 @@
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
+
     <!-- ============================================================== -->
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../plugins/bower_components/jquery/dist/jquery.min.js?v=<?= time(); ?>"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/app-style-switcher.js"></script>
-    <script src="../plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="../bootstrap/dist/js/bootstrap.bundle.min.js?v=<?= time(); ?>"></script>
+    <script src="../js/app-style-switcher.js?v=<?= time(); ?>"></script>
+    <script src="../plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js?v=<?= time(); ?>"></script>
     <!--Wave Effects -->
-    <script src="../js/waves.js"></script>
+    <script src="../js/waves.js?v=<?= time(); ?>"></script>
     <!--Menu sidebar -->
-    <script src="../js/sidebarmenu.js"></script>
+    <script src="../js/sidebarmenu.js?v=<?= time(); ?>"></script>
     <!--Custom JavaScript -->
-    <script src="../js/custom.js"></script>
+    <script src="../js/custom.js?v=<?= time(); ?>"></script>
     <!--This page JavaScript -->
     <!--chartis chart-->
-    <script src="../plugins/bower_components/chartist/dist/chartist.min.js"></script>
-    <script src="../plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="../js/pages/dashboards/dashboard1.js"></script>
+    <script src="../plugins/bower_components/chartist/dist/chartist.min.js?v=<?= time(); ?>"></script>
+    <script src="../plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js?v=<?= time(); ?>"></script>
+    <script src="../js/pages/dashboards/dashboard1.js?v=<?= time(); ?>"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
-    <script type="module" src="../js/routes/quill.js"></script>
-    <script type="module" src="../js/routes/dashboard/emails/reviseManuscript.js"></script>
-    <script type="module" src="../js/routes/dashboard/filterinviteEditorsList.js"></script>
-    <script type="module" src="../js/routes/dashboard/addFileAttachment.js"></script>
+    <script type="module" src="../js/routes/quill.js?v=<?= time(); ?>"></script>
+    <script type="module" src="../js/routes/dashboard/emails/acceptPaper.js?v=<?= time(); ?>"></script>
+    <script type="module" src="../js/routes/dashboard/filterinviteEditorsList.js?v=<?= time(); ?>"></script>
+    <script src="../js/routes/dashboard/addFileAttachment.js?v=<?= time(); ?>"></script>
 </body>
 
 </html>

@@ -26,7 +26,9 @@ const stats = document.getElementById("stats");
 
  const submissionId = GetParameters(window.location.href).get("a")
  console.log("SUBMISSION ID", submissionId)
-    
+ const str = submissionId;
+
+ const result = str.substring(0, str.lastIndexOf('.')) ? str.substring(0, str.lastIndexOf('.')) : submissionId;
 
     const AccountData = await validateLogin(user);
     const userFullname = AccountData.fullname;
@@ -49,12 +51,12 @@ const stats = document.getElementById("stats");
     };
 
     if (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant") {
-        SubmissionsArray = await GetPreviousAdminSubmissions(user, submissionId)
+        SubmissionsArray = await GetPreviousAdminSubmissions(user, result)
     } else {
         if (stats) {
             stats.style.display = "none";
         }
-        SubmissionsArray = await GetMyPreviousSubmissions(user, submissionId)
+        SubmissionsArray = await GetMyPreviousSubmissions(user, result)
     }
 
     if (SubmissionsArray.length > 0) {

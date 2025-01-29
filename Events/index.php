@@ -349,22 +349,22 @@
           <!-- ============================================================== -->
           <!-- All Jquery -->
           <!-- ============================================================== -->
-          <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+          <script src="../plugins/bower_components/jquery/dist/jquery.min.js?v=<?= time(); ?>"></script>
           <!-- Bootstrap tether Core JavaScript -->
-          <script src="../bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-          <script src="../js/app-style-switcher.js"></script>
-          <script src="../plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+          <script src="../bootstrap/dist/js/bootstrap.bundle.min.js?v=<?= time(); ?>"></script>
+          <script src="../js/app-style-switcher.js?v=<?= time(); ?>"></script>
+          <script src="../plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js?v=<?= time(); ?>"></script>
           <!--Wave Effects -->
-          <script src="../js/waves.js"></script>
+          <script src="../js/waves.js?v=<?= time(); ?>"></script>
           <!--Menu sidebar -->
-          <script src="../js/sidebarmenu.js"></script>
+          <script src="../js/sidebarmenu.js?v=<?= time(); ?>"></script>
           <!--Custom JavaScript -->
-          <script src="../js/custom.js"></script>
+          <script src="../js/custom.js?v=<?= time(); ?>"></script>
           <!--This page JavaScript -->
           <!--chartis chart-->
-          <script src="../plugins/bower_components/chartist/dist/chartist.min.js"></script>
-          <script src="../plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-          <script src="../js/pages/dashboards/dashboard1.js"></script>
+          <script src="../plugins/bower_components/chartist/dist/chartist.min.js?v=<?= time(); ?>"></script>
+          <script src="../plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js?v=<?= time(); ?>"></script>
+          <script src="../js/pages/dashboards/dashboard1.js?v=<?= time(); ?>"></script>
           <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
           <script>
             $("#MOD_BTN").on("click", function(){
