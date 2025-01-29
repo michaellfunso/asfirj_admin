@@ -62,7 +62,7 @@ sendMail.addEventListener("submit", function(e){
     .then(data=>{
         if(data.status === "success"){
             alert(data.message)
-            window.location.href = `${parentDirectoryName}/../Dashboard`
+            // window.location.href = `${parentDirectoryName}/../Dashboard`
 
         }else{
             alert(data.message)
