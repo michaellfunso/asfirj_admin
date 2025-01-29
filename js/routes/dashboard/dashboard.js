@@ -2,15 +2,15 @@ import { GetParameters, parentDirectoryName, submissionsEndpoint } from "../cons
 import { formatTimestamp } from "../formatDate.js";
 import { GetCookie } from "../setCookie.js";
 import { validateLogin } from "../validateLogin.js";
-import { 
-    countAcceptedEditorInvitations, 
-    CountRejectedEditorInvitaitons, 
-    CountTotalEditorInvitaitons 
+import {
+    countAcceptedEditorInvitations,
+    CountRejectedEditorInvitaitons,
+    CountTotalEditorInvitaitons
 } from "./countEditorInvitations.js";
-import { 
-    countAcceptedReviewerInvitations, 
-    CountRejectedReviewerInvitaitons, 
-    CountTotalReviewerInvitaitons 
+import {
+    countAcceptedReviewerInvitations,
+    CountRejectedReviewerInvitaitons,
+    CountTotalReviewerInvitaitons
 } from "./countReviewerInvitations.js";
 import { GetAdminSubmissions } from "./getAdminSubmissions.js";
 import { GetMySubmissions } from "./getMySubmissions.js";
@@ -18,14 +18,14 @@ import { GetMySubmissions } from "./getMySubmissions.js";
 const user = GetCookie("editor");
 
 if (user) {
-const userFullnameContainer = document.querySelectorAll(".userFullnameContainer");
-const submissionsContainer = document.getElementById("submissionsContainer");
-const authorsCount = document.querySelectorAll(".authorsCount");
-const reviewedCount = document.querySelectorAll(".reviewedCount");
-const editorInviteCount = document.querySelectorAll(".editorInviteCount");
-const stats = document.getElementById("stats");
+    const userFullnameContainer = document.querySelectorAll(".userFullnameContainer");
+    const submissionsContainer = document.getElementById("submissionsContainer");
+    const authorsCount = document.querySelectorAll(".authorsCount");
+    const reviewedCount = document.querySelectorAll(".reviewedCount");
+    const editorInviteCount = document.querySelectorAll(".editorInviteCount");
+    const stats = document.getElementById("stats");
 
-const SubmissionsCount = document.querySelectorAll(".submissionsCount");
+    const SubmissionsCount = document.querySelectorAll(".submissionsCount");
 
     const updateCount = (selector, endpoint) => {
         fetch(`${submissionsEndpoint}/backend/editors/${endpoint}?u_id=${user}`)
@@ -131,14 +131,14 @@ const SubmissionsCount = document.querySelectorAll(".submissionsCount");
     <ul class="dropdown-menu">
        <a href="${parentDirectoryName}/View?a=${submission.revision_id}"> <li data-action="view">View</li></a>
         ${adminAction
-            .split('\n')
-            .map((option) => {
-                const match = option.match(/value="([^"]+)">(.*?)</);
-                return match
-                    ? `<a href="${parentDirectoryName}/${match[1]}?a=${submission.revision_id}"><li data-action="${match[1]}">${match[2]}</li></a>`
-                    : '';
-            })
-            .join('')}
+                        .split('\n')
+                        .map((option) => {
+                            const match = option.match(/value="([^"]+)">(.*?)</);
+                            return match
+                                ? `<a href="${parentDirectoryName}/${match[1]}?a=${submission.revision_id}"><li data-action="${match[1]}">${match[2]}</li></a>`
+                                : '';
+                        })
+                        .join('')}
     </ul>
 </div>
 
@@ -206,13 +206,56 @@ const SubmissionsCount = document.querySelectorAll(".submissionsCount");
                     tableRowClass = "success-item";
                     break;
                 case "saved_for_later":
-                    submissionStatus = getStatus(submission.status, "status-orange", "Under Processing by author", "alert-item");
+                    submissionStatus = `
+                    <td class="status">
+                        <span class="status-text status-orange">Under Processing by author</span>
+                    </td>
+                         <td>${reviewerInvitaitons}</td>
+                <td>${editorInvitations}</td>
+                <td>
+                   
+                   
+                </td>
+                <td>
+                 <a href="../View/?a=${id}" style="font-weight:bold;">View</a>
+                </td>
+                `;
                     tableRowClass = "alert-item";
                     break;
                 case "revision_saved":
-                    submissionStatus = getStatus(submission.status, "status-orange", "Under Processing by author", "success-item");
+                    submissionStatus = `
+                        <td class="status">
+                            <span class="status-text status-orange">Under Processing by author</span>
+                        </td>
+                             <td>${reviewerInvitaitons}</td>
+                    <td>${editorInvitations}</td>
+                    <td>
+                       
+                       
+                    </td>
+                    <td>
+                     <a href="../View/?a=${id}" style="font-weight:bold;">View</a>
+                    </td>
+                    `;
                     tableRowClass = "alert-item";
-                     break;
+                    break;
+                case "correction_saved":
+                    submissionStatus = `
+                            <td class="status">
+                                <span class="status-text status-orange">Under Processing by author</span>
+                            </td>
+                                 <td>${reviewerInvitaitons}</td>
+                        <td>${editorInvitations}</td>
+                        <td>
+                           
+                           
+                        </td>
+                        <td>
+                         <a href="../View/?a=${id}" style="font-weight:bold;">View</a>
+                        </td>
+                        `;
+                    tableRowClass = "alert-item";
+                    break;
                 default:
                     break;
             }
@@ -230,99 +273,99 @@ const SubmissionsCount = document.querySelectorAll(".submissionsCount");
                 </td>
                 ${submissionStatus}
             `;
-           
-     
-if(submissionsContainer){
-            submissionsContainer.appendChild(submissionRow);
-}
+
+
+            if (submissionsContainer) {
+                submissionsContainer.appendChild(submissionRow);
+            }
         }
     } else {
-        if(submissionsContainer){
-        submissionsContainer.innerHTML = `<tr><td>You have no manuscripts to Edit</td></tr>`;
+        if (submissionsContainer) {
+            submissionsContainer.innerHTML = `<tr><td>You have no manuscripts to Edit</td></tr>`;
         }
     }
 
 
 
     var actionBoxMain = document.querySelectorAll('.action-box');
-    
-    actionBoxMain.forEach(actionBox =>{
- 
-    actionBox.addEventListener('change', (event) => {
-        const id = event.target.closest("form").id.value
-        const action = event.target.value;
-        if (action) {
-            if (action === "view") {
-                redirectTo(`View`, id);
-            } else if (action === "invite_editor") {
-                redirectTo(`InviteEditor`, id);
-            } else if (action === "InviteReviewer") {
-                redirectTo(`InviteReviewer`, id);
-            } else if (action === "return_for_correction") {
-                redirectTo(`returnPaper`, id);
-            } else if (action === "return_for_revision") {
-                redirectTo(`revisePaper`, id);
-            } else if (action === "accept") {
-                redirectTo(`acceptPaper`, id);
-            } else if (action === "reject") {
-                redirectTo(`rejectPaper`, id);
-             } 
-        }
+
+    actionBoxMain.forEach(actionBox => {
+
+        actionBox.addEventListener('change', (event) => {
+            const id = event.target.closest("form").id.value
+            const action = event.target.value;
+            if (action) {
+                if (action === "view") {
+                    redirectTo(`View`, id);
+                } else if (action === "invite_editor") {
+                    redirectTo(`InviteEditor`, id);
+                } else if (action === "InviteReviewer") {
+                    redirectTo(`InviteReviewer`, id);
+                } else if (action === "return_for_correction") {
+                    redirectTo(`returnPaper`, id);
+                } else if (action === "return_for_revision") {
+                    redirectTo(`revisePaper`, id);
+                } else if (action === "accept") {
+                    redirectTo(`acceptPaper`, id);
+                } else if (action === "reject") {
+                    redirectTo(`rejectPaper`, id);
+                }
+            }
+        });
+    })
+
+
+    document.querySelectorAll('.dropdown').forEach((dropdown) => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        const menu = dropdown.querySelector('.dropdown-menu');
+
+        // Toggle dropdown visibility
+        toggle.addEventListener('click', () => {
+            menu.classList.toggle('show');
+        });
+
+        // Handle dropdown item clicks
+        // menu.addEventListener('click', (event) => {
+        //     const action = event.target.getAttribute('data-action');
+        //     const id = dropdown.closest('form').id;
+
+        //     if (action) {
+        //         switch (action) {
+        //             case 'view':
+        //                 redirectTo(`View`, id);
+        //                 break;
+        //             case 'invite_editor':
+        //                 redirectTo(`InviteEditor`, id);
+        //                 break;
+        //             case 'invite_reviewer':
+        //                 redirectTo(`InviteReviewer`, id);
+        //                 break;
+        //             case 'return_for_correction':
+        //                 redirectTo(`returnPaper`, id);
+        //                 break;
+        //             case 'return_for_revision':
+        //                 redirectTo(`revisePaper`, id);
+        //                 break;
+        //             case 'accept':
+        //                 redirectTo(`acceptPaper`, id);
+        //                 break;
+        //             case 'reject':
+        //                 redirectTo(`rejectPaper`, id);
+        //                 break;
+        //         }
+        //     }
+
+        //     // Close the dropdown after selection
+        //     menu.classList.remove('show');
+        // });
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', (event) => {
+            if (!dropdown.contains(event.target)) {
+                menu.classList.remove('show');
+            }
+        });
     });
-})
-
-
-document.querySelectorAll('.dropdown').forEach((dropdown) => {
-    const toggle = dropdown.querySelector('.dropdown-toggle');
-    const menu = dropdown.querySelector('.dropdown-menu');
-
-    // Toggle dropdown visibility
-    toggle.addEventListener('click', () => {
-        menu.classList.toggle('show');
-    });
-
-    // Handle dropdown item clicks
-    // menu.addEventListener('click', (event) => {
-    //     const action = event.target.getAttribute('data-action');
-    //     const id = dropdown.closest('form').id;
-
-    //     if (action) {
-    //         switch (action) {
-    //             case 'view':
-    //                 redirectTo(`View`, id);
-    //                 break;
-    //             case 'invite_editor':
-    //                 redirectTo(`InviteEditor`, id);
-    //                 break;
-    //             case 'invite_reviewer':
-    //                 redirectTo(`InviteReviewer`, id);
-    //                 break;
-    //             case 'return_for_correction':
-    //                 redirectTo(`returnPaper`, id);
-    //                 break;
-    //             case 'return_for_revision':
-    //                 redirectTo(`revisePaper`, id);
-    //                 break;
-    //             case 'accept':
-    //                 redirectTo(`acceptPaper`, id);
-    //                 break;
-    //             case 'reject':
-    //                 redirectTo(`rejectPaper`, id);
-    //                 break;
-    //         }
-    //     }
-
-    //     // Close the dropdown after selection
-    //     menu.classList.remove('show');
-    // });
-
-    // Close dropdown if clicked outside
-    document.addEventListener('click', (event) => {
-        if (!dropdown.contains(event.target)) {
-            menu.classList.remove('show');
-        }
-    });
-});
 
 
 } else {
