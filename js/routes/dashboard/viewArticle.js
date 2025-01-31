@@ -52,7 +52,7 @@ if(ArticleId){
         DOCUMENTFILE = "Original Document Files: "
         for(let i = 0; i< filesArray.length; i++){
             if(filesArray[i].slice(0, 26) === 'https://res.cloudinary.com'){
-            DOCUMENTFILE += `<li><a href="${filesArray[i]}">${filesArray[i].slice(76)}</a></li>`
+            DOCUMENTFILE += `<li><a href="https://process.asfirj.org/doc?url/${filesArray[i]}">${filesArray[i].slice(76)}</a></li>`
             }else{
                 DOCUMENTFILE += `<li><a href="${filesArray[i]}">${filesArray[i].slice(36)}</a></li>`
             }  
