@@ -12,7 +12,8 @@ import {
     CountRejectedReviewerInvitaitons,
     CountTotalReviewerInvitaitons
 } from "./countReviewerInvitations.js";
-import { GetAdminSubmissions } from "./getAdminSubmissions.js";
+import { getAcceptedSubmissions } from "./getAcceptedSubmissions.js";
+
 import { GetMySubmissions } from "./getMySubmissions.js";
 
 const user = GetCookie("editor");
@@ -20,38 +21,12 @@ const user = GetCookie("editor");
 if (user) {
     const userFullnameContainer = document.querySelectorAll(".userFullnameContainer");
     const submissionsContainer = document.getElementById("submissionsContainer");
-    const authorsCount = document.querySelectorAll(".authorsCount");
-    const reviewedCount = document.querySelectorAll(".reviewedCount");
-    const editorInviteCount = document.querySelectorAll(".editorInviteCount");
+
     const stats = document.getElementById("stats");
 
-    const SubmissionsCount = document.querySelectorAll(".submissionsCount");
 
-    const updateCount = (selector, endpoint) => {
-        fetch(`${submissionsEndpoint}/backend/editors/${endpoint}?u_id=${user}`)
-            .then(res => res.json())
-            .then(data => {
-                selector.forEach(count => {
-                    count.innerText = data.count;
-                });
-            });
-    };
+  
 
-    if (SubmissionsCount) {
-        updateCount(SubmissionsCount, "countSubmissions.php");
-    }
-
-    if (authorsCount) {
-        updateCount(authorsCount, "countAuthors.php");
-    }
-
-    if (reviewedCount) {
-        updateCount(reviewedCount, "countReviewed.php");
-    }
-
-    if (editorInviteCount) {
-        updateCount(editorInviteCount, "countEditorInvites.php");
-    }
 
     const AccountData = await validateLogin(user);
     const userFullname = AccountData.fullname;
@@ -71,10 +46,12 @@ if (user) {
 
     const redirectTo = (path, id) => {
         window.location.href = `${parentDirectoryName}/${path}?a=${id}`;
+        
     };
 
     if (accoount_type === "editor_in_chief" || accoount_type === "editorial_assistant") {
-        SubmissionsArray = await GetAdminSubmissions(user);
+        SubmissionsArray = await getAcceptedSubmissions(user);
+    
     } else {
         if (stats) {
             stats.style.display = "none";
@@ -180,7 +157,7 @@ if (user) {
                     <td>${editorInvitations}</td>
                     <td>
                        
-                       <a href="?archive=${submission.revision_id}" style="font-weight:bold;">Archive</a>
+                       <a href="javascript:void(0)" onclick=archivePaper("${submission.revision_id}") style="font-weight:bold;">Archive</a>
                     </td>
                     <td>
                      <a href="../View/?a=${id}" style="font-weight:bold;">View</a>

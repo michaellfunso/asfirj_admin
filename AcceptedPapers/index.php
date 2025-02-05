@@ -1,5 +1,5 @@
 
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html dir="ltr" lang="en">
 <head>
     <meta charset="utf-8">
@@ -147,7 +147,7 @@
 }
 
     </style>
-    <script src="../js/routes/dashboard/archivePaper.js"></script>
+<script src="../js/routes/dashboard/archivePaper.js"></script>
 </head>
 
 <body>
@@ -261,79 +261,7 @@
                 <!-- ============================================================== -->
                 <!-- Three charts -->
                 <!-- ============================================================== -->
-                <div class="admin col"">
-                    <h3><b>Welcome, <span class="userFullnameContainer"></span></b>
-                        <h5>Editor</h5>
-                
-                </h3>
-                </div><div class="row justify-content-left" id="stats">
-
-                    <div class="col-lg-2 col-md-10 ">
-                        <div class="white-box analytics-info box-shadow align-center">
-                            <!-- <i class=" fas fa-shopping-basket"></i> -->
-                            <i class="bi bi-upload"></i>
-                            <h3 class="box-title"><span class="submissionsCount">0</span> Submissions</h3>
-                        </div>
-                    </div>
-           
-                   
-                    <div class="col-lg-2 col-md-10">
-                        <a href="../Authors/">
-                        <div class="white-box analytics-info box-shadow align-center">
-                            <i class="bi bi-people"></i>
-                             <h3 class="box-title"><span class="authorsCount">0</span> Authors</h3>
-                        </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-2 col-md-10">
-                       
-                        <div class="white-box analytics-info box-shadow align-center">
-                           <i class="bi bi-list-columns-reverse">
-                              </i>
-                             <h3 class="box-title"><span class="reviewedCount">0</span> Reviewed</h3>
-                        </div>
-                    </div>
-
-                   <div class="col-lg-2 col-md-10">
-                   <a href="../AcceptedPapers">
-                       <div class="white-box analytics-info box-shadow align-center">
-                          <i class="bi bi-list-columns-reverse">
-                             </i>
-                            <h3 class="box-title"><span class="acceptedCount"></span> Accepted</h3>
-                       </div>
-                       </a>
-                   </div>
-
-                   <div class="col-lg-2 col-md-10">
-                   <a href="../ArchivedPapers">
-                       <div class="white-box analytics-info box-shadow align-center">
-                          <i class="bi bi-list-columns-reverse">
-                             </i>
-                            <h3 class="box-title"><span class="archivedCount"></span> Archived</h3>
-                       </div>
-                       </a>
-                   </div>
-                   
-
-                    <div class="col-lg-2 col-md-10">
-                       <a href="../EditorInvitations">
-                        <div class="white-box analytics-info box-shadow align-center">
-                            <i class="bi bi-person-plus"></i>
-                             <h3 class="box-title"><span class="editorInviteCount">0</span> Editor invitations</h3>
-                        </div>
-                    </a>
-                    </div>
-                    
-                        <!-- <div class="col-lg-2 col-md-10">
-                            
-                        <div class="white-box analytics-info box-shadow align-center">
-                            <i class="fas fa-book"></i>
-                             <h3 class="box-title"><span>0</span> Published</h3>
-                        </div>
-                    </div> -->
-
-                </div>
+          
              
                 <!-- ============================================================== -->
                 <!-- RECENT SALES -->
@@ -342,9 +270,9 @@
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
                             <div class="d-md-flex mb-3">
-                                <h3 class="box-title mb-0">Recent Submissions</h3>
+                                <h3 class="box-title mb-0">Accepted Papers</h3>
                                 <div class="col-md-3 col-sm-4 col-xs-6 ms-auto">
-                                <input type="text" class="form-control form-input search" id="search" placeholder="Search">
+                                   <input type="text" class="form-control form-input search" id="search" placeholder="Search">
                                     <!-- <select class="form-select shadow-none row border-top">
                                         <option>March 2021</option>
                                         <option>April 2021</option>
@@ -442,106 +370,7 @@
             monitorElements();
         };
     </script>
-    <!-- <script>
-    const itemsPerPage = 5; // Number of items to show per page
-    let currentPage = 1; // Initial page
 
-    // Function to render a specific set of items based on the current page
-    function renderPage(pageNumber) {
-        const allItems = document.querySelectorAll('#submissionsContainer .success-item'); // Get all dynamic items
-        const totalItems = allItems.length;
-
-        // Calculate the start and end indices for the items to display on this page
-        const startIndex = (pageNumber - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-
-        // Hide all items initially
-        allItems.forEach((item, index) => {
-            item.style.display = 'none'; // Hide each item
-        });
-
-        // Show only the items for the current page
-        for (let i = startIndex; i < endIndex && i < totalItems; i++) {
-            allItems[i].style.display = ''; // Unhide items within the range
-        }
-
-        // Update the page indicator text
-        document.getElementById('pageIndicator').textContent = `Page ${currentPage}`;
-
-        // Disable/Enable the Previous and Next buttons based on the page
-        document.getElementById('prevPage').disabled = currentPage === 1; // Disable "Previous" on the first page
-        document.getElementById('nextPage').disabled = endIndex >= totalItems; // Disable "Next" on the last page
-    }
-
-    // Function to handle the Previous button click
-    function previousPage() {
-        if (currentPage > 1) {
-            currentPage -= 1; // Go to the previous page
-            renderPage(currentPage);
-        }
-    }
-
-    // Function to handle the Next button click
-    function nextPage() {
-        const allItems = document.querySelectorAll('#submissionsContainer .success-item');
-        if ((currentPage * itemsPerPage) < allItems.length) {
-            currentPage += 1; // Go to the next page
-            renderPage(currentPage);
-        }
-    }
-
-    // Function to handle the hiding of the preloader
-    function hidePreloader() {
-        const preloader = document.querySelector('.preloader2');
-        preloader.classList.add('hidden');
-    }
-
-    // Function to monitor dynamic elements and detect when all have been loaded
-    function monitorElements() {
-        let dynamicContentLoaded = false;
-        let lastLoadedCount = 0; // Track the last number of loaded items
-        let noNewItemsForSeconds = 0; // Counter to track if new items stop loading
-
-        // Function to periodically check if dynamic content has finished loading
-        function checkLoadingStatus() {
-            const dynamicElements = document.getElementsByClassName('success-item');
-            const currentLoadedCount = dynamicElements.length;
-
-            // If new elements have been added, reset the counter
-            if (currentLoadedCount > lastLoadedCount) {
-                lastLoadedCount = currentLoadedCount;
-                noNewItemsForSeconds = 0; // Reset counter if new items are detected
-            } else {
-                // Increment the counter if no new items have been added
-                noNewItemsForSeconds += 1;
-            }
-
-            // If no new items for a certain period (e.g., 2 seconds), assume loading is complete
-            if (noNewItemsForSeconds >= 2) {
-                dynamicContentLoaded = true;
-            }
-
-            // If loading is complete, hide the preloader and show the first page of results
-            if (dynamicContentLoaded) {
-                clearInterval(checkInterval); // Stop checking
-                hidePreloader(); // Hide the preloader
-                renderPage(currentPage); // Render the first page of items
-            }
-        }
-
-        // Check every 1 second to see if all elements have finished loading
-        const checkInterval = setInterval(checkLoadingStatus, 1000); // Adjust interval time if needed
-    }
-
-    // Wait until the entire page is initially loaded
-    window.onload = function () {
-        // Start monitoring specific elements after the initial page load
-        monitorElements();
-    };
-</script> -->
-
-   
-   
 
     <!-- All Jquery -->
     <!-- ============================================================== -->
@@ -563,8 +392,9 @@
     <script src="../js/pages/dashboards/dashboard1.js?v=<?= time(); ?>"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
 
-    <script type="module" src="../js/routes/dashboard/dashboard.js?v=<?= time(); ?>"></script>
+    <script type="module" src="../js/routes/dashboard/acceptedPapers.js?v=<?= time(); ?>"></script>
     <script src="../js/routes/dashboard/searchPaper.js?v=<?= time(); ?>"></script>
+
 </body>
 
 </html>

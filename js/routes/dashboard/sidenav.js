@@ -48,6 +48,20 @@ const admin_nav = `<ul id="sidebarnav">
                                 <span class="hide-menu">Author's Dashboard</span>
                             </a>
                         </li>
+                           <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../ArchivedPapers" target="_blank"
+                                aria-expanded="false">
+                                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                                <span class="hide-menu">Archived Papers</span>
+                            </a>
+                        </li>
+                           <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../AcceptedPapers"
+                                aria-expanded="false">
+                                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                                <span class="hide-menu">Accepted Papers</span>
+                            </a>
+                        </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="https://asfirj.org/manuscriptPortal/manage" target="_blank"
                                 aria-expanded="false">
