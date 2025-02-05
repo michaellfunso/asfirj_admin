@@ -179,8 +179,8 @@ if (user) {
                              <td>${reviewerInvitaitons}</td>
                     <td>${editorInvitations}</td>
                     <td>
-                       
-                       <a href="?archive=${submission.revision_id}" style="font-weight:bold;">Archive</a>
+         <a href="javascript:void(0)" onclick=archivePaper("${submission.revision_id}") style="font-weight:bold;">Archive</a>
+
                     </td>
                     <td>
                      <a href="../View/?a=${id}" style="font-weight:bold;">View</a>
