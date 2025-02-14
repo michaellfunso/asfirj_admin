@@ -43,7 +43,7 @@ if (user) {
                 }
             } else {
                 if (ArticleData.manuscript_file.slice(0, 26) === 'https://res.cloudinary.com') {
-                    MANUSCRIPT_FILE = `<li>Manuscript File: <a href="https://process.asfirj.org/file?url=${ArticleData.manuscript_file}">${ArticleData.manuscript_file.slice(78)}</a></li>`
+                    MANUSCRIPT_FILE = `<li>Manuscript File: <a href="https://process.asfirj.org/doc?url=${ArticleData.manuscript_file}">${ArticleData.manuscript_file.slice(78)}</a></li>`
                 } else {
                     MANUSCRIPT_FILE = `<li>Manuscript File: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.manuscript_file}">${ArticleData.manuscript_file}</a></li>`
                 }
@@ -89,6 +89,13 @@ if (user) {
 
                 }
             }
+            let coverLetterMan = ""
+            if(ArticleData.cover_letter_file.slice(0, 26) === 'https://res.cloudinary.com'){
+               coverLetterMan =  `<a href="https://process.asfirj.org/doc?url=${ArticleData.cover_letter_file}">Cover Letter</a></li>`
+            }else{
+
+               coverLetterMan = `<a href="https://cp.asfirj.org/uploadedFiles/${ArticleData.cover_letter_file}">${ArticleData.cover_letter_file}</a></li>`
+            }
 
 
             ArticlesContainer.innerHTML = `     <!-- Section  -->
@@ -129,7 +136,7 @@ if (user) {
                                     <div class="d-md-flex mb-3 row">
                                         <h3 class="box-title mb-0">Files</h3>
                                        <ul style="list-style-type:disc;">
-                                        <li>Cover Letter: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.cover_letter_file}">${ArticleData.cover_letter_file}</a></li>
+                                        <li>Cover Letter: ${coverLetterMan}
                                         ${MANUSCRIPT_FILE}
                                         ${DOCUMENTFILE} 
 
