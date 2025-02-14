@@ -141,7 +141,8 @@ if (user) {
                                         ${DOCUMENTFILE} 
 
                                        </ul>
-                                       <button type="button" class="combine_file">Combine Files</button>
+                                       <a href='https://process.asfirj.org/combine?a=${ArticleData.revision_id}'><button type="button" class="combine_file">Combine Files</button></a>
+                                       <p> Please note that this only applies to papers submitted before 2025</p>
                                     </div>
                                     
                                     <!-- End Section  -->
