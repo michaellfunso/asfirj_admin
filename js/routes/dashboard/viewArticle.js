@@ -9,58 +9,89 @@ import { getAuthor } from "./getAuthor.js";
 
 const userFullnameContainer = document.querySelectorAll(".userFullnameContainer")
 const user = GetCookie("editor")
-if(user){
-const AccountData = await validateLogin(user)
+if (user) {
+    const AccountData = await validateLogin(user)
 
 
-const userFullname = AccountData.fullname 
-const email = AccountData.email 
-const accoount_type = AccountData.editorial_level
+    const userFullname = AccountData.fullname
+    const email = AccountData.email
+    const accoount_type = AccountData.editorial_level
 
-userFullnameContainer.forEach(container =>{
-    container.innerText= userFullname
-})
-const ArticleId = GetParameters(window.location.href).get("a")
-const ArticlesContainer = document.getElementById("articlesContainer")
+    userFullnameContainer.forEach(container => {
+        container.innerText = userFullname
+    })
+    const ArticleId = GetParameters(window.location.href).get("a")
+    const ArticlesContainer = document.getElementById("articlesContainer")
 
-if(ArticleId){
-   const ArticleData = await GetSubmissionData(ArticleId)
-
-  
-
-   if(ArticleData){
-    let AuthorsList = ""
-       const unstructuredAbstract = ArticleData.abstract
-       let documentFile = ""
-       let DOCUMENTFILE = ""
-       let MANUSCRIPT_FILE = ""
-       if(ArticleData.date_submitted < "2025-01-07"){
-        MANUSCRIPT_FILE = `<li>Manuscript File: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.manuscript_file}">${ArticleData.manuscript_file}</a></li>`
-
-       if (ArticleData.document_file !== "dummy.pdf") {
-           documentFile = ArticleData.document_file;
-           DOCUMENTFILE = `<li>Document File: <a href="${submissionsEndpoint}/uploadedFiles/${documentFile}">${documentFile}</a></li>`;
-       }
-    }else{
-        if(ArticleData.manuscript_file.slice(0, 26) === 'https://res.cloudinary.com'){
-        MANUSCRIPT_FILE = `<li>Manuscript File: <a href="https://process.asfirj.org/file?url=${ArticleData.manuscript_file}">${ArticleData.manuscript_file.slice(78)}</a></li>`
-        }else{
-             MANUSCRIPT_FILE = `<li>Manuscript File: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.manuscript_file}">${ArticleData.manuscript_file}</a></li>`
-        }
-
-        const filesArray = JSON.parse(ArticleData.document_file)
-        DOCUMENTFILE = "Original Document Files: "
-        for(let i = 0; i< filesArray.length; i++){
-            if(filesArray[i].slice(0, 26) === 'https://res.cloudinary.com'){
-            DOCUMENTFILE += `<li><a href="https://process.asfirj.org/doc?url=${filesArray[i]}">${filesArray[i].slice(76)}</a></li>`
-            }else{
-                DOCUMENTFILE += `<li><a href="${filesArray[i]}">${filesArray[i].slice(36)}</a></li>`
-            }  
-        }
-    }
+    if (ArticleId) {
+        const ArticleData = await GetSubmissionData(ArticleId)
 
 
-   ArticlesContainer.innerHTML = `     <!-- Section  -->
+
+        if (ArticleData) {
+            let AuthorsList = ""
+            const unstructuredAbstract = ArticleData.abstract
+            let documentFile = ""
+            let DOCUMENTFILE = ""
+            let MANUSCRIPT_FILE = ""
+            if (ArticleData.date_submitted < "2025-01-07") {
+                MANUSCRIPT_FILE = `<li>Manuscript File: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.manuscript_file}">${ArticleData.manuscript_file}</a></li>`
+
+                if (ArticleData.document_file !== "dummy.pdf") {
+                    documentFile = ArticleData.document_file;
+                    DOCUMENTFILE = `<li>Document File: <a href="${submissionsEndpoint}/uploadedFiles/${documentFile}">${documentFile}</a></li>`;
+                }
+            } else {
+                if (ArticleData.manuscript_file.slice(0, 26) === 'https://res.cloudinary.com') {
+                    MANUSCRIPT_FILE = `<li>Manuscript File: <a href="https://process.asfirj.org/file?url=${ArticleData.manuscript_file}">${ArticleData.manuscript_file.slice(78)}</a></li>`
+                } else {
+                    MANUSCRIPT_FILE = `<li>Manuscript File: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.manuscript_file}">${ArticleData.manuscript_file}</a></li>`
+                }
+
+                // const filesArray = JSON.parse(ArticleData.document_file)
+                const filesArrayCont = []
+                const supplements = ArticleData.supplementary_material
+                if (supplements) {
+                    filesArrayCont.push(supplements)
+                }
+                const graphicAbstract = ArticleData.graphic_abstract
+                if (graphicAbstract) {
+                    filesArrayCont.push(graphicAbstract)
+                }
+
+
+                const figures = ArticleData.figures
+                if (figures) {
+                    filesArrayCont.push(figures)
+                }
+
+                const tables = ArticleData.tables
+                if (tables) {
+                    filesArrayCont.push(tables)
+                }
+
+                const trackedManuscriptFile = ArticleData.tracked_manuscript_file
+
+                if (trackedManuscriptFile) {
+                    filesArrayCont.push(trackedManuscriptFile)
+                }
+
+                const filesArray = filesArrayCont
+
+                DOCUMENTFILE = "<b>Additional Document Files</b> (i.e supplementary materials, tables, figures, graphic abstract): "
+                for (let i = 0; i < filesArray.length; i++) {
+                    if (filesArray[i].slice(0, 26) === 'https://res.cloudinary.com') {
+                        DOCUMENTFILE += `<br> <a href="https://process.asfirj.org/doc?url=${filesArray[i]}" style="color:#333; text-decoration: underline;" target=_blank>View ${filesArray[i].substring(filesArray[i].lastIndexOf("/") + 1)}</a>
+                         `
+                    } else {
+                        DOCUMENTFILE += `<br> <a href="${filesArray[i]}" style="color:#333; text-decoration: underline;" target=_blank>View ${filesArray[i].substring(filesArray[i].lastIndexOf("/") + 1)}</a>`
+                    }
+
+                }
+            }
+
+
+            ArticlesContainer.innerHTML = `     <!-- Section  -->
                                         <div class="d-md-flex mb-3" style="flex-direction: column;">
                                         <h3 class="box-title mb-0">Title</h3>
                                         <div>${ArticleData.title}</div>
@@ -95,18 +126,20 @@ if(ArticleId){
                                     </div>
                                     <!-- End Section  -->
                                     <!-- Section  -->
-                                    <div class="d-md-flex mb-3">
+                                    <div class="d-md-flex mb-3 row">
                                         <h3 class="box-title mb-0">Files</h3>
                                        <ul style="list-style-type:disc;">
                                         <li>Cover Letter: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.cover_letter_file}">${ArticleData.cover_letter_file}</a></li>
                                         ${MANUSCRIPT_FILE}
-                                        ${DOCUMENTFILE}
+                                        ${DOCUMENTFILE} 
 
                                        </ul>
+                                       <button type="button" class="combine_file">Combine Files</button>
                                     </div>
+                                    
                                     <!-- End Section  -->
                                         <!-- Section  -->
-                                    <div class="d-md-flex mb-3">
+                                    <div class="d-md-flex mb-3 row">
                                         <h3 class="box-title mb-0">Authors</h3>
                                     
                                        <table class="projects-table">
@@ -173,41 +206,41 @@ if(ArticleId){
 
                                     <!-- End Section  -->
                               `;
- 
 
-                    // Parse the Quill content from the JSON data
-                    const quillContent = JSON.parse(unstructuredAbstract);
 
-                    // Create a Quill instance in "read-only" mode to render the content as HTML
-                    const contentDiv = document.getElementById('content');
+            // Parse the Quill content from the JSON data
+            const quillContent = JSON.parse(unstructuredAbstract);
 
-                    function renderQuillAsHTML(divId, deltaContent) {
-                        // Create a Quill instance in a temporary div
-                        const tempDiv = document.createElement('div');
-                        const quill = new Quill(tempDiv, {
-                            theme: 'snow',
-                            modules: { toolbar: false },
-                            readOnly: true,
-                        });
+            // Create a Quill instance in "read-only" mode to render the content as HTML
+            const contentDiv = document.getElementById('content');
 
-                        // Set the content as Quill Delta and extract the HTML
-                        quill.setContents(deltaContent);
+            function renderQuillAsHTML(divId, deltaContent) {
+                // Create a Quill instance in a temporary div
+                const tempDiv = document.createElement('div');
+                const quill = new Quill(tempDiv, {
+                    theme: 'snow',
+                    modules: { toolbar: false },
+                    readOnly: true,
+                });
 
-                        // Get the innerHTML from the Quill editor
-                        const htmlContent = tempDiv.innerHTML;
+                // Set the content as Quill Delta and extract the HTML
+                quill.setContents(deltaContent);
 
-                        // Render the extracted HTML into the specified div
-                        contentDiv.innerHTML = htmlContent;
-                    }
+                // Get the innerHTML from the Quill editor
+                const htmlContent = tempDiv.innerHTML;
 
-                    // Render the Quill content as HTML in the "content" div
-                    renderQuillAsHTML('content', quillContent);
-                    const AuthorsContainer = document.getElementById("authorsContainer")
+                // Render the extracted HTML into the specified div
+                contentDiv.innerHTML = htmlContent;
+            }
+
+            // Render the Quill content as HTML in the "content" div
+            renderQuillAsHTML('content', quillContent);
+            const AuthorsContainer = document.getElementById("authorsContainer")
             fetch(`${submissionsEndpoint}/backend/accounts/articleAuthors.php?articleID=${ArticleId}`, {
                 method: "GET"
             }).then(res => res.json())
                 .then(data => {
-                    
+
                     if (data) {
                         const AllAuthors = data.authorsList
                         AllAuthors.forEach(author => {
@@ -226,32 +259,32 @@ if(ArticleId){
                         console.log("Server Error")
                     }
 
-                
+
                 })
-            }
-            }
+        }
+    }
 
-            const keywordsContainer = document.getElementById("keywordsContainer");
-            const keywords = await GetKeywords(ArticleId)
-            for(let i=0; i<keywords.length;i++){
-                if(i === (keywords.length - 1)){
-                    keywordsContainer.innerHTML += `${keywords[i].keyword}`
-                }else{
-                    keywordsContainer.innerHTML += `${keywords[i].keyword}, `
-                }
-            }
+    const keywordsContainer = document.getElementById("keywordsContainer");
+    const keywords = await GetKeywords(ArticleId)
+    for (let i = 0; i < keywords.length; i++) {
+        if (i === (keywords.length - 1)) {
+            keywordsContainer.innerHTML += `${keywords[i].keyword}`
+        } else {
+            keywordsContainer.innerHTML += `${keywords[i].keyword}, `
+        }
+    }
 
-            const suggestedReviewersContainer = document.getElementById("suggestedReviewersContainer")
+    const suggestedReviewersContainer = document.getElementById("suggestedReviewersContainer")
 
-            fetch(`${submissionsEndpoint}/backend/accounts/suggestedReviewers.php?articleID=${ArticleId}`, {
-                method:"GET"
-            }).then(res=>res.json())
-            .then(data=>{
-                if(data){
-                    const ReviewersList = data.suggestedReviewers
+    fetch(`${submissionsEndpoint}/backend/accounts/suggestedReviewers.php?articleID=${ArticleId}`, {
+        method: "GET"
+    }).then(res => res.json())
+        .then(data => {
+            if (data) {
+                const ReviewersList = data.suggestedReviewers
 
-                    ReviewersList.forEach(reviewer =>{
-                        suggestedReviewersContainer.innerHTML += `
+                ReviewersList.forEach(reviewer => {
+                    suggestedReviewersContainer.innerHTML += `
                         <tr>
                            <td><p><b>${reviewer.fullname}</b></p>
                            <p>${reviewer.email}</p>
@@ -262,16 +295,16 @@ if(ArticleId){
                            <td>${reviewer.affiliation_city}</td>    
                        </tr>
                        `
-                    })
-              
+                })
 
-                }else{
-                    console.log("Could not Get Suggested Reviewers")
-                }
-            })
-     
 
-}else{
+            } else {
+                console.log("Could not Get Suggested Reviewers")
+            }
+        })
+
+
+} else {
     window.location.href = `${parentDirectoryName}/workflow/accounts/login`
 }
 

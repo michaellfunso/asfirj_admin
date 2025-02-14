@@ -6,7 +6,9 @@ body {
 p {
   margin-left: inherit;
 }
-
+a{
+  color: #e00196 !important;
+}
 .title {
   color: blue;
 }
