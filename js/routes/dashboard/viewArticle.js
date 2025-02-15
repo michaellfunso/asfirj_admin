@@ -42,11 +42,15 @@ if (user) {
                     DOCUMENTFILE = `<li>Document File: <a href="${submissionsEndpoint}/uploadedFiles/${documentFile}">${documentFile}</a></li>`;
                 }
             } else {
+                if(ArticleData.manuscript_file && ArticleData.manuscript_file !== null){
                 if (ArticleData.manuscript_file.slice(0, 26) === 'https://res.cloudinary.com') {
                     MANUSCRIPT_FILE = `<li>Manuscript File: <a href="https://process.asfirj.org/doc?url=${ArticleData.manuscript_file}">${ArticleData.manuscript_file.slice(78)}</a></li>`
                 } else {
                     MANUSCRIPT_FILE = `<li>Manuscript File: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.manuscript_file}">${ArticleData.manuscript_file}</a></li>`
                 }
+            }else{
+                MANUSCRIPT_FILE = "No Manuscript has been submitted"
+            }
 
                 // const filesArray = JSON.parse(ArticleData.document_file)
                 const filesArrayCont = []
