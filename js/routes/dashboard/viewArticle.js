@@ -49,7 +49,7 @@ if (user) {
                     MANUSCRIPT_FILE = `<li>Manuscript File: <a href="${submissionsEndpoint}/uploadedFiles/${ArticleData.manuscript_file}">${ArticleData.manuscript_file}</a></li>`
                 }
             }else{
-                MANUSCRIPT_FILE = "No Manuscript has been submitted"
+                MANUSCRIPT_FILE = "<li>No Manuscript has been submitted</li>"
             }
 
                 // const filesArray = JSON.parse(ArticleData.document_file)
