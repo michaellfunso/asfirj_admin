@@ -60,7 +60,8 @@ const stats = document.getElementById("stats");
     }
 
     if (SubmissionsArray.length > 0) {
-        submissoinArray.forEach(async submission => {
+        console.log("SUBMISSIONS", SubmissionsArray)
+        SubmissionsArray.forEach(async submission => {
 
             const id = submission.revision_id;
             editorInvitations = `
