@@ -60,7 +60,8 @@ const stats = document.getElementById("stats");
     }
 
     if (SubmissionsArray.length > 0) {
-        for (const submission of SubmissionsArray) {
+        submissoinArray.forEach(async submission => {
+
             const id = submission.revision_id;
             editorInvitations = `
                 <ul>
@@ -188,12 +189,14 @@ const stats = document.getElementById("stats");
                 </td>
                 ${submissionStatus}
             `;
+        
            
      
 if(submissionsContainer){
             submissionsContainer.appendChild(submissionRow);
 }
         }
+    )
     } else {
         if(submissionsContainer){
         submissionsContainer.innerHTML = `<tr><td>You have no manuscripts to Edit</td></tr>`;
