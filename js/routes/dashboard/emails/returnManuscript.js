@@ -128,6 +128,8 @@ sendMail.addEventListener("submit", function(e){
         if(data.status === "success"){
             alert(data.message)
             // window.location.href = `${parentDirectoryName}/../Dashboard`
+            preloader.setAttribute("style", "display:none;")
+
 
         }else{
             alert(data.message)
