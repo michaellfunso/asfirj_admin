@@ -62,6 +62,9 @@ const stats = document.getElementById("stats");
     if (SubmissionsArray.length > 0) {
         console.log("SUBMISSIONS", SubmissionsArray)
         SubmissionsArray.forEach(async submission => {
+            if(!submission || submission === null){
+            
+            }else{
 
             const id = submission.revision_id;
             editorInvitations = `
@@ -196,7 +199,8 @@ const stats = document.getElementById("stats");
 if(submissionsContainer){
             submissionsContainer.appendChild(submissionRow);
 }
-        }
+        
+            }}
     )
     } else {
         if(submissionsContainer){
